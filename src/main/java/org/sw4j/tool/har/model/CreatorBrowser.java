@@ -2,7 +2,7 @@ package org.sw4j.tool.har.model;
 
 import com.google.gson.annotations.Expose;
 
-public class Creator {
+public class CreatorBrowser {
 
     @Expose
     private String name;
