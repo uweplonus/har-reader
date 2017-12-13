@@ -7,6 +7,9 @@ public class Log {
     @Expose
     private String version;
 
+    @Expose
+    private Creator creator;
+
     public String getVersion() {
         return version;
     }
@@ -15,4 +18,11 @@ public class Log {
         this.version = version;
     }
 
+    public Creator getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Creator creator) {
+        this.creator = creator;
+    }
 }
