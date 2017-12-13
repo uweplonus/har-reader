@@ -8,7 +8,10 @@ public class Log {
     private String version;
 
     @Expose
-    private Creator creator;
+    private CreatorBrowser creator;
+
+    @Expose
+    private CreatorBrowser browser;
 
     public String getVersion() {
         return version;
@@ -18,11 +21,20 @@ public class Log {
         this.version = version;
     }
 
-    public Creator getCreator() {
+    public CreatorBrowser getCreator() {
         return creator;
     }
 
-    public void setCreator(Creator creator) {
+    public void setCreator(CreatorBrowser creator) {
         this.creator = creator;
     }
+
+    public CreatorBrowser getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(CreatorBrowser browser) {
+        this.browser = browser;
+    }
+
 }
