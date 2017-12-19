@@ -11,21 +11,6 @@ import java.nio.charset.UnsupportedCharsetException;
 
 public class HarReaderTest {
 
-    /** Test JSON containing all attributes (required and optional). */
-    private String optionalJson =
-            "{" +
-            "  \"log\": {" +
-            "    \"version\": \"1.2\"," +
-            "    \"creator\": {" +
-            "      \"name\": \"HAR Test\"" +
-            "    }," +
-            "    \"browser\": {" +
-            "      \"name\": \"HAR Test\"" +
-            "    }" +
-            "  }" +
-            "}"
-            ;
-
     @Test
     public void testReaderCreation() throws UnsupportedEncodingException {
         HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("empty.json"), "UTF-8"));
