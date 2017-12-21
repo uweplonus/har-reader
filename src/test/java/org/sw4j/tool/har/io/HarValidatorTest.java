@@ -16,9 +16,11 @@
 package org.sw4j.tool.har.io;
 
 import java.util.List;
+import org.sw4j.tool.har.model.CreatorBrowser;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -26,12 +28,15 @@ public class HarValidatorTest {
 
     private Har model;
 
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
         model = new Har();
         Log log = new Log();
         model.setLog(log);
         log.setVersion("1.2");
+        CreatorBrowser creator = new CreatorBrowser();
+        log.setCreator(creator);
+        creator.setName("creator");
     }
 
     @Test
@@ -41,9 +46,32 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testHarNoMissing() {
+    public void testNoMissing() {
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 0, "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testCreatorMissing() {
+        model.getLog().setCreator(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log", "Expected the parent to be \"log\".");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "creator",
+                "Expected the attribute to be \"creator\".");
+    }
+
+    @Test
+    public void testCreatorNameMissing() {
+        model.getLog().getCreator().setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.creator",
+                "Expected the parent to be \"log.creator\".");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "name",
+                "Expected the attribute to be \"name\".");
     }
 
 }
