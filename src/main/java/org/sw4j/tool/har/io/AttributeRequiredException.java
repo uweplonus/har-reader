@@ -1,4 +1,4 @@
-package org.sw4j.tool.har.reader;
+package org.sw4j.tool.har.io;
 
 public class AttributeRequiredException extends RuntimeException {
 

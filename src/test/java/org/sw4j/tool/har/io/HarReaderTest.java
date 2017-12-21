@@ -1,4 +1,4 @@
-package org.sw4j.tool.har.reader;
+package org.sw4j.tool.har.io;
 
 import org.sw4j.tool.har.model.Log;
 import org.testng.Assert;
@@ -7,37 +7,68 @@ import org.testng.annotations.Test;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.UnsupportedCharsetException;
 
 public class HarReaderTest {
 
+    private String emptyJson = "{}";
+
+    private String requiredJson =
+            "{\n" +
+            "  \"log\": {\n" +
+            "    \"version\": \"1.2\",\n" +
+            "    \"creator\": {\n" +
+            "      \"name\": \"HAR Test\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}\n";
+
+    private String optionalJson =
+            "{\n" +
+            "  \"log\": {\n" +
+            "    \"version\": \"1.2\",\n" +
+            "    \"creator\": {\n" +
+            "      \"name\": \"HAR Test\"\n" +
+            "    },\n" +
+            "    \"browser\": {\n" +
+            "      \"name\": \"HAR Test\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}\n";
+
     @Test
-    public void testReaderCreation() throws UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("empty.json"), "UTF-8"));
+    public void testReaderCreation() {
+        HarReader hr = new HarReader(new StringReader(emptyJson));
     }
 
     @Test
-    public void testReadEmptyJson() throws UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("empty.json"), "UTF-8"));
+    public void testReadEmptyJson() {
+        HarReader hr = new HarReader(new StringReader(emptyJson));
         try {
             Log log = hr.read(true);
             Assert.fail("Read should have thrown an exception.");
         } catch (AttributeRequiredException ex) {
-            Assert.assertEquals(ex.getObject(), "har", "Expected the object with the missing attribute to be \"har\"");
+            Assert.assertEquals(ex.getObject(), "", "Expected the object with the missing attribute to be \"\"");
             Assert.assertEquals(ex.getAttribute(), "log", "Expected the missing attribute to be \"log\".");
         }
     }
 
     @Test
-    public void testReadLog() throws AttributeRequiredException, UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("required.json"), "UTF-8"));
+    public void testReadLogNoCheck() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(false);
         Assert.assertNotNull(log, "Expected a nonnull log object.");
     }
 
     @Test
+    public void testReadLogWithCheck() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log, "Expected a nonnull log object.");
+    }
+
+    @Test
     public void testReadLogVersion() throws AttributeRequiredException, UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("required.json"), "UTF-8"));
+        HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(false);
         Assert.assertNotNull(log.getVersion(), "Expected a nonnull log.version object.");
         Assert.assertEquals("1.2", log.getVersion(), "Expected the version to be \"1.2\".");
@@ -45,14 +76,14 @@ public class HarReaderTest {
 
     @Test
     public void testReadLogCreator() throws AttributeRequiredException, UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("required.json"), "UTF-8"));
+        HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(false);
         Assert.assertNotNull(log.getCreator(), "Expected a nonnull log.creator object.");
     }
 
     @Test
     public void testReadLogCreatorName() throws AttributeRequiredException, UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("required.json"), "UTF-8"));
+        HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(false);
         Assert.assertNotNull(log.getCreator().getName(), "Expected a nonnull log.creator.name object.");
         Assert.assertEquals("HAR Test", log.getCreator().getName(),
@@ -61,21 +92,21 @@ public class HarReaderTest {
 
     @Test
     public void testReadLogNoBrowser() throws AttributeRequiredException, UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("required.json"), "UTF-8"));
+        HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(false);
         Assert.assertNull(log.getBrowser(), "Expected a null log.browser object.");
     }
 
     @Test
     public void testReadLogBrowser() throws AttributeRequiredException, UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("optional.json"), "UTF-8"));
+        HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(false);
         Assert.assertNotNull(log.getBrowser(), "Expected a nonnull log.browser object.");
     }
 
     @Test
     public void testReadLogBrowserName() throws AttributeRequiredException, UnsupportedEncodingException {
-        HarReader hr = new HarReader(new InputStreamReader(getClass().getResourceAsStream("optional.json"), "UTF-8"));
+        HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(false);
         Assert.assertNotNull(log.getBrowser().getName(), "Expected a nonnull log.browser.name object.");
         Assert.assertEquals("HAR Test", log.getBrowser().getName(),
