@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HarReader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HAR Reader</a> &gt; <a href="index.source.html" class="el_package">org.sw4j.tool.har.io</a> &gt; <span class="el_source">HarReader.java</span></div><h1>HarReader.java</h1><pre class="source lang-java linenums">package org.sw4j.tool.har.io;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.Reader;
+import org.sw4j.tool.har.model.Har;
+import org.sw4j.tool.har.model.Log;
+
+public class HarReader {
+
+    private final Reader source;
+
+<span class="fc" id="L13">    public HarReader(Reader reader) {</span>
+<span class="fc" id="L14">        this.source = reader;</span>
+<span class="fc" id="L15">    }</span>
+
+    public Log read(boolean check) {
+<span class="fc" id="L18">        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();</span>
+<span class="fc" id="L19">        Har har = gson.fromJson(source, Har.class);</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (check) {</span>
+<span class="fc" id="L21">            HarValidator.checkRequiredAttributes(har);</span>
+        }
+<span class="fc" id="L23">        return har.getLog();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
