@@ -17,17 +17,22 @@ package org.sw4j.tool.har.io;
 
 import java.util.LinkedList;
 import java.util.List;
+import org.sw4j.tool.har.model.CreatorBrowser;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
+ *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
-public class HarValidator {
+public final class HarValidator {
 
-    /** Hidden constructor for an utility class. */
-    private HarValidator() { }
+    /**
+     * Hidden constructor for an utility class.
+     */
+    private HarValidator() {
+    }
 
     /**
      * <p>
@@ -40,20 +45,55 @@ public class HarValidator {
      *
      * @param har the model to check for missing attributes.
      * @return a list with all missing required attributes. If no attributes are missing the an empty list will be
-     *  returned.
+     *   returned.
      */
     public static List<RequiredAttribute> getMissingRequiredAttributes(final Har har) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (har == null) {
             result.add(new RequiredAttribute("", "har"));
-            return result;
+        } else {
+            result.addAll(getMissingRequiredAttributes(har.getLog()));
         }
-        Log log = har.getLog();
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the log object.
+     * </p>
+     *
+     * @param log    the log object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final Log log) {
+        List<RequiredAttribute> result = new LinkedList<>();
         if (log == null) {
             result.add(new RequiredAttribute("", "log"));
+        } else {
+            if (log.getVersion() == null) {
+                result.add(new RequiredAttribute("log", "version"));
+            }
+            result.addAll(getMissingRequiredAttributes(log.getCreator()));
         }
-        if (log != null && log.getVersion() == null) {
-            result.add(new RequiredAttribute("log", "version"));
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the creator object.
+     * </p>
+     *
+     * @param creator the log object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final CreatorBrowser creator) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (creator == null) {
+            result.add(new RequiredAttribute("log", "creator"));
+        } else {
+            if (creator.getName() == null) {
+                result.add(new RequiredAttribute("log.creator", "name"));
+            }
         }
         return result;
     }
@@ -63,6 +103,7 @@ public class HarValidator {
      * Check for missing attributes from the HAR model and throw an exception when at least one attribute is missing.
      * The exception contains the information for the first missing attribute.
      * </p>
+     *
      * @param har the model to check for missing attributes.
      * @throws AttributeRequiredException if at least one required attribute in the model is missing.
      */
@@ -80,16 +121,22 @@ public class HarValidator {
      */
     public static class RequiredAttribute {
 
-        /** The parent of the required attribute. */
+        /**
+         * The parent of the required attribute.
+         */
         private final String parent;
 
-        /** The attribute. */
+        /**
+         * The attribute.
+         */
         private final String attribute;
 
         /**
+         * <p>
          * Constructor of the immutable class.
+         * </p>
          *
-         * @param parent the parent object of the attribute.
+         * @param parent    the parent object of the attribute.
          * @param attribute the attribute.
          */
         public RequiredAttribute(final String parent, final String attribute) {
@@ -98,7 +145,10 @@ public class HarValidator {
         }
 
         /**
+         * <p>
          * Returns the parent of the attribute.
+         * </p>
+         *
          * @return the parent.
          */
         public String getParent() {
@@ -106,7 +156,10 @@ public class HarValidator {
         }
 
         /**
+         * <p>
          * Returns the attribute.
+         * </p>
+         *
          * @return the attribute.
          */
         public String getAttribute() {
