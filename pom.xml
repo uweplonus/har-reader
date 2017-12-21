@@ -157,6 +157,7 @@
         <configuration>
           <scmBranch>gh-pages</scmBranch>
           <skipCheckin>true</skipCheckin>
+          <skipDeletedFiles>true</skipDeletedFiles>
         </configuration>
         <executions>
           <execution>
