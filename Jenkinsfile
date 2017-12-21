@@ -39,13 +39,19 @@ pipeline {
                 }
                 stage('Site') {
                     steps {
-                        sshagent (credentials: ['4cab8b17-578f-49fc-908b-0e318625d63b']) {
-                            withMaven(jdk: 'Current JDK 8',
-                                    maven: 'Current Maven 3',
-                                    mavenLocalRepo: '${JENKINS_HOME}/maven-repositories/${EXECUTOR_NUMBER}/',
-                                    globalMavenSettingsConfig: '03c863c2-c19c-4ed5-bc3a-7650b8f73ecf') {
-                                sh "mvn post-site scm-publish:publish-scm"
-                            }
+                        withMaven(jdk: 'Current JDK 8',
+                                maven: 'Current Maven 3',
+                                mavenLocalRepo: '${JENKINS_HOME}/maven-repositories/${EXECUTOR_NUMBER}/',
+                                globalMavenSettingsConfig: '03c863c2-c19c-4ed5-bc3a-7650b8f73ecf') {
+                            sh "mvn -Dscmpublish.skipCheckin=true post-site scm-publish:publish-scm"
+                        }
+                        withCredentials([string(credentialsId: "f9c0bd13-de91-4d90-a292-8fd2d05c26b0",
+                                variable: 'GH_TOKEN')]) {
+                            sh """
+                                cd target/scmpublish-checkout
+                                git commit -a -m 'Automatic created documentation' || echo 'Nothing to commit.'
+                                git push -fq https://${GH_TOKEN}@github.com/sw4j-org/har-reader.git gh-pages:gh-pages
+                            """
                         }
                     }
                 }
