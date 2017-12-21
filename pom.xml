@@ -667,7 +667,7 @@
   </issueManagement>
 
   <scm>
-    <developerConnection>scm:git:ssh://git@github.com:sw4j-org/har-reader.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:sw4j-org/har-reader.git</developerConnection>
     <url>https://github.com/sw4j-org/har-reader</url>
   </scm>
 
