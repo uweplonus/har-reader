@@ -44,7 +44,7 @@ pipeline {
                         withCredentials([string(credentialsId: "f9c0bd13-de91-4d90-a292-8fd2d05c26b0", variable: 'GH_TOKEN')]) {
                             sh """
                                 cd target/scmpublish-checkout
-                                git commit -a -m 'Automatic created documentation'
+                                git commit -a -m 'Automatic created documentation' || echo 'Nothing to commit.'
                                 git push -fq https://${GH_TOKEN}@github.com/sw4j-org/har-reader.git gh-pages:gh-pages
                             """
                         }

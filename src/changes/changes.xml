@@ -14,27 +14,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<project xmlns='http://maven.apache.org/DECORATION/1.6.0'
-         xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-         xsi:schemaLocation='http://maven.apache.org/DECORATION/1.6.0 http://maven.apache.org/xsd/decoration-1.6.0.xsd'
-         name="HAR Reader">
-
-  <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-fluido-skin</artifactId>
-    <version>${fluido-skin.version}</version>
-  </skin>
+<document
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://maven.apache.org/changes/1.0.0'
+    xsi:schemaLocation='http://maven.apache.org/changes/1.0.0 https://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd'>
 
   <body>
-
-    <menu name="">
-      <item name="Introduction" href="index.html"/>
-    </menu>
-
-    <menu ref="modules"/>
-
-    <menu ref="reports"/>
-
+    <release version="0.1.0" description="Initial release">
+      <action dev="uweplonus" type="add" date="2017-12-19">
+        Initial setup of the project.
+      </action>
+    </release>
   </body>
 
-</project>
+</document>
