@@ -17,17 +17,22 @@ package org.sw4j.tool.har.io;
 
 import java.util.LinkedList;
 import java.util.List;
+import org.sw4j.tool.har.model.CreatorBrowser;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
+ *
  * @author Uwe Plonus &amp;lt;u.plonus@gmail.com&amp;gt;
  */
-public class HarValidator {
+public final class HarValidator {
 
-    /** Hidden constructor for an utility class. */
-<span class="nc" id="L30">    private HarValidator() { }</span>
+    /**
+     * Hidden constructor for an utility class.
+     */
+<span class="nc" id="L34">    private HarValidator() {</span>
+<span class="nc" id="L35">    }</span>
 
     /**
      * &lt;p&gt;
@@ -40,22 +45,57 @@ public class HarValidator {
      *
      * @param har the model to check for missing attributes.
      * @return a list with all missing required attributes. If no attributes are missing the an empty list will be
-     *  returned.
+     *   returned.
      */
     public static List&lt;RequiredAttribute&gt; getMissingRequiredAttributes(final Har har) {
-<span class="fc" id="L46">        List&lt;RequiredAttribute&gt; result = new LinkedList&lt;&gt;();</span>
-<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (har == null) {</span>
-<span class="fc" id="L48">            result.add(new RequiredAttribute(&quot;&quot;, &quot;har&quot;));</span>
-<span class="fc" id="L49">            return result;</span>
+<span class="fc" id="L51">        List&lt;RequiredAttribute&gt; result = new LinkedList&lt;&gt;();</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (har == null) {</span>
+<span class="fc" id="L53">            result.add(new RequiredAttribute(&quot;&quot;, &quot;har&quot;));</span>
+        } else {
+<span class="fc" id="L55">            result.addAll(getMissingRequiredAttributes(har.getLog()));</span>
         }
-<span class="fc" id="L51">        Log log = har.getLog();</span>
-<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (log == null) {</span>
-<span class="fc" id="L53">            result.add(new RequiredAttribute(&quot;&quot;, &quot;log&quot;));</span>
+<span class="fc" id="L57">        return result;</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Return all missing required attributes from the log object.
+     * &lt;/p&gt;
+     *
+     * @param log    the log object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List&lt;RequiredAttribute&gt; getMissingRequiredAttributes(final Log log) {
+<span class="fc" id="L69">        List&lt;RequiredAttribute&gt; result = new LinkedList&lt;&gt;();</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (log == null) {</span>
+<span class="fc" id="L71">            result.add(new RequiredAttribute(&quot;&quot;, &quot;log&quot;));</span>
+        } else {
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">            if (log.getVersion() == null) {</span>
+<span class="nc" id="L74">                result.add(new RequiredAttribute(&quot;log&quot;, &quot;version&quot;));</span>
+            }
+<span class="fc" id="L76">            result.addAll(getMissingRequiredAttributes(log.getCreator()));</span>
         }
-<span class="pc bpc" id="L55" title="1 of 4 branches missed.">        if (log != null &amp;&amp; log.getVersion() == null) {</span>
-<span class="nc" id="L56">            result.add(new RequiredAttribute(&quot;log&quot;, &quot;version&quot;));</span>
+<span class="fc" id="L78">        return result;</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Return all missing required attributes from the creator object.
+     * &lt;/p&gt;
+     *
+     * @param creator the log object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List&lt;RequiredAttribute&gt; getMissingRequiredAttributes(final CreatorBrowser creator) {
+<span class="fc" id="L90">        List&lt;RequiredAttribute&gt; result = new LinkedList&lt;&gt;();</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (creator == null) {</span>
+<span class="fc" id="L92">            result.add(new RequiredAttribute(&quot;log&quot;, &quot;creator&quot;));</span>
+        } else {
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            if (creator.getName() == null) {</span>
+<span class="fc" id="L95">                result.add(new RequiredAttribute(&quot;log.creator&quot;, &quot;name&quot;));</span>
+            }
         }
-<span class="fc" id="L58">        return result;</span>
+<span class="fc" id="L98">        return result;</span>
     }
 
     /**
@@ -63,16 +103,17 @@ public class HarValidator {
      * Check for missing attributes from the HAR model and throw an exception when at least one attribute is missing.
      * The exception contains the information for the first missing attribute.
      * &lt;/p&gt;
+     *
      * @param har the model to check for missing attributes.
      * @throws AttributeRequiredException if at least one required attribute in the model is missing.
      */
     public static void checkRequiredAttributes(final Har har) throws AttributeRequiredException {
-<span class="fc" id="L70">        List&lt;RequiredAttribute&gt; missingAttributes = getMissingRequiredAttributes(har);</span>
-<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (!missingAttributes.isEmpty()) {</span>
-<span class="fc" id="L72">            RequiredAttribute firstEntry = missingAttributes.get(0);</span>
-<span class="fc" id="L73">            throw new AttributeRequiredException(firstEntry.getParent(), firstEntry.getAttribute());</span>
+<span class="fc" id="L111">        List&lt;RequiredAttribute&gt; missingAttributes = getMissingRequiredAttributes(har);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (!missingAttributes.isEmpty()) {</span>
+<span class="fc" id="L113">            RequiredAttribute firstEntry = missingAttributes.get(0);</span>
+<span class="fc" id="L114">            throw new AttributeRequiredException(firstEntry.getParent(), firstEntry.getAttribute());</span>
         }
-<span class="fc" id="L75">    }</span>
+<span class="fc" id="L116">    }</span>
 
 
     /**
@@ -80,37 +121,49 @@ public class HarValidator {
      */
     public static class RequiredAttribute {
 
-        /** The parent of the required attribute. */
+        /**
+         * The parent of the required attribute.
+         */
         private final String parent;
 
-        /** The attribute. */
+        /**
+         * The attribute.
+         */
         private final String attribute;
 
         /**
+         * &lt;p&gt;
          * Constructor of the immutable class.
+         * &lt;/p&gt;
          *
-         * @param parent the parent object of the attribute.
+         * @param parent    the parent object of the attribute.
          * @param attribute the attribute.
          */
-<span class="fc" id="L95">        public RequiredAttribute(final String parent, final String attribute) {</span>
-<span class="fc" id="L96">            this.parent = parent;</span>
-<span class="fc" id="L97">            this.attribute = attribute;</span>
-<span class="fc" id="L98">        }</span>
+<span class="fc" id="L142">        public RequiredAttribute(final String parent, final String attribute) {</span>
+<span class="fc" id="L143">            this.parent = parent;</span>
+<span class="fc" id="L144">            this.attribute = attribute;</span>
+<span class="fc" id="L145">        }</span>
 
         /**
+         * &lt;p&gt;
          * Returns the parent of the attribute.
+         * &lt;/p&gt;
+         *
          * @return the parent.
          */
         public String getParent() {
-<span class="fc" id="L105">            return parent;</span>
+<span class="fc" id="L155">            return parent;</span>
         }
 
         /**
+         * &lt;p&gt;
          * Returns the attribute.
+         * &lt;/p&gt;
+         *
          * @return the attribute.
          */
         public String getAttribute() {
-<span class="fc" id="L113">            return attribute;</span>
+<span class="fc" id="L166">            return attribute;</span>
         }
 
     }

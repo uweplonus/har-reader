@@ -2,17 +2,43 @@
 
 import com.google.gson.annotations.Expose;
 
-<span class="fc" id="L5">public class Har {</span>
+/**
+ * &lt;p&gt;
+ * This model class is the container for a complete HAR JSON object.
+ * &lt;/p&gt;
+ *
+ * @author Uwe Plonus &amp;lt;u.plonus@gmail.com&amp;gt;
+ */
+public class Har {
 
+    /** The log attribute of the HAR container. */
     @Expose
     private Log log;
 
+    /** The default constructor. */
+<span class="fc" id="L19">    public Har() { }</span>
+
+    /**
+     * &lt;p&gt;
+     * Returns the log attribute of the HAR.
+     * &lt;/p&gt;
+     *
+     * @return the log attribute.
+     */
     public Log getLog() {
-<span class="fc" id="L11">        return log;</span>
+<span class="fc" id="L29">        return log;</span>
     }
 
-    public void setLog(Log log) {
-<span class="fc" id="L15">        this.log = log;</span>
-<span class="fc" id="L16">    }</span>
+    /**
+     * &lt;p&gt;
+     * Sets the log attribute of the HAR.
+     * &lt;/p&gt;
+     *
+     * @param log the log attribute.
+     */
+    public void setLog(final Log log) {
+<span class="fc" id="L40">        this.log = log;</span>
+<span class="fc" id="L41">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

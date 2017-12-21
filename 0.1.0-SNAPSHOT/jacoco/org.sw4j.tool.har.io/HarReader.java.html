@@ -6,21 +6,45 @@ import java.io.Reader;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 
+/**
+ * &lt;p&gt;
+ * A reader that reads HAR JSON from a reader and returns the parsed model.
+ * &lt;/p&gt;
+ *
+ * @author Uwe Plonus &amp;lt;u.plonus@gmail.com&amp;gt;
+ */
 public class HarReader {
 
+    /** The source of the HAR JSON model. */
     private final Reader source;
 
-<span class="fc" id="L13">    public HarReader(Reader reader) {</span>
-<span class="fc" id="L14">        this.source = reader;</span>
-<span class="fc" id="L15">    }</span>
+    /**
+     * &lt;p&gt;
+     * A constructor that takes a reader for this HAR reader.
+     * &lt;/p&gt;
+     *
+     * @param reader the reader that will be used for parsing.
+     */
+<span class="fc" id="L28">    public HarReader(final Reader reader) {</span>
+<span class="fc" id="L29">        this.source = reader;</span>
+<span class="fc" id="L30">    }</span>
 
-    public Log read(boolean check) {
-<span class="fc" id="L18">        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();</span>
-<span class="fc" id="L19">        Har har = gson.fromJson(source, Har.class);</span>
-<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (check) {</span>
-<span class="fc" id="L21">            HarValidator.checkRequiredAttributes(har);</span>
+    /**
+     * &lt;p&gt;
+     * Reads in the JSON from the reader and returns a model from the parsed JSON.
+     * &lt;/p&gt;
+     *
+     * @param check whether to check the JSON for all required attributes.
+     * @return the log that is parsed from the JSON.
+     * @throws AttributeRequiredException if {@code check} is set and a required attribute is not set.
+     */
+    public Log read(final boolean check) throws AttributeRequiredException {
+<span class="fc" id="L42">        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();</span>
+<span class="fc" id="L43">        Har har = gson.fromJson(source, Har.class);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (check) {</span>
+<span class="fc" id="L45">            HarValidator.checkRequiredAttributes(har);</span>
         }
-<span class="fc" id="L23">        return har.getLog();</span>
+<span class="fc" id="L47">        return har.getLog();</span>
     }
 
 }

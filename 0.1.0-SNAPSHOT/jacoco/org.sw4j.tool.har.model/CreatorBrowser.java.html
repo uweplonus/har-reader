@@ -2,18 +2,43 @@
 
 import com.google.gson.annotations.Expose;
 
-<span class="fc" id="L5">public class CreatorBrowser {</span>
+/**
+ * &lt;p&gt;
+ * This model class represents either a creator or a browser.
+ * &lt;/p&gt;
+ *
+ * @author Uwe Plonus &amp;lt;u.plonus@gmail.com&amp;gt;
+ */
+public class CreatorBrowser {
 
+    /** The required name of the creator or the browser. */
     @Expose
     private String name;
 
+    /** The default constructor. */
+<span class="fc" id="L19">    public CreatorBrowser() { }</span>
+
+    /**
+     * &lt;p&gt;
+     * Returns the name of the creator or the browser.
+     * &lt;/p&gt;
+     *
+     * @return the name.
+     */
     public String getName() {
-<span class="fc" id="L11">        return name;</span>
+<span class="fc" id="L29">        return name;</span>
     }
 
-    public void setName(String name) {
-<span class="nc" id="L15">        this.name = name;</span>
-<span class="nc" id="L16">    }</span>
+    /**
+     * &lt;p&gt;
+     * Sets the name of the creator or the browser.
+     * &lt;/p&gt;
+     *
+     * @param name the name of the creator or browser.
+     */
+    public void setName(final String name) {
+<span class="fc" id="L40">        this.name = name;</span>
+<span class="fc" id="L41">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

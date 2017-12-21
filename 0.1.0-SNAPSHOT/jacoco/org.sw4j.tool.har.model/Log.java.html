@@ -2,40 +2,95 @@
 
 import com.google.gson.annotations.Expose;
 
-<span class="fc" id="L5">public class Log {</span>
+/**
+ * &lt;p&gt;
+ * This is the log object of the HAR.
+ * &lt;/p&gt;
+ *
+ * @author Uwe Plonus &amp;lt;u.plonus@gmail.com&amp;gt;
+ */
+public class Log {
 
+    /** The version of the HAR. */
     @Expose
     private String version;
 
+    /** The creator of the HAR. */
     @Expose
     private CreatorBrowser creator;
 
+    /** The optional browser of the HAR. */
     @Expose
     private CreatorBrowser browser;
 
+    /** The default constructor. */
+<span class="fc" id="L27">    public Log() { }</span>
+
+    /**
+     * &lt;p&gt;
+     * Returns the version of the HAR.
+     * &lt;/p&gt;
+     *
+     * @return the version of the HAR.
+     */
     public String getVersion() {
-<span class="fc" id="L17">        return version;</span>
+<span class="fc" id="L37">        return version;</span>
     }
 
-    public void setVersion(String version) {
-<span class="fc" id="L21">        this.version = version;</span>
-<span class="fc" id="L22">    }</span>
+    /**
+     * &lt;p&gt;
+     * Sets the version of the HAR.
+     * &lt;/p&gt;
+     *
+     * @param version the version of the HAR.
+     */
+    public void setVersion(final String version) {
+<span class="fc" id="L48">        this.version = version;</span>
+<span class="fc" id="L49">    }</span>
 
+    /**
+     * &lt;p&gt;
+     * Returns the creator of the HAR.
+     * &lt;/p&gt;
+     *
+     * @return the creator of the HAR.
+     */
     public CreatorBrowser getCreator() {
-<span class="fc" id="L25">        return creator;</span>
+<span class="fc" id="L59">        return creator;</span>
     }
 
-    public void setCreator(CreatorBrowser creator) {
-<span class="nc" id="L29">        this.creator = creator;</span>
-<span class="nc" id="L30">    }</span>
+    /**
+     * &lt;p&gt;
+     * Sets the creator of the HAR.
+     * &lt;/p&gt;
+     *
+     * @param creator the creator of the HAR.
+     */
+    public void setCreator(final CreatorBrowser creator) {
+<span class="fc" id="L70">        this.creator = creator;</span>
+<span class="fc" id="L71">    }</span>
 
+    /**
+     * &lt;p&gt;
+     * Returns the browser of the HAR.
+     * &lt;/p&gt;
+     *
+     * @return the browser of the HAR.
+     */
     public CreatorBrowser getBrowser() {
-<span class="fc" id="L33">        return browser;</span>
+<span class="fc" id="L81">        return browser;</span>
     }
 
-    public void setBrowser(CreatorBrowser browser) {
-<span class="nc" id="L37">        this.browser = browser;</span>
-<span class="nc" id="L38">    }</span>
+    /**
+     * &lt;p&gt;
+     * Sets the browser of the HAR.
+     * &lt;/p&gt;
+     *
+     * @param browser the browser of the HAR.
+     */
+    public void setBrowser(final CreatorBrowser browser) {
+<span class="nc" id="L92">        this.browser = browser;</span>
+<span class="nc" id="L93">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

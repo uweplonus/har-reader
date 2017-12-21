@@ -1,8 +1,8 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 HAR Reader,org.sw4j.tool.har.io,AttributeRequiredException,0,28,0,0,0,7,0,3,0,3
 HAR Reader,org.sw4j.tool.har.io,HarReader,0,26,0,2,0,8,0,3,0,2
-HAR Reader,org.sw4j.tool.har.io,HarValidator,11,56,1,9,2,14,2,6,1,2
+HAR Reader,org.sw4j.tool.har.io,HarValidator,11,97,1,11,3,22,2,9,1,4
 HAR Reader,org.sw4j.tool.har.io,HarValidator.RequiredAttribute,0,15,0,0,0,6,0,3,0,3
 HAR Reader,org.sw4j.tool.har.model,Har,0,10,0,0,0,4,0,3,0,3
-HAR Reader,org.sw4j.tool.har.model,CreatorBrowser,4,6,0,0,2,2,1,2,1,2
-HAR Reader,org.sw4j.tool.har.model,Log,8,16,0,0,4,6,2,5,2,5
+HAR Reader,org.sw4j.tool.har.model,CreatorBrowser,0,10,0,0,0,4,0,3,0,3
+HAR Reader,org.sw4j.tool.har.model,Log,4,20,0,0,2,8,1,6,1,6
