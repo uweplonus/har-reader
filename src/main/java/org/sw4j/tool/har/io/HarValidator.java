@@ -125,6 +125,9 @@ public final class HarValidator {
         if (creatorBrowser.getName() == null) {
             result.add(new RequiredAttribute(parent, "name"));
         }
+        if (creatorBrowser.getVersion() == null) {
+            result.add(new RequiredAttribute(parent, "version"));
+        }
         return result;
     }
 
