@@ -17,7 +17,11 @@ package org.sw4j.tool.har.io;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.sw4j.tool.har.model.*;
+import org.sw4j.tool.har.model.Browser;
+import org.sw4j.tool.har.model.Creator;
+import org.sw4j.tool.har.model.CreatorBrowser;
+import org.sw4j.tool.har.model.Har;
+import org.sw4j.tool.har.model.Log;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
@@ -116,6 +120,7 @@ public final class HarValidator {
      * Return all missing required attributes from the creator or browser object.
      * </p>
      *
+     * @param parent the parent object that represents the given creator or browser.
      * @param creatorBrowser the creator or browser object to check.
      * @return a list containing all required but missing attributes.
      */
