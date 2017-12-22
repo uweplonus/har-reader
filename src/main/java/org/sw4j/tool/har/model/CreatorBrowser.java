@@ -108,7 +108,7 @@ public abstract class CreatorBrowser {
      *
      * @param comment the comment of the creator or browser.
      */
-    public void setComment(String comment) {
+    public void setComment(final String comment) {
         this.comment = comment;
     }
 

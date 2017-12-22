@@ -149,9 +149,9 @@ public class Log {
      *
      * @param i the index.
      * @return the page at the given index or {@code null} if either the given index is invalid or no pages are
-     *  available.
+     *     available.
      */
-    public Page getPage(int i) {
+    public Page getPage(final int i) {
         if (pages == null || i < 0 || i >= pages.size()) {
             return null;
         }
@@ -165,7 +165,7 @@ public class Log {
      *
      * @param page the page to add to the list.
      */
-    public void addPage(Page page) {
+    public void addPage(final Page page) {
         if (pages == null) {
             pages = new LinkedList<>();
         }
