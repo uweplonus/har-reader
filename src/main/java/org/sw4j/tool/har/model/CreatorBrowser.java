@@ -30,9 +30,13 @@ public abstract class CreatorBrowser {
     @Expose
     private String name;
 
-    /** The version name of the creator or the browser. */
+    /** The required version of the creator or the browser. */
     @Expose
     private String version;
+
+    /** The optional comment of the creator or the browser. */
+    @Expose
+    private String comment;
 
     /**
      * <p>
@@ -84,6 +88,28 @@ public abstract class CreatorBrowser {
      */
     public void setVersion(final String version) {
         this.version = version;
+    }
+
+    /**
+     * <p>
+     * Returns the comment of the creator or the browser.
+     * </p>
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * <p>
+     * Sets the comment of the creator or the browser.
+     * </p>
+     *
+     * @param comment the comment of the creator or browser.
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 }
