@@ -15,6 +15,7 @@
  */
 package org.sw4j.tool.har.io;
 
+import java.util.LinkedList;
 import java.util.List;
 import org.sw4j.tool.har.model.*;
 import org.testng.Assert;
@@ -25,6 +26,8 @@ import org.testng.annotations.Test;
 public class HarValidatorTest {
 
     private Har model;
+
+    private List<Page> pages;
 
     @BeforeMethod
     public void setUp() {
@@ -42,6 +45,12 @@ public class HarValidatorTest {
         browser.setName("browser");
         browser.setVersion("2.2");
         browser.setComment("browser's comment");
+
+        pages = new LinkedList<>();
+        Page page1 = new Page();
+        pages.add(page1);
+        Page page2 = new Page();
+        pages.add(page2);
     }
 
     @Test
@@ -148,6 +157,35 @@ public class HarValidatorTest {
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testPagesMissing() {
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+        Assert.assertEquals(model.getLog().getPagesSize(), 0,
+                "Expected the number of pages to be 0.");
+        Assert.assertNull(model.getLog().getPages(), "Expected the pages to be null.");
+        Assert.assertNull(model.getLog().getPage(0), "Expected the page #0 to be null.");
+        Assert.assertNull(model.getLog().getPage(-1), "Expected the page #-1 to be null.");
+        Assert.assertNull(model.getLog().getPage(Integer.MAX_VALUE), "Expected the page #MAX_VAL to be null.");
+    }
+
+    @Test
+    public void testPagesAvailable() {
+        for (Page page: pages) {
+            model.getLog().addPage(page);
+        }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+        Assert.assertEquals(model.getLog().getPagesSize(), pages.size(),
+                "Expected the number of pages to be greater than 0.");
+        Assert.assertNotNull(model.getLog().getPages(), "Expected the pages not to be null.");
+        Assert.assertEquals(model.getLog().getPage(0), pages.get(0),
+                "Expected the page #0 not to be null.");
+        Assert.assertNull(model.getLog().getPage(-1), "Expected the page #-1 to be null.");
+        Assert.assertNull(model.getLog().getPage(Integer.MAX_VALUE), "Expected the page #MAX_VAL to be null.");
     }
 
 }
