@@ -35,9 +35,11 @@ public class HarValidatorTest {
         Creator creator = new Creator();
         log.setCreator(creator);
         creator.setName("creator");
+        creator.setVersion("2.1");
         Browser browser = new Browser();
         log.setBrowser(browser);
         browser.setName("browser");
+        browser.setVersion("2.2");
     }
 
     @Test
@@ -87,6 +89,18 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testCreatorVersionMissing() {
+        model.getLog().getCreator().setVersion(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.creator",
+                "Expected the parent to be \"log.creator\".");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "version",
+                "Expected the attribute to be \"version\".");
+    }
+
+    @Test
     public void testBrowserMissing() {
         model.getLog().setBrowser(null);
 
@@ -104,6 +118,18 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log.browser\".");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "name",
                 "Expected the attribute to be \"name\".");
+    }
+
+    @Test
+    public void testBrowserVersionMissing() {
+        model.getLog().getBrowser().setVersion(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.browser",
+                "Expected the parent to be \"log.browser\".");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "version",
+                "Expected the attribute to be \"version\".");
     }
 
 }

@@ -29,7 +29,8 @@ public class HarReaderTest {
             "  \"log\": {\n" +
             "    \"version\": \"1.2\",\n" +
             "    \"creator\": {\n" +
-            "      \"name\": \"HAR Test\"\n" +
+            "      \"name\": \"HAR Test\",\n" +
+            "      \"version\": \"2.2\"\n" +
             "    }\n" +
             "  }\n" +
             "}\n";
@@ -39,10 +40,12 @@ public class HarReaderTest {
             "  \"log\": {\n" +
             "    \"version\": \"1.2\",\n" +
             "    \"creator\": {\n" +
-            "      \"name\": \"HAR Test\"\n" +
+            "      \"name\": \"HAR Test\",\n" +
+            "      \"version\": \"2.2\"\n" +
             "    },\n" +
             "    \"browser\": {\n" +
-            "      \"name\": \"HAR Test\"\n" +
+            "      \"name\": \"HAR Test\",\n" +
+            "      \"version\": \"2.3\"\n" +
             "    }\n" +
             "  }\n" +
             "}\n";
@@ -114,6 +117,15 @@ public class HarReaderTest {
     }
 
     @Test
+    public void testReadLogCreatorVersion() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getCreator().getVersion(), "Expected a nonnull log.creator.version object.");
+        Assert.assertEquals("2.2", log.getCreator().getVersion(),
+                "Expected the creator.version to be \"2.2\".");
+    }
+
+    @Test
     public void testReadLogNoBrowser() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
@@ -134,6 +146,15 @@ public class HarReaderTest {
         Assert.assertNotNull(log.getBrowser().getName(), "Expected a nonnull log.browser.name object.");
         Assert.assertEquals("HAR Test", log.getBrowser().getName(),
                 "Expected the browser.name to be \"HAR Test\".");
+    }
+
+    @Test
+    public void testReadLogBrowserVersion() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getBrowser().getVersion(), "Expected a nonnull log.browser.version object.");
+        Assert.assertEquals("2.3", log.getBrowser().getVersion(),
+                "Expected the browser.version to be \"2.3\".");
     }
 
 }

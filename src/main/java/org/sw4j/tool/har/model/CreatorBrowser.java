@@ -30,6 +30,10 @@ public abstract class CreatorBrowser {
     @Expose
     private String name;
 
+    /** The version name of the creator or the browser. */
+    @Expose
+    private String version;
+
     /**
      * <p>
      * The default constructor.
@@ -58,6 +62,28 @@ public abstract class CreatorBrowser {
      */
     public void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * <p>
+     * Returns the version of the creator or the browser.
+     * </p>
+     *
+     * @return the version.
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * <p>
+     * Sets the version of the creator or the browser.
+     * </p>
+     *
+     * @param version the version of the creator or browser.
+     */
+    public void setVersion(final String version) {
+        this.version = version;
     }
 
 }
