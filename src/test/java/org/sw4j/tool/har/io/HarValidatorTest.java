@@ -36,10 +36,12 @@ public class HarValidatorTest {
         log.setCreator(creator);
         creator.setName("creator");
         creator.setVersion("2.1");
+        creator.setComment("creator's comment");
         Browser browser = new Browser();
         log.setBrowser(browser);
         browser.setName("browser");
         browser.setVersion("2.2");
+        browser.setComment("browser's comment");
     }
 
     @Test
@@ -101,6 +103,14 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testCreatorCommentMissing() {
+        model.getLog().getCreator().setComment(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
     public void testBrowserMissing() {
         model.getLog().setBrowser(null);
 
@@ -130,6 +140,14 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log.browser\".");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "version",
                 "Expected the attribute to be \"version\".");
+    }
+
+    @Test
+    public void testBrowserCommentMissing() {
+        model.getLog().getBrowser().setComment(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
 }

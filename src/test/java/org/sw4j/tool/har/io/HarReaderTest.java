@@ -41,11 +41,13 @@ public class HarReaderTest {
             "    \"version\": \"1.2\",\n" +
             "    \"creator\": {\n" +
             "      \"name\": \"HAR Test\",\n" +
-            "      \"version\": \"2.2\"\n" +
+            "      \"version\": \"2.2\",\n" +
+            "      \"comment\": \"creator's comment\"\n" +
             "    },\n" +
             "    \"browser\": {\n" +
             "      \"name\": \"HAR Test\",\n" +
-            "      \"version\": \"2.3\"\n" +
+            "      \"version\": \"2.3\",\n" +
+            "      \"comment\": \"browser's comment\"\n" +
             "    }\n" +
             "  }\n" +
             "}\n";
@@ -62,8 +64,8 @@ public class HarReaderTest {
             Log log = hr.read(true);
             Assert.fail("Read should have thrown an exception.");
         } catch (AttributeRequiredException ex) {
-            Assert.assertEquals(ex.getObject(), "", "Expected the object with the missing attribute to be \"\"");
-            Assert.assertEquals(ex.getAttribute(), "log", "Expected the missing attribute to be \"log\".");
+            Assert.assertEquals("", ex.getObject(), "Expected the object with the missing attribute to be \"\"");
+            Assert.assertEquals("log", ex.getAttribute(), "Expected the missing attribute to be \"log\".");
         }
     }
 
@@ -97,7 +99,7 @@ public class HarReaderTest {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
         Assert.assertNotNull(log.getVersion(), "Expected a nonnull log.version object.");
-        Assert.assertEquals("1.2", log.getVersion(), "Expected the version to be \"1.2\".");
+        Assert.assertEquals(log.getVersion(), "1.2", "Expected the version to be \"1.2\".");
     }
 
     @Test
@@ -112,7 +114,7 @@ public class HarReaderTest {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
         Assert.assertNotNull(log.getCreator().getName(), "Expected a nonnull log.creator.name object.");
-        Assert.assertEquals("HAR Test", log.getCreator().getName(),
+        Assert.assertEquals(log.getCreator().getName(), "HAR Test",
                 "Expected the creator.name to be \"HAR Test\".");
     }
 
@@ -121,8 +123,17 @@ public class HarReaderTest {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
         Assert.assertNotNull(log.getCreator().getVersion(), "Expected a nonnull log.creator.version object.");
-        Assert.assertEquals("2.2", log.getCreator().getVersion(),
+        Assert.assertEquals(log.getCreator().getVersion(), "2.2",
                 "Expected the creator.version to be \"2.2\".");
+    }
+
+    @Test
+    public void testReadLogCreatorComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getCreator().getComment(), "Expected a nonnull log.creator.comment object.");
+        Assert.assertEquals(log.getCreator().getComment(), "creator's comment",
+                "Expected the creator.comment to be \"creator's comment\".");
     }
 
     @Test
@@ -144,7 +155,7 @@ public class HarReaderTest {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
         Assert.assertNotNull(log.getBrowser().getName(), "Expected a nonnull log.browser.name object.");
-        Assert.assertEquals("HAR Test", log.getBrowser().getName(),
+        Assert.assertEquals(log.getBrowser().getName(), "HAR Test",
                 "Expected the browser.name to be \"HAR Test\".");
     }
 
@@ -153,8 +164,17 @@ public class HarReaderTest {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
         Assert.assertNotNull(log.getBrowser().getVersion(), "Expected a nonnull log.browser.version object.");
-        Assert.assertEquals("2.3", log.getBrowser().getVersion(),
+        Assert.assertEquals(log.getBrowser().getVersion(), "2.3",
                 "Expected the browser.version to be \"2.3\".");
+    }
+
+    @Test
+    public void testReadLogBrowserComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getBrowser().getComment(), "Expected a nonnull log.browser.comment object.");
+        Assert.assertEquals(log.getBrowser().getComment(), "browser's comment",
+                "Expected the browser.version to be \"browser's comment\".");
     }
 
 }

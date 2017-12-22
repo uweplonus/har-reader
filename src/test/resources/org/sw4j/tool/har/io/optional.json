@@ -2,10 +2,14 @@
   "log": {
     "version": "1.2",
     "creator": {
-      "name": "HAR Test"
+      "name": "HAR Test",
+      "version": "1.2",
+      "comment": "creator's comment"
     },
     "browser": {
-      "name": "HAR Test"
+      "name": "HAR Test",
+      "version": "2.3",
+      "comment": "browser's comment"
     }
   }
 }
