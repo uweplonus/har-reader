@@ -52,6 +52,17 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testLogVersionMissing() {
+        model.getLog().setVersion(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log", "Expected the parent to be \"log\".");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "version",
+                "Expected the attribute to be \"version\".");
+    }
+
+    @Test
     public void testCreatorMissing() {
         model.getLog().setCreator(null);
 
