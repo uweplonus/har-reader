@@ -17,11 +17,11 @@ public class Log {
 
     /** The creator of the HAR. */
     @Expose
-    private CreatorBrowser creator;
+    private Creator creator;
 
     /** The optional browser of the HAR. */
     @Expose
-    private CreatorBrowser browser;
+    private Browser browser;
 
     /** The default constructor. */
     public Log() { }
@@ -55,7 +55,7 @@ public class Log {
      *
      * @return the creator of the HAR.
      */
-    public CreatorBrowser getCreator() {
+    public Creator getCreator() {
         return creator;
     }
 
@@ -66,7 +66,7 @@ public class Log {
      *
      * @param creator the creator of the HAR.
      */
-    public void setCreator(final CreatorBrowser creator) {
+    public void setCreator(final Creator creator) {
         this.creator = creator;
     }
 
@@ -77,7 +77,7 @@ public class Log {
      *
      * @return the browser of the HAR.
      */
-    public CreatorBrowser getBrowser() {
+    public Browser getBrowser() {
         return browser;
     }
 
@@ -88,7 +88,7 @@ public class Log {
      *
      * @param browser the browser of the HAR.
      */
-    public void setBrowser(final CreatorBrowser browser) {
+    public void setBrowser(final Browser browser) {
         this.browser = browser;
     }
 

@@ -16,9 +16,7 @@
 package org.sw4j.tool.har.io;
 
 import java.util.List;
-import org.sw4j.tool.har.model.CreatorBrowser;
-import org.sw4j.tool.har.model.Har;
-import org.sw4j.tool.har.model.Log;
+import org.sw4j.tool.har.model.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -34,10 +32,10 @@ public class HarValidatorTest {
         Log log = new Log();
         model.setLog(log);
         log.setVersion("1.2");
-        CreatorBrowser creator = new CreatorBrowser(CreatorBrowser.Type.CREATOR);
+        Creator creator = new Creator();
         log.setCreator(creator);
         creator.setName("creator");
-        CreatorBrowser browser = new CreatorBrowser(CreatorBrowser.Type.BROWSER);
+        Browser browser = new Browser();
         log.setBrowser(browser);
         browser.setName("browser");
     }

@@ -17,9 +17,7 @@ package org.sw4j.tool.har.io;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.sw4j.tool.har.model.CreatorBrowser;
-import org.sw4j.tool.har.model.Har;
-import org.sw4j.tool.har.model.Log;
+import org.sw4j.tool.har.model.*;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
@@ -73,8 +71,42 @@ public final class HarValidator {
             if (log.getVersion() == null) {
                 result.add(new RequiredAttribute("log", "version"));
             }
-            result.addAll(getMissingRequiredAttributes(log.getCreator(), CreatorBrowser.Type.CREATOR));
-            result.addAll(getMissingRequiredAttributes(log.getBrowser(), CreatorBrowser.Type.BROWSER));
+            result.addAll(getMissingRequiredAttributes(log.getCreator()));
+            result.addAll(getMissingRequiredAttributes(log.getBrowser()));
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the creator.
+     * </p>
+     *
+     * @param creator the creator object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final Creator creator) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (creator == null) {
+            result.add(new RequiredAttribute("log", "creator"));
+        } else {
+            result.addAll(getMissingRequiredAttributes("log.creator", creator));
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the browser object.
+     * </p>
+     *
+     * @param browser the browser object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final Browser browser) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (browser != null) {
+            result.addAll(getMissingRequiredAttributes("log.browser", browser));
         }
         return result;
     }
@@ -87,21 +119,11 @@ public final class HarValidator {
      * @param creatorBrowser the creator or browser object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final CreatorBrowser creatorBrowser,
-            final CreatorBrowser.Type type) {
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final String parent,
+            final CreatorBrowser creatorBrowser) {
         List<RequiredAttribute> result = new LinkedList<>();
-        if (creatorBrowser == null) {
-            if (type == type.CREATOR){
-                result.add(new RequiredAttribute("log", "creator"));
-            }
-        } else {
-            String parent = "log.creator";
-            if (type == CreatorBrowser.Type.BROWSER) {
-                parent = "log.browser";
-            }
-            if (creatorBrowser.getName() == null) {
-                result.add(new RequiredAttribute(parent, "name"));
-            }
+        if (creatorBrowser.getName() == null) {
+            result.add(new RequiredAttribute(parent, "name"));
         }
         return result;
     }
