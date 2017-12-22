@@ -9,10 +9,7 @@ import com.google.gson.annotations.Expose;
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
-public class CreatorBrowser {
-
-    /** The type that this object represents. */
-    private final Type type;
+public abstract class CreatorBrowser {
 
     /** The required name of the creator or the browser. */
     @Expose
@@ -20,24 +17,10 @@ public class CreatorBrowser {
 
     /**
      * <p>
-     * The constructor with a type argument.
+     * The default constructor.
      * </p>
-     *
-     * @param type the type of this object
      */
-    public CreatorBrowser(final Type type) {
-        this.type = type;
-    }
-
-    /**
-     * <p>
-     * Returns the type of this object.
-     * </p>
-     *
-     * @return the type of this object.
-     */
-    public Type getType() {
-        return type;
+    public CreatorBrowser() {
     }
 
     /**
@@ -60,20 +43,6 @@ public class CreatorBrowser {
      */
     public void setName(final String name) {
         this.name = name;
-    }
-
-
-    /**
-     * Enum to define the type of the enclosing object.
-     */
-    public static enum Type {
-
-        /** The object is a creator. */
-        CREATOR,
-        /** The object is a browser. */
-        BROWSER,
-        ;
-
     }
 
 }
