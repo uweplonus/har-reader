@@ -34,9 +34,12 @@ public class HarValidatorTest {
         Log log = new Log();
         model.setLog(log);
         log.setVersion("1.2");
-        CreatorBrowser creator = new CreatorBrowser();
+        CreatorBrowser creator = new CreatorBrowser(CreatorBrowser.Type.CREATOR);
         log.setCreator(creator);
         creator.setName("creator");
+        CreatorBrowser browser = new CreatorBrowser(CreatorBrowser.Type.BROWSER);
+        log.setBrowser(browser);
+        browser.setName("browser");
     }
 
     @Test
@@ -48,7 +51,7 @@ public class HarValidatorTest {
     @Test
     public void testNoMissing() {
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
-        Assert.assertEquals(missingAttributes.size(), 0, "Expected no attribute to be missing.");
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
     @Test
@@ -81,6 +84,26 @@ public class HarValidatorTest {
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
         Assert.assertEquals(missingAttributes.get(0).getParent(), "log.creator",
                 "Expected the parent to be \"log.creator\".");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "name",
+                "Expected the attribute to be \"name\".");
+    }
+
+    @Test
+    public void testBrowserMissing() {
+        model.getLog().setBrowser(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testBrowserNameMissing() {
+        model.getLog().getBrowser().setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.browser",
+                "Expected the parent to be \"log.browser\".");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "name",
                 "Expected the attribute to be \"name\".");
     }

@@ -73,26 +73,34 @@ public final class HarValidator {
             if (log.getVersion() == null) {
                 result.add(new RequiredAttribute("log", "version"));
             }
-            result.addAll(getMissingRequiredAttributes(log.getCreator()));
+            result.addAll(getMissingRequiredAttributes(log.getCreator(), CreatorBrowser.Type.CREATOR));
+            result.addAll(getMissingRequiredAttributes(log.getBrowser(), CreatorBrowser.Type.BROWSER));
         }
         return result;
     }
 
     /**
      * <p>
-     * Return all missing required attributes from the creator object.
+     * Return all missing required attributes from the creator or browser object.
      * </p>
      *
-     * @param creator the log object to check.
+     * @param creatorBrowser the creator or browser object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final CreatorBrowser creator) {
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final CreatorBrowser creatorBrowser,
+            final CreatorBrowser.Type type) {
         List<RequiredAttribute> result = new LinkedList<>();
-        if (creator == null) {
-            result.add(new RequiredAttribute("log", "creator"));
+        if (creatorBrowser == null) {
+            if (type == type.CREATOR){
+                result.add(new RequiredAttribute("log", "creator"));
+            }
         } else {
-            if (creator.getName() == null) {
-                result.add(new RequiredAttribute("log.creator", "name"));
+            String parent = "log.creator";
+            if (type == CreatorBrowser.Type.BROWSER) {
+                parent = "log.browser";
+            }
+            if (creatorBrowser.getName() == null) {
+                result.add(new RequiredAttribute(parent, "name"));
             }
         }
         return result;
