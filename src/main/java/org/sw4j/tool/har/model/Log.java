@@ -16,6 +16,9 @@
 package org.sw4j.tool.har.model;
 
 import com.google.gson.annotations.Expose;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * <p>
@@ -37,6 +40,10 @@ public class Log {
     /** The optional browser of the HAR. */
     @Expose
     private Browser browser;
+
+    /** The optional list of pages in the HAR. */
+    @Expose
+    private List<Page> pages;
 
     /** The default constructor. */
     public Log() { }
@@ -105,6 +112,64 @@ public class Log {
      */
     public void setBrowser(final Browser browser) {
         this.browser = browser;
+    }
+
+    /**
+     * <p>
+     * Returns all pages as unmodifiable list.
+     * </p>
+     *
+     * @return an unmodifiable list with all pages or {@code null} if there are no pages.
+     */
+    public List<Page> getPages() {
+        if (pages == null) {
+            return pages;
+        }
+        return Collections.unmodifiableList(pages);
+    }
+
+    /**
+     * <p>
+     * Returns the size of the list of pages.
+     * </p>
+     *
+     * @return the size of the list of the pages. If there are no pages then {@code 0} if returned.
+     */
+    public int getPagesSize() {
+        if (pages != null) {
+            return pages.size();
+        }
+        return 0;
+    }
+
+    /**
+     * <p>
+     * Returns the page at index {@code i}.
+     * </p>
+     *
+     * @param i the index.
+     * @return the page at the given index or {@code null} if either the given index is invalid or no pages are
+     *  available.
+     */
+    public Page getPage(int i) {
+        if (pages == null || i < 0 || i >= pages.size()) {
+            return null;
+        }
+        return pages.get(i);
+    }
+
+    /**
+     * <p>
+     * Adds the given page to the list of pages.
+     * </p>
+     *
+     * @param page the page to add to the list.
+     */
+    public void addPage(Page page) {
+        if (pages == null) {
+            pages = new LinkedList<>();
+        }
+        pages.add(page);
     }
 
 }
