@@ -15,6 +15,7 @@
  */
 package org.sw4j.tool.har.io;
 
+import java.time.OffsetDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import org.sw4j.tool.har.model.*;
@@ -49,8 +50,11 @@ public class HarValidatorTest {
         pages = new LinkedList<>();
         Page page1 = new Page();
         pages.add(page1);
+        page1.setStartedDateTime(OffsetDateTime.now());
         Page page2 = new Page();
         pages.add(page2);
+        page2.setStartedDateTime(page1.getStartedDateTime().plusSeconds(5));
+        pages.add(null);
     }
 
     @Test
@@ -186,6 +190,21 @@ public class HarValidatorTest {
                 "Expected the page #0 not to be null.");
         Assert.assertNull(model.getLog().getPage(-1), "Expected the page #-1 to be null.");
         Assert.assertNull(model.getLog().getPage(Integer.MAX_VALUE), "Expected the page #MAX_VAL to be null.");
+    }
+
+    @Test
+    public void testPagesStartedDateTimeMissing() {
+        pages.get(0).setStartedDateTime(null);
+        for (Page page: pages) {
+            model.getLog().addPage(page);
+        }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.pages[0]",
+                "Expected the parent to be \"log.pages[0]\"");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "startedDateTime",
+                "Expected the attribute to be \"startedDateTime\"");
     }
 
 }
