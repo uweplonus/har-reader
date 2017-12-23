@@ -22,6 +22,7 @@ import org.sw4j.tool.har.model.Creator;
 import org.sw4j.tool.har.model.CreatorBrowser;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
+import org.sw4j.tool.har.model.Page;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
@@ -77,6 +78,7 @@ public final class HarValidator {
             }
             result.addAll(getMissingRequiredAttributes(log.getCreator()));
             result.addAll(getMissingRequiredAttributes(log.getBrowser()));
+            result.addAll(getMissingRequiredAttributes(log.getPages()));
         }
         return result;
     }
@@ -132,6 +134,44 @@ public final class HarValidator {
         }
         if (creatorBrowser.getVersion() == null) {
             result.add(new RequiredAttribute(parent, "version"));
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the list of pages.
+     * </p>
+     *
+     * @param pages the list of pages to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final List<Page> pages) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (pages != null) {
+            for (int i = 0; i < pages.size(); i++) {
+                result.addAll(getMissingRequiredAttributes(i, pages.get(i)));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the page object.
+     * </p>
+     *
+     * @param i the index in the original list (or array).
+     * @param page the page object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final int i, final Page page) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (page != null) {
+            String parent = new StringBuilder("log.pages[").append(i).append("]").toString();
+            if (page.getStartedDateTime() == null) {
+                result.add(new RequiredAttribute(parent, "startedDateTime"));
+            }
         }
         return result;
     }

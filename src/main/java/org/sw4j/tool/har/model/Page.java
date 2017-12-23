@@ -15,6 +15,9 @@
  */
 package org.sw4j.tool.har.model;
 
+import com.google.gson.annotations.Expose;
+import java.time.OffsetDateTime;
+
 /**
  * <p>
  * This is a page object of the log.
@@ -24,7 +27,33 @@ package org.sw4j.tool.har.model;
  */
 public class Page {
 
+    /** The date and time when the page load started. */
+    @Expose
+    private OffsetDateTime startedDateTime;
+
     /** The default constructor. */
     public Page() { }
+
+    /**
+     * <p>
+     * Returns the date and time when the page load started.
+     * </p>
+     *
+     * @return the date and time of the page load.
+     */
+    public OffsetDateTime getStartedDateTime() {
+        return startedDateTime;
+    }
+
+    /**
+     * <p>
+     * Sets the date and time when the page load started.
+     * </p>
+     *
+     * @param startedDateTime the date and time of the page load.
+     */
+    public void setStartedDateTime(final OffsetDateTime startedDateTime) {
+        this.startedDateTime = startedDateTime;
+    }
 
 }

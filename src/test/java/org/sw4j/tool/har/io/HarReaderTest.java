@@ -48,7 +48,15 @@ public class HarReaderTest {
             "      \"name\": \"HAR Test\",\n" +
             "      \"version\": \"2.3\",\n" +
             "      \"comment\": \"browser's comment\"\n" +
-            "    }\n" +
+            "    },\n" +
+            "    \"pages\": [\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:00+01:00\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:01+01:00\"\n" +
+            "      }\n" +
+            "    ]\n" +
             "  }\n" +
             "}\n";
 

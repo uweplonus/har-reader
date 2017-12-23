@@ -18,6 +18,8 @@ package org.sw4j.tool.har.io;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.Reader;
+import java.time.OffsetDateTime;
+import org.sw4j.gson.extension.OffsetDateTimeAdapter;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 
@@ -54,7 +56,10 @@ public class HarReader {
      * @throws AttributeRequiredException if {@code check} is set and a required attribute is not set.
      */
     public Log read(final boolean check) throws AttributeRequiredException {
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .registerTypeAdapter(OffsetDateTime.class, new OffsetDateTimeAdapter())
+                .create();
         Har har = gson.fromJson(source, Har.class);
         if (check) {
             HarValidator.checkRequiredAttributes(har);
