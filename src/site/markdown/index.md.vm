@@ -4,3 +4,5 @@
 $h1 Introduction
 
 This project is a HAR (HTTP Archive) reader to read and write HAR files.
+
+The specification can be found at [http://www.softwareishard.com/blog/har-12-spec/](http://www.softwareishard.com/blog/har-12-spec/).

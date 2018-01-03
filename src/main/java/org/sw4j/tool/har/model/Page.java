@@ -16,43 +16,44 @@
 package org.sw4j.tool.har.model;
 
 import com.google.gson.annotations.Expose;
+import java.time.OffsetDateTime;
 
 /**
  * <p>
- * This model class is the container for a complete HAR JSON object.
+ * This is a page object of the log.
  * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
-public class Har {
+public class Page {
 
-    /** The log attribute of the HAR container. */
+    /** The date and time when the page load started. */
     @Expose
-    private Log log;
+    private OffsetDateTime startedDateTime;
 
     /** The default constructor. */
-    public Har() { }
+    public Page() { }
 
     /**
      * <p>
-     * Returns the log attribute of the HAR.
+     * Returns the date and time when the page load started.
      * </p>
      *
-     * @return the log attribute.
+     * @return the date and time of the page load.
      */
-    public Log getLog() {
-        return log;
+    public OffsetDateTime getStartedDateTime() {
+        return startedDateTime;
     }
 
     /**
      * <p>
-     * Sets the log attribute of the HAR.
+     * Sets the date and time when the page load started.
      * </p>
      *
-     * @param log the log attribute.
+     * @param startedDateTime the date and time of the page load.
      */
-    public void setLog(final Log log) {
-        this.log = log;
+    public void setStartedDateTime(final OffsetDateTime startedDateTime) {
+        this.startedDateTime = startedDateTime;
     }
 
 }

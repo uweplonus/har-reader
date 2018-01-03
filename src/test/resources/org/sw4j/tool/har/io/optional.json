@@ -2,10 +2,22 @@
   "log": {
     "version": "1.2",
     "creator": {
-      "name": "HAR Test"
+      "name": "HAR Test",
+      "version": "1.2",
+      "comment": "creator's comment"
     },
     "browser": {
-      "name": "HAR Test"
-    }
+      "name": "HAR Test",
+      "version": "2.3",
+      "comment": "browser's comment"
+    },
+    "pages": [
+      {
+        "startedDateTime": "2017-12-23T14:15:00+01:00"
+      },
+      {
+        "startedDateTime": "2017-12-23T14:15:01+01:00"
+      }
+    ]
   }
 }
