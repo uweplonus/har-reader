@@ -1,8 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HarReader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HAR Reader</a> &gt; <a href="index.source.html" class="el_package">org.sw4j.tool.har.io</a> &gt; <span class="el_source">HarReader.java</span></div><h1>HarReader.java</h1><pre class="source lang-java linenums">package org.sw4j.tool.har.io;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HarReader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HAR Reader</a> &gt; <a href="index.source.html" class="el_package">org.sw4j.tool.har.io</a> &gt; <span class="el_source">HarReader.java</span></div><h1>HarReader.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2017 Uwe Plonus
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.sw4j.tool.har.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.Reader;
+import java.time.OffsetDateTime;
+import org.sw4j.gson.extension.OffsetDateTimeAdapter;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 
@@ -25,9 +42,9 @@ public class HarReader {
      *
      * @param reader the reader that will be used for parsing.
      */
-<span class="fc" id="L28">    public HarReader(final Reader reader) {</span>
-<span class="fc" id="L29">        this.source = reader;</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L45">    public HarReader(final Reader reader) {</span>
+<span class="fc" id="L46">        this.source = reader;</span>
+<span class="fc" id="L47">    }</span>
 
     /**
      * &lt;p&gt;
@@ -39,13 +56,16 @@ public class HarReader {
      * @throws AttributeRequiredException if {@code check} is set and a required attribute is not set.
      */
     public Log read(final boolean check) throws AttributeRequiredException {
-<span class="fc" id="L42">        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();</span>
-<span class="fc" id="L43">        Har har = gson.fromJson(source, Har.class);</span>
-<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (check) {</span>
-<span class="fc" id="L45">            HarValidator.checkRequiredAttributes(har);</span>
+<span class="fc" id="L59">        Gson gson = new GsonBuilder()</span>
+<span class="fc" id="L60">                .excludeFieldsWithoutExposeAnnotation()</span>
+<span class="fc" id="L61">                .registerTypeAdapter(OffsetDateTime.class, new OffsetDateTimeAdapter())</span>
+<span class="fc" id="L62">                .create();</span>
+<span class="fc" id="L63">        Har har = gson.fromJson(source, Har.class);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (check) {</span>
+<span class="fc" id="L65">            HarValidator.checkRequiredAttributes(har);</span>
         }
-<span class="fc" id="L47">        return har.getLog();</span>
+<span class="fc" id="L67">        return har.getLog();</span>
     }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

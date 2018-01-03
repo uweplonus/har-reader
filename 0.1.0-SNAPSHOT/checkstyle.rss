@@ -20,19 +20,19 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>HAR Reader - Checkstyle report</title>
-    <link>https://sw4j-org.github.io/har-reader/</link>
+    <link>https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT</link>
     <description>HAR Reader - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2017</copyright>
+    <copyright>&#169;2018</copyright>
     <item>
-      <title>File: 8,
+      <title>File: 11,
              Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>https://sw4j-org.github.io/har-reader//checkstyle.html</link>
+            <link>https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html</link>
       <description>
-        <p>Click <a href="https://sw4j-org.github.io/har-reader//checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.model.Log.java">org/sw4j/tool/har/model/Log.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.model.Log.java">org/sw4j/tool/har/model/Log.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.io.package-info.java">org/sw4j/tool/har/io/package-info.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.io.package-info.java">org/sw4j/tool/har/io/package-info.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.model.CreatorBrowser.java">org/sw4j/tool/har/model/CreatorBrowser.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.model.Browser.java">org/sw4j/tool/har/model/Browser.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.io.HarReader.java">org/sw4j/tool/har/io/HarReader.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.model.Page.java">org/sw4j/tool/har/model/Page.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.model.package-info.java">org/sw4j/tool/har/model/package-info.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.model.CreatorBrowser.java">org/sw4j/tool/har/model/CreatorBrowser.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.io.AttributeRequiredException.java">org/sw4j/tool/har/io/AttributeRequiredException.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.model.Creator.java">org/sw4j/tool/har/model/Creator.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.model.Har.java">org/sw4j/tool/har/model/Har.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.io.HarReader.java">org/sw4j/tool/har/io/HarReader.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,49 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://sw4j-org.github.io/har-reader//checkstyle.html#org.sw4j.tool.har.io.HarValidator.java">org/sw4j/tool/har/io/HarValidator.java</a>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.model.package-info.java">org/sw4j/tool/har/model/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.io.AttributeRequiredException.java">org/sw4j/tool/har/io/AttributeRequiredException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.model.Har.java">org/sw4j/tool/har/model/Har.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://sw4j-org.github.io/har-reader/0.1.0-SNAPSHOT/checkstyle.html#org.sw4j.tool.har.io.HarValidator.java">org/sw4j/tool/har/io/HarValidator.java</a>
                 </td>
                 <td>
                   0
