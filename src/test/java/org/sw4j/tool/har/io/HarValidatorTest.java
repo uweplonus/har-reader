@@ -21,7 +21,6 @@ import java.util.List;
 import org.sw4j.tool.har.model.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class HarValidatorTest {
@@ -52,10 +51,12 @@ public class HarValidatorTest {
         pages.add(page1);
         page1.setStartedDateTime(OffsetDateTime.now());
         page1.setId("id0");
+        page1.setTitle("Page 1");
         Page page2 = new Page();
         pages.add(page2);
         page2.setStartedDateTime(page1.getStartedDateTime().plusSeconds(5));
         page2.setId("id1");
+        page2.setTitle("Page 2");
         // Gson reads a null element if the array ends with a comma.
         pages.add(null);
     }
@@ -235,6 +236,21 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log.pages[0]\"");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "id",
                 "Expected the attribute to be \"id\"");
+    }
+
+    @Test
+    public void testPagesTitleMissing() {
+        pages.get(0).setTitle(null);
+        for (Page page: pages) {
+            model.getLog().addPage(page);
+        }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.pages[0]",
+                "Expected the parent to be \"log.pages[0]\"");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "title",
+                "Expected the attribute to be \"title\"");
     }
 
 }

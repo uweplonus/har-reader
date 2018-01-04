@@ -14,11 +14,13 @@
     "pages": [
       {
         "startedDateTime": "2017-12-23T14:15:00+01:00",
-        "id": "id1"
+        "id": "id0",
+        "title": "Page 1"
       },
       {
         "startedDateTime": "2017-12-23T14:15:01+01:00"
-        "id": "id2"
+        "id": "id1",
+        "title": "Page 2"
       }
     ]
   }

@@ -35,6 +35,10 @@ public class Page {
     @Expose
     private String id;
 
+    /** The title of the page. */
+    @Expose
+    private String title;
+
     /** The default constructor. */
     public Page() { }
 
@@ -81,4 +85,27 @@ public class Page {
     public void setId(final String id) {
         this.id = id;
     }
+
+    /**
+     * <p>
+     * Returns the title of the page.
+     * </p>
+     *
+     * @return the title.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * <p>
+     * Sets the title of the page.
+     * </p>
+     *
+     * @param title the title.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 }

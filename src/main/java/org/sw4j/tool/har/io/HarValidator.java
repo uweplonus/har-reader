@@ -175,6 +175,9 @@ public final class HarValidator {
             if (page.getId() == null) {
                 result.add(new RequiredAttribute(parent, "id"));
             }
+            if (page.getTitle() == null) {
+                result.add(new RequiredAttribute(parent, "title"));
+            }
         }
         return result;
     }
