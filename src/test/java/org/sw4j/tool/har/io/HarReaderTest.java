@@ -54,12 +54,16 @@ public class HarReaderTest {
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:00+01:00\",\n" +
             "        \"id\": \"id0\",\n" +
-            "        \"title\": \"Page 1\"\n" +
+            "        \"title\": \"Page 1\",\n" +
+            "        \"pageTimings\": {\n" +
+            "        }\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:01+01:00\",\n" +
             "        \"id\": \"id1\",\n" +
-            "        \"title\": \"Page 2\"\n" +
+            "        \"title\": \"Page 2\",\n" +
+            "        \"pageTimings\": {\n" +
+            "        }\n" +
             "      }\n" +
             "    ]\n" +
             "  }\n" +
@@ -228,6 +232,14 @@ public class HarReaderTest {
                 "Expected a nonnull log.pages[0].title object.");
         Assert.assertEquals(log.getPage(0).getTitle(), "Page 1",
                 "Expected the pages[0].title to be \"Page 1\".");
+    }
+
+    @Test
+    public void testReadLogPagesPageTimings() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getPage(0).getPageTimings(),
+                "Expected a nonnull log.pages[0].pageTimings object.");
     }
 
 }

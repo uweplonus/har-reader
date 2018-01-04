@@ -52,11 +52,17 @@ public class HarValidatorTest {
         page1.setStartedDateTime(OffsetDateTime.now());
         page1.setId("id0");
         page1.setTitle("Page 1");
+        PageTimings pageTimings = new PageTimings();
+        page1.setPageTimings(pageTimings);
+
         Page page2 = new Page();
         pages.add(page2);
         page2.setStartedDateTime(page1.getStartedDateTime().plusSeconds(5));
         page2.setId("id1");
         page2.setTitle("Page 2");
+        pageTimings = new PageTimings();
+        page2.setPageTimings(pageTimings);
+
         // Gson reads a null element if the array ends with a comma.
         pages.add(null);
     }
@@ -251,6 +257,21 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log.pages[0]\"");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "title",
                 "Expected the attribute to be \"title\"");
+    }
+
+    @Test
+    public void testPagesPageTimingsMissing() {
+        pages.get(0).setPageTimings(null);
+        for (Page page: pages) {
+            model.getLog().addPage(page);
+        }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.pages[0]",
+                "Expected the parent to be \"log.pages[0]\"");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "pageTimings",
+                "Expected the attribute to be \"pageTimings\"");
     }
 
 }

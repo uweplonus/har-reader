@@ -39,6 +39,10 @@ public class Page {
     @Expose
     private String title;
 
+    /** The page timings of the page. */
+    @Expose
+    private PageTimings pageTimings;
+
     /** The default constructor. */
     public Page() { }
 
@@ -106,6 +110,28 @@ public class Page {
      */
     public void setTitle(final String title) {
         this.title = title;
+    }
+
+    /**
+     * <p>
+     * Returns the timings of this page.
+     * </p>
+     *
+     * @return the timings of this page.
+     */
+    public PageTimings getPageTimings() {
+        return pageTimings;
+    }
+
+    /**
+     * <p>
+     * Sets the timings of this page.
+     * </p>
+     *
+     * @param pageTimings the timings of this page.
+     */
+    public void setPageTimings(final PageTimings pageTimings) {
+        this.pageTimings = pageTimings;
     }
 
 }
