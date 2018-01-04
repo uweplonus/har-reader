@@ -31,6 +31,10 @@ public class Page {
     @Expose
     private OffsetDateTime startedDateTime;
 
+    /** The unique identifier of the page. */
+    @Expose
+    private String id;
+
     /** The default constructor. */
     public Page() { }
 
@@ -56,4 +60,25 @@ public class Page {
         this.startedDateTime = startedDateTime;
     }
 
+    /**
+     * <p>
+     * Returns the unique identifier of the page within the log.
+     * </p>
+     *
+     * @return the unique identifier.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * <p>
+     * Sets the unique identifier of the page within the log.
+     * </p>
+     *
+     * @param id the unique identifier.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
 }

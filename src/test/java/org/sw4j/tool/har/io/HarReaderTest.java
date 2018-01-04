@@ -16,6 +16,7 @@
 package org.sw4j.tool.har.io;
 
 import java.io.StringReader;
+import java.time.format.DateTimeFormatter;
 import org.sw4j.tool.har.model.Log;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -51,10 +52,12 @@ public class HarReaderTest {
             "    },\n" +
             "    \"pages\": [\n" +
             "      {\n" +
-            "        \"startedDateTime\": \"2017-12-23T14:15:00+01:00\"\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:00+01:00\",\n" +
+            "        \"id\": \"id0\"\n" +
             "      },\n" +
             "      {\n" +
-            "        \"startedDateTime\": \"2017-12-23T14:15:01+01:00\"\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:01+01:00\",\n" +
+            "        \"id\": \"id1\"\n" +
             "      }\n" +
             "    ]\n" +
             "  }\n" +
@@ -183,6 +186,36 @@ public class HarReaderTest {
         Assert.assertNotNull(log.getBrowser().getComment(), "Expected a nonnull log.browser.comment object.");
         Assert.assertEquals(log.getBrowser().getComment(), "browser's comment",
                 "Expected the browser.version to be \"browser's comment\".");
+    }
+
+    @Test
+    public void testReadLogPages() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getPages(), "Expected a nonnull log.pages object.");
+        Assert.assertEquals(log.getPagesSize(), 2,
+                "Expected the pages size to be 2.");
+    }
+
+    @Test
+    public void testReadLogPagesStartedDateTime() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getPage(0).getStartedDateTime(),
+                "Expected a nonnull log.pages[0].startedDateTime object.");
+        Assert.assertEquals(log.getPage(0).getStartedDateTime().format(DateTimeFormatter.ISO_DATE_TIME),
+                "2017-12-23T14:15:00+01:00",
+                "Expected the pages[0].startedDateTime to be \"2017-12-23T14:15:00+01:00\".");
+    }
+
+    @Test
+    public void testReadLogPagesId() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getPage(0).getId(),
+                "Expected a nonnull log.pages[0].id object.");
+        Assert.assertEquals(log.getPage(0).getId(), "id0",
+                "Expected the pages[0].id to be \"id0\".");
     }
 
 }

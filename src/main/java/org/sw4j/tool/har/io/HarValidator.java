@@ -172,6 +172,9 @@ public final class HarValidator {
             if (page.getStartedDateTime() == null) {
                 result.add(new RequiredAttribute(parent, "startedDateTime"));
             }
+            if (page.getId() == null) {
+                result.add(new RequiredAttribute(parent, "id"));
+            }
         }
         return result;
     }
