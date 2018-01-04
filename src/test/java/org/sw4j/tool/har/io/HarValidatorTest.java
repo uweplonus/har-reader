@@ -15,6 +15,7 @@
  */
 package org.sw4j.tool.har.io;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class HarValidatorTest {
         page1.setId("id0");
         page1.setTitle("Page 1");
         PageTimings pageTimings = new PageTimings();
+        pageTimings.setOnContentLoad(new BigDecimal("15.01"));
         page1.setPageTimings(pageTimings);
 
         Page page2 = new Page();
@@ -61,6 +63,7 @@ public class HarValidatorTest {
         page2.setId("id1");
         page2.setTitle("Page 2");
         pageTimings = new PageTimings();
+        pageTimings.setOnContentLoad(new BigDecimal("17.37"));
         page2.setPageTimings(pageTimings);
 
         // Gson reads a null element if the array ends with a comma.
@@ -272,6 +275,17 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log.pages[0]\"");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "pageTimings",
                 "Expected the attribute to be \"pageTimings\"");
+    }
+
+    @Test
+    public void testPagesPageTimingsOnContentLoadMissing() {
+        pages.get(0).getPageTimings().setOnContentLoad(null);
+        for (Page page: pages) {
+            model.getLog().addPage(page);
+        }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
 }

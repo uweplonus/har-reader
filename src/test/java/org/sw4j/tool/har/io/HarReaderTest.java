@@ -16,6 +16,7 @@
 package org.sw4j.tool.har.io;
 
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import org.sw4j.tool.har.model.Log;
 import org.testng.Assert;
@@ -56,6 +57,7 @@ public class HarReaderTest {
             "        \"id\": \"id0\",\n" +
             "        \"title\": \"Page 1\",\n" +
             "        \"pageTimings\": {\n" +
+            "          \"onContentLoad\": 100.01\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
@@ -240,6 +242,16 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertNotNull(log.getPage(0).getPageTimings(),
                 "Expected a nonnull log.pages[0].pageTimings object.");
+    }
+
+    @Test
+    public void testReadLogPagesPageTimimgsOnContentLoad() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getPage(0).getPageTimings().getOnContentLoad(),
+                "Expected a nonnull log.pages[0].pageTimings.onContentLoad object.");
+        Assert.assertEquals(log.getPage(0).getPageTimings().getOnContentLoad(), new BigDecimal("100.01"),
+                "Expected the pages[0].pageTimings.onContentLoad to be 100.01.");
     }
 
 }

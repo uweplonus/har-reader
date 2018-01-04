@@ -15,6 +15,9 @@
  */
 package org.sw4j.tool.har.model;
 
+import com.google.gson.annotations.Expose;
+import java.math.BigDecimal;
+
 /**
  * <p>
  * This is a page timings object of a page in the log.
@@ -23,5 +26,34 @@ package org.sw4j.tool.har.model;
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
 public class PageTimings {
+
+    /** Time (in milliseconds) from start of page loading until the page is loaded. */
+    @Expose
+    private BigDecimal onContentLoad;
+
+    /** The default constructor. */
+    public PageTimings() { }
+
+    /**
+     * <p>
+     * Returns the time (in milliseconds) from the start of page loading until the page is loaded.
+     * </p>
+     *
+     * @return the time (in milliseconds).
+     */
+    public BigDecimal getOnContentLoad() {
+        return onContentLoad;
+    }
+
+    /**
+     * <p>
+     * Sets the time (in milliseconds) from the start of page loading until the page is loaded.
+     * </p>
+     *
+     * @param onContentLoad the time (in milliseconds).
+     */
+    public void setOnContentLoad(final BigDecimal onContentLoad) {
+        this.onContentLoad = onContentLoad;
+    }
 
 }
