@@ -381,6 +381,22 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testEntriesAvailable() {
+        addPagesToLog();
+        addEntriesToLog();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+        Assert.assertEquals(model.getLog().getEntriesSize(), entries.size(),
+                "Expected the number of entries to be greater than 0.");
+        Assert.assertNotNull(model.getLog().getEntries(), "Expected the entries not to be null.");
+        Assert.assertEquals(model.getLog().getEntry(0), entries.get(0),
+                "Expected the entry #0 not to be null.");
+        Assert.assertNull(model.getLog().getEntry(-1), "Expected the entry #-1 to be null.");
+        Assert.assertNull(model.getLog().getEntry(Integer.MAX_VALUE), "Expected the entry #MAX_VAL to be null.");
+    }
+
+    @Test
     public void testEntriesPagerefMissing() {
         entries.get(0).setPageref(null);
         addEntriesToLog();
