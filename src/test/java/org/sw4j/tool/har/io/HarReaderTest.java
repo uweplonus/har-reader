@@ -37,11 +37,15 @@ public class HarReaderTest {
             "    \"entries\": [\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
-            "        \"time\": 100.01\n" +
+            "        \"time\": 100.01,\n" +
+            "        \"request\": {\n" +
+            "        }\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
-            "        \"time\": 200.02\n" +
+            "        \"time\": 200.02,\n" +
+            "        \"request\": {\n" +
+            "        }\n" +
             "      }\n" +
             "    ]\n" +
             "  }\n" +
@@ -85,11 +89,15 @@ public class HarReaderTest {
             "      {\n" +
             "        \"pageref\": \"id0\",\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
-            "        \"time\": 101.01\n" +
+            "        \"time\": 101.01,\n" +
+            "        \"request\": {\n" +
+            "        }\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
-            "        \"time\": 202.02\n" +
+            "        \"time\": 202.02,\n" +
+            "        \"request\": {\n" +
+            "        }\n" +
             "      }" +
             "    ],\n" +
             "    \"comment\": \"Log Comment\"\n" +

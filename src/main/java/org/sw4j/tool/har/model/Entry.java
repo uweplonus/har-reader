@@ -43,6 +43,10 @@ public class Entry {
     @Expose
     private BigDecimal time;
 
+    /** The request of this entry. */
+    @Expose
+    private Request request;
+
     /** The default constructor. */
     public Entry() { }
 
@@ -110,6 +114,28 @@ public class Entry {
      */
     public void setTime(final BigDecimal time) {
         this.time = time;
+    }
+
+    /**
+     * <p>
+     * Returns the request of the entry.
+     * </p>
+     *
+     * @return the request.
+     */
+    public Request getRequest() {
+        return request;
+    }
+
+    /**
+     * <p>
+     * Sets the request of the entry.
+     * </p>
+     *
+     * @param request the request.
+     */
+    public void setRequest(final Request request) {
+        this.request = request;
     }
 
 }

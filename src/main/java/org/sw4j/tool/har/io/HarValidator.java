@@ -24,6 +24,7 @@ import org.sw4j.tool.har.model.Entry;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 import org.sw4j.tool.har.model.Page;
+import org.sw4j.tool.har.model.Request;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
@@ -142,6 +143,26 @@ public final class HarValidator {
 
     /**
      * <p>
+     * Return all missing required attributes from the request object.
+     * </p>
+     *
+     * @param i the index in the original list (or array).
+     * @param request the request object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final int i, final Request request) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
+        if (request == null) {
+            result.add(new RequiredAttribute(parent, "request"));
+//        } else {
+//            result.addAll(getMissingRequiredAttributes("log.browser", browser));
+        }
+        return result;
+    }
+
+    /**
+     * <p>
      * Return all missing required attributes from the list of pages.
      * </p>
      *
@@ -226,6 +247,7 @@ public final class HarValidator {
             if (entry.getTime() == null) {
                 result.add(new RequiredAttribute(parent, "time"));
             }
+            result.addAll(getMissingRequiredAttributes(i, entry.getRequest()));
         }
         return result;
     }
