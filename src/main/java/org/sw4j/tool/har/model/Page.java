@@ -31,6 +31,22 @@ public class Page {
     @Expose
     private OffsetDateTime startedDateTime;
 
+    /** The unique identifier of the page. */
+    @Expose
+    private String id;
+
+    /** The title of the page. */
+    @Expose
+    private String title;
+
+    /** The page timings of the page. */
+    @Expose
+    private PageTimings pageTimings;
+
+    /** Comment to the page timings. */
+    @Expose
+    private String comment;
+
     /** The default constructor. */
     public Page() { }
 
@@ -54,6 +70,94 @@ public class Page {
      */
     public void setStartedDateTime(final OffsetDateTime startedDateTime) {
         this.startedDateTime = startedDateTime;
+    }
+
+    /**
+     * <p>
+     * Returns the unique identifier of the page within the log.
+     * </p>
+     *
+     * @return the unique identifier.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * <p>
+     * Sets the unique identifier of the page within the log.
+     * </p>
+     *
+     * @param id the unique identifier.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * <p>
+     * Returns the title of the page.
+     * </p>
+     *
+     * @return the title.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * <p>
+     * Sets the title of the page.
+     * </p>
+     *
+     * @param title the title.
+     */
+    public void setTitle(final String title) {
+        this.title = title;
+    }
+
+    /**
+     * <p>
+     * Returns the timings of this page.
+     * </p>
+     *
+     * @return the timings of this page.
+     */
+    public PageTimings getPageTimings() {
+        return pageTimings;
+    }
+
+    /**
+     * <p>
+     * Sets the timings of this page.
+     * </p>
+     *
+     * @param pageTimings the timings of this page.
+     */
+    public void setPageTimings(final PageTimings pageTimings) {
+        this.pageTimings = pageTimings;
+    }
+
+    /**
+     * <p>
+     * Returns the comment to the page.
+     * </p>
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * <p>
+     * Sets the comment to the page.
+     * </p>
+     *
+     * @param comment the comment.
+     */
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 
 }
