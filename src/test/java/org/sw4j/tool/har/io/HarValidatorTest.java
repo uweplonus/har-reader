@@ -58,6 +58,7 @@ public class HarValidatorTest {
         pageTimings.setOnLoad(new BigDecimal("20.02"));
         pageTimings.setComment("Comment 1");
         page1.setPageTimings(pageTimings);
+        page1.setComment("Page Comment 1");
 
         Page page2 = new Page();
         pages.add(page2);
@@ -69,6 +70,7 @@ public class HarValidatorTest {
         pageTimings.setOnLoad(new BigDecimal("22.03"));
         pageTimings.setComment("Comment 2");
         page2.setPageTimings(pageTimings);
+        page2.setComment("Page Comment 2");
 
         // Gson reads a null element if the array ends with a comma.
         pages.add(null);
@@ -306,6 +308,17 @@ public class HarValidatorTest {
     @Test
     public void testPagesPageTimingsCommentMissing() {
         pages.get(0).getPageTimings().setComment(null);
+        for (Page page: pages) {
+            model.getLog().addPage(page);
+        }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testPagesCommentMissing() {
+        pages.get(0).setComment(null);
         for (Page page: pages) {
             model.getLog().addPage(page);
         }

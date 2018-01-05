@@ -60,7 +60,8 @@ public class HarReaderTest {
             "          \"onContentLoad\": 100.01,\n" +
             "          \"onLoad\": 200.02,\n" +
             "          \"comment\": \"Comment 1\"\n" +
-            "        }\n" +
+            "        },\n" +
+            "        \"comment\": \"Page Comment 1\"\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:01+01:00\",\n" +
@@ -274,6 +275,16 @@ public class HarReaderTest {
                 "Expected a nonnull log.pages[0].pageTimings.comment object.");
         Assert.assertEquals(log.getPage(0).getPageTimings().getComment(), "Comment 1",
                 "Expected the pages[0].pageTimings.comment to be \"Comment 1\".");
+    }
+
+    @Test
+    public void testReadLogPagesComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getPage(0).getComment(),
+                "Expected a nonnull log.pages[0].comment object.");
+        Assert.assertEquals(log.getPage(0).getComment(), "Page Comment 1",
+                "Expected the pages[0].comment to be \"Page Comment 1\".");
     }
 
 }

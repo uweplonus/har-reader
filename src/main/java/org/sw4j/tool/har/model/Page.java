@@ -43,6 +43,10 @@ public class Page {
     @Expose
     private PageTimings pageTimings;
 
+    /** Comment to the page timings. */
+    @Expose
+    private String comment;
+
     /** The default constructor. */
     public Page() { }
 
@@ -132,6 +136,28 @@ public class Page {
      */
     public void setPageTimings(final PageTimings pageTimings) {
         this.pageTimings = pageTimings;
+    }
+
+    /**
+     * <p>
+     * Returns the comment to the page.
+     * </p>
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * <p>
+     * Sets the comment to the page.
+     * </p>
+     *
+     * @param comment the comment.
+     */
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 
 }
