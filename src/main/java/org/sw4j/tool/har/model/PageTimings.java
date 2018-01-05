@@ -35,6 +35,10 @@ public class PageTimings {
     @Expose
     private BigDecimal onLoad;
 
+    /** Comment to the page timings. */
+    @Expose
+    private String comment;
+
     /** The default constructor. */
     public PageTimings() { }
 
@@ -80,6 +84,28 @@ public class PageTimings {
      */
     public void setOnLoad(final BigDecimal onLoad) {
         this.onLoad = onLoad;
+    }
+
+    /**
+     * <p>
+     * Returns the comment to the page timings.
+     * </p>
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * <p>
+     * Sets the comment to the page timings.
+     * </p>
+     *
+     * @param comment the comment.
+     */
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 
 }
