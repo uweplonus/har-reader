@@ -15,6 +15,8 @@
  */
 package org.sw4j.tool.har.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * <p>
  * This is an request object of the entry.
@@ -27,7 +29,33 @@ package org.sw4j.tool.har.model;
  */
 public class Request {
 
+    /** The method of the request. */
+    @Expose
+    private String method;
+
     /** The default constructor. */
     public Request() { }
+
+    /**
+     * <p>
+     * Returns the method of the request.
+     * </p>
+     *
+     * @return the method of the request.
+     */
+    public String getMethod() {
+        return method;
+    }
+
+    /**
+     * <p>
+     * Sets the method of the request.
+     * </p>
+     *
+     * @param method the method of the request.
+     */
+    public void setMethod(final String method) {
+        this.method = method;
+    }
 
 }

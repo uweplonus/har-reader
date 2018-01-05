@@ -39,12 +39,14 @@ public class HarReaderTest {
             "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
             "        \"time\": 100.01,\n" +
             "        \"request\": {\n" +
+            "          \"method\": \"GET\"\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
             "        \"time\": 200.02,\n" +
             "        \"request\": {\n" +
+            "          \"method\": \"POST\"\n" +
             "        }\n" +
             "      }\n" +
             "    ]\n" +
@@ -91,12 +93,14 @@ public class HarReaderTest {
             "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
             "        \"time\": 101.01,\n" +
             "        \"request\": {\n" +
+            "          \"method\": \"GET\"\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
             "        \"time\": 202.02,\n" +
             "        \"request\": {\n" +
+            "          \"method\": \"POST\"\n" +
             "        }\n" +
             "      }" +
             "    ],\n" +
@@ -354,6 +358,24 @@ public class HarReaderTest {
                 "Expected a nonnull log.entries[0].time object.");
         Assert.assertEquals(log.getEntry(0).getTime(), new BigDecimal("100.01"),
                 "Expected the entries[0].startedDateTime to be 100.01.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequest() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getRequest(),
+                "Expected a nonnull log.entries[0].request object.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestMethod() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getRequest().getMethod(),
+                "Expected a nonnull log.entries[0].request.method object.");
+        Assert.assertEquals(log.getEntry(0).getRequest().getMethod(), "GET",
+                "Expected the request.method to be \"GET\".");
     }
 
     @Test

@@ -155,8 +155,11 @@ public final class HarValidator {
         String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
         if (request == null) {
             result.add(new RequiredAttribute(parent, "request"));
-//        } else {
-//            result.addAll(getMissingRequiredAttributes("log.browser", browser));
+        } else {
+            parent = new StringBuilder(parent).append(".request").toString();
+            if (request.getMethod() == null) {
+                result.add(new RequiredAttribute(parent, "method"));
+            }
         }
         return result;
     }
