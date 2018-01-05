@@ -97,9 +97,11 @@ public class HarValidatorTest {
 
         Entry entry1 = new Entry();
         entries.add(entry1);
+        entry1.setPageref("id0");
 
         Entry entry2 = new Entry();
         entries.add(entry2);
+        entry2.setPageref("id1");
 
         // Gson reads a null element if the array ends with a comma.
         entries.add(null);
@@ -374,6 +376,15 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log\"");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "entries",
                 "Expected the attribute to be \"entries\"");
+    }
+
+    @Test
+    public void testEntriesPagerefMissing() {
+        entries.get(0).setPageref(null);
+        addEntriesToLog();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
     @Test

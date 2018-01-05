@@ -15,6 +15,8 @@
  */
 package org.sw4j.tool.har.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * <p>
  * This is an entry object of the log.
@@ -27,7 +29,33 @@ package org.sw4j.tool.har.model;
  */
 public class Entry {
 
+    /** The optional pageref of the entry. */
+    @Expose
+    private String pageref;
+
     /** The default constructor. */
     public Entry() { }
+
+    /**
+     * <p>
+     * Returns the optional pageref of the entry.
+     * </p>
+     *
+     * @return the pageref of the entry.
+     */
+    public String getPageref() {
+        return pageref;
+    }
+
+    /**
+     * <p>
+     * Sets the optional pageref of the entry.
+     * </p>
+     *
+     * @param pageref the pageref of the entry.
+     */
+    public void setPageref(final String pageref) {
+        this.pageref = pageref;
+    }
 
 }

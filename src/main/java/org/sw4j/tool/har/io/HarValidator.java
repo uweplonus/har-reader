@@ -152,7 +152,7 @@ public final class HarValidator {
         List<RequiredAttribute> result = new LinkedList<>();
         if (pages != null) {
             for (int i = 0; i < pages.size(); i++) {
-                result.addAll(getMissingRequiredAttributes(i, pages.get(i)));
+                result.addAll(getMissingRequiredPageAttributes(i, pages.get(i)));
             }
         }
         return result;
@@ -167,7 +167,7 @@ public final class HarValidator {
      * @param page the page object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final int i, final Page page) {
+    private static List<RequiredAttribute> getMissingRequiredPageAttributes(final int i, final Page page) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (page != null) {
             String parent = new StringBuilder("log.pages[").append(i).append("]").toString();
@@ -201,7 +201,7 @@ public final class HarValidator {
             result.add(new RequiredAttribute("log", "entries"));
         } else {
             for (int i = 0; i < entries.size(); i++) {
-                result.addAll(getMissingRequiredAttributes(i, entries.get(i)));
+                result.addAll(getMissingRequiredEntryAttributes(i, entries.get(i)));
             }
         }
         return result;
@@ -216,14 +216,14 @@ public final class HarValidator {
      * @param entry the entry object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final int i, final Entry entry) {
+    private static List<RequiredAttribute> getMissingRequiredEntryAttributes(final int i, final Entry entry) {
         List<RequiredAttribute> result = new LinkedList<>();
-        if (entry != null) {
-            String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
+//        if (entry != null) {
+//            String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
 //            if (entry.getStartedDateTime() == null) {
 //                result.add(new RequiredAttribute(parent, "startedDateTime"));
 //            }
-        }
+//        }
         return result;
     }
 

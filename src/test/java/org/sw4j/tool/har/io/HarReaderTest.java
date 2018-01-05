@@ -76,6 +76,10 @@ public class HarReaderTest {
             "      }\n" +
             "    ],\n" +
             "    \"entries\": [\n" +
+            "      {\n" +
+            "        \"pageref\": \"id0\"\n" +
+            "      },\n" +
+            "      {}\n" +
             "    ],\n" +
             "    \"comment\": \"Log Comment\"\n" +
             "  }\n" +
@@ -295,6 +299,24 @@ public class HarReaderTest {
     }
 
     @Test
+    public void testReadLogEntries() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntries(), "Expected a nonnull log.entries object.");
+        Assert.assertEquals(log.getEntriesSize(), 2,
+                "Expected the entries size to be 2.");
+    }
+
+    @Test
+    public void testReadLogEntriesPageref() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getPageref(), "Expected a nonnull log.entries[0].pageref object.");
+        Assert.assertEquals(log.getEntry(0).getPageref(), "id0",
+                "Expected the entries[0].pageref to be \"id0\".");
+    }
+
+    @Test
     public void testReadLogComment() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
@@ -302,15 +324,6 @@ public class HarReaderTest {
                 "Expected a nonnull log.comment object.");
         Assert.assertEquals(log.getComment(), "Log Comment",
                 "Expected the log.comment to be \"Log Comment \".");
-    }
-
-    @Test
-    public void testReadLogEntries() throws AttributeRequiredException {
-        HarReader hr = new HarReader(new StringReader(requiredJson));
-        Log log = hr.read(true);
-        Assert.assertNotNull(log.getEntries(), "Expected a nonnull log.entries object.");
-        Assert.assertEquals(log.getEntriesSize(), 2,
-                "Expected the entries size to be 2.");
     }
 
 }
