@@ -24,6 +24,9 @@ import java.util.List;
  * <p>
  * This is the log object of the HAR.
  * </p>
+ * <p>
+ * This class is not thread safe.
+ * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
@@ -44,6 +47,10 @@ public class Log {
     /** The optional list of pages in the HAR. */
     @Expose
     private List<Page> pages;
+
+    /** The entries in the HAR. */
+    @Expose
+    private List<Entry> entries;
 
     /** Comment to the log. */
     @Expose
@@ -137,7 +144,7 @@ public class Log {
      * Returns the size of the list of pages.
      * </p>
      *
-     * @return the size of the list of the pages. If there are no pages then {@code 0} if returned.
+     * @return the size of the list of the pages. If there are no pages then {@code 0} is returned.
      */
     public int getPagesSize() {
         if (pages != null) {
@@ -174,6 +181,64 @@ public class Log {
             pages = new LinkedList<>();
         }
         pages.add(page);
+    }
+
+    /**
+     * <p>
+     * Returns all entries as unmodifiable list.
+     * </p>
+     *
+     * @return an unmodifiable list with all entries or {@code null} if there are no entries.
+     */
+    public List<Entry> getEntries() {
+        if (entries == null) {
+            return entries;
+        }
+        return Collections.unmodifiableList(entries);
+    }
+
+    /**
+     * <p>
+     * Returns the size of the list of entries.
+     * </p>
+     *
+     * @return the size of the list of entries. If there are no entries then {@code 0} is returned.
+     */
+    public int getEntriesSize() {
+        if (entries != null) {
+            return entries.size();
+        }
+        return 0;
+    }
+
+    /**
+     * <p>
+     * Returns the entry at index {@code i}.
+     * </p>
+     *
+     * @param i the index.
+     * @return the entry at the given index or {@code null} if either the given index is invalid or no entries are
+     *     available.
+     */
+    public Entry getEntry(final int i) {
+        if (entries == null || i < 0 || i >= entries.size()) {
+            return null;
+        }
+        return entries.get(i);
+    }
+
+    /**
+     * <p>
+     * Adds the given entry to the list of entries.
+     * </p>
+     *
+     * @param entry the entry to add to the list.
+     */
+    public void addEntry(final Entry entry) {
+        if (entries == null) {
+            entries = new LinkedList<>();
+        }
+        entries.add(entry);
     }
 
     /**

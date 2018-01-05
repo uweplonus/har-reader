@@ -22,6 +22,9 @@ import java.time.OffsetDateTime;
  * <p>
  * This is a page object of the log.
  * </p>
+ * <p>
+ * This class is not thread safe.
+ * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */

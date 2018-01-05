@@ -21,6 +21,9 @@ import com.google.gson.annotations.Expose;
  * <p>
  * This model class represents either a creator or a browser.
  * </p>
+ * <p>
+ * This class is not thread safe.
+ * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */

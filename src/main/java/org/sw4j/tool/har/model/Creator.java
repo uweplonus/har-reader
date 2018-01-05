@@ -16,7 +16,12 @@
 package org.sw4j.tool.har.model;
 
 /**
+ * <p>
  * This class represents a creator.
+ * </p>
+ * <p>
+ * This class is not thread safe.
+ * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
