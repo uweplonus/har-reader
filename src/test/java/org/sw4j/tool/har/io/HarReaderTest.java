@@ -36,10 +36,12 @@ public class HarReaderTest {
             "    },\n" +
             "    \"entries\": [\n" +
             "      {\n" +
-            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\"\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
+            "        \"time\": 100.01\n" +
             "      },\n" +
             "      {\n" +
-            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\"\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
+            "        \"time\": 200.02\n" +
             "      }\n" +
             "    ]\n" +
             "  }\n" +
@@ -82,10 +84,12 @@ public class HarReaderTest {
             "    \"entries\": [\n" +
             "      {\n" +
             "        \"pageref\": \"id0\",\n" +
-            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\"\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
+            "        \"time\": 101.01\n" +
             "      },\n" +
             "      {\n" +
-            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\"\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
+            "        \"time\": 202.02\n" +
             "      }" +
             "    ],\n" +
             "    \"comment\": \"Log Comment\"\n" +
@@ -332,6 +336,16 @@ public class HarReaderTest {
         Assert.assertEquals(log.getEntry(0).getStartedDateTime().format(DateTimeFormatter.ISO_DATE_TIME),
                 "2017-12-23T14:15:02+01:00",
                 "Expected the entries[0].startedDateTime to be \"2017-12-23T14:15:02+01:00\".");
+    }
+
+    @Test
+    public void testReadLogEntriesTime() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getTime(),
+                "Expected a nonnull log.entries[0].time object.");
+        Assert.assertEquals(log.getEntry(0).getTime(), new BigDecimal("100.01"),
+                "Expected the entries[0].startedDateTime to be 100.01.");
     }
 
     @Test

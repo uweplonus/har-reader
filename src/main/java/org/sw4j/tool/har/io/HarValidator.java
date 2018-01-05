@@ -223,6 +223,9 @@ public final class HarValidator {
             if (entry.getStartedDateTime() == null) {
                 result.add(new RequiredAttribute(parent, "startedDateTime"));
             }
+            if (entry.getTime() == null) {
+                result.add(new RequiredAttribute(parent, "time"));
+            }
         }
         return result;
     }

@@ -16,6 +16,7 @@
 package org.sw4j.tool.har.model;
 
 import com.google.gson.annotations.Expose;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 /**
@@ -37,6 +38,10 @@ public class Entry {
     /** The date and time when the request started. */
     @Expose
     private OffsetDateTime startedDateTime;
+
+    /** The elapsed time of the request in milliseconds. */
+    @Expose
+    private BigDecimal time;
 
     /** The default constructor. */
     public Entry() { }
@@ -83,6 +88,28 @@ public class Entry {
      */
     public void setStartedDateTime(final OffsetDateTime startedDateTime) {
         this.startedDateTime = startedDateTime;
+    }
+
+    /**
+     * <p>
+     * Returns the elapsed time of the request in milliseconds.
+     * </p>
+     *
+     * @return the elapsed time in milliseconds.
+     */
+    public BigDecimal getTime() {
+        return time;
+    }
+
+    /**
+     * <p>
+     * Sets the elapsed time of the request in milliseconds.
+     * </p>
+     *
+     * @param time the elapsed time in milliseconds.
+     */
+    public void setTime(final BigDecimal time) {
+        this.time = time;
     }
 
 }
