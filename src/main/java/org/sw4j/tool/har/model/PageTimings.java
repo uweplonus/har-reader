@@ -27,16 +27,20 @@ import java.math.BigDecimal;
  */
 public class PageTimings {
 
-    /** Time (in milliseconds) from start of page loading until the page is loaded. */
+    /** Time (in milliseconds) from start of page loading until the content is loaded. */
     @Expose
     private BigDecimal onContentLoad;
+
+    /** Time (in milliseconds) from start of page loading until the page is loaded. */
+    @Expose
+    private BigDecimal onLoad;
 
     /** The default constructor. */
     public PageTimings() { }
 
     /**
      * <p>
-     * Returns the time (in milliseconds) from the start of page loading until the page is loaded.
+     * Returns the time (in milliseconds) from the start of page loading until the content is loaded.
      * </p>
      *
      * @return the time (in milliseconds).
@@ -47,13 +51,35 @@ public class PageTimings {
 
     /**
      * <p>
-     * Sets the time (in milliseconds) from the start of page loading until the page is loaded.
+     * Sets the time (in milliseconds) from the start of page loading until the content is loaded.
      * </p>
      *
      * @param onContentLoad the time (in milliseconds).
      */
     public void setOnContentLoad(final BigDecimal onContentLoad) {
         this.onContentLoad = onContentLoad;
+    }
+
+    /**
+     * <p>
+     * Returns the time (in milliseconds) from the start of page loading until the page is loaded.
+     * </p>
+     *
+     * @return the time (in milliseconds).
+     */
+    public BigDecimal getOnLoad() {
+        return onLoad;
+    }
+
+    /**
+     * <p>
+     * Sets the time (in milliseconds) from the start of page loading until the page is loaded.
+     * </p>
+     *
+     * @param onLoad the time (in milliseconds).
+     */
+    public void setOnLoad(final BigDecimal onLoad) {
+        this.onLoad = onLoad;
     }
 
 }

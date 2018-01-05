@@ -57,7 +57,8 @@ public class HarReaderTest {
             "        \"id\": \"id0\",\n" +
             "        \"title\": \"Page 1\",\n" +
             "        \"pageTimings\": {\n" +
-            "          \"onContentLoad\": 100.01\n" +
+            "          \"onContentLoad\": 100.01,\n" +
+            "          \"onLoad\": 200.02\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
@@ -252,6 +253,16 @@ public class HarReaderTest {
                 "Expected a nonnull log.pages[0].pageTimings.onContentLoad object.");
         Assert.assertEquals(log.getPage(0).getPageTimings().getOnContentLoad(), new BigDecimal("100.01"),
                 "Expected the pages[0].pageTimings.onContentLoad to be 100.01.");
+    }
+
+    @Test
+    public void testReadLogPagesPageTimimgsOnLoad() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getPage(0).getPageTimings().getOnLoad(),
+                "Expected a nonnull log.pages[0].pageTimings.onLoad object.");
+        Assert.assertEquals(log.getPage(0).getPageTimings().getOnLoad(), new BigDecimal("200.02"),
+                "Expected the pages[0].pageTimings.onLoad to be 200.02.");
     }
 
 }

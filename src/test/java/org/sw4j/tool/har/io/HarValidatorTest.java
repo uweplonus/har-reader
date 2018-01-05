@@ -288,4 +288,15 @@ public class HarValidatorTest {
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
+    @Test
+    public void testPagesPageTimingsOnLoadMissing() {
+        pages.get(0).getPageTimings().setOnLoad(null);
+        for (Page page: pages) {
+            model.getLog().addPage(page);
+        }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
 }
