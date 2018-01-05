@@ -98,10 +98,12 @@ public class HarValidatorTest {
         Entry entry1 = new Entry();
         entries.add(entry1);
         entry1.setPageref("id0");
+        entry1.setStartedDateTime(OffsetDateTime.now().plusSeconds(1));
 
         Entry entry2 = new Entry();
         entries.add(entry2);
         entry2.setPageref("id1");
+        entry2.setStartedDateTime(entry1.getStartedDateTime().plusSeconds(5));
 
         // Gson reads a null element if the array ends with a comma.
         entries.add(null);
@@ -385,6 +387,19 @@ public class HarValidatorTest {
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesStartedDateTimeMissing() {
+        entries.get(0).setStartedDateTime(null);
+        addEntriesToLog();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.entries[0]",
+                "Expected the parent to be \"log.entries[0]\"");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "startedDateTime",
+                "Expected the attribute to be \"startedDateTime\"");
     }
 
     @Test

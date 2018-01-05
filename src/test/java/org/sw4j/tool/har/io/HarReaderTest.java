@@ -35,8 +35,12 @@ public class HarReaderTest {
             "      \"version\": \"2.2\"\n" +
             "    },\n" +
             "    \"entries\": [\n" +
-            "      {},\n" +
-            "      {}\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\"\n" +
+            "      }\n" +
             "    ]\n" +
             "  }\n" +
             "}\n";
@@ -77,9 +81,12 @@ public class HarReaderTest {
             "    ],\n" +
             "    \"entries\": [\n" +
             "      {\n" +
-            "        \"pageref\": \"id0\"\n" +
+            "        \"pageref\": \"id0\",\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\"\n" +
             "      },\n" +
-            "      {}\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\"\n" +
+            "      }" +
             "    ],\n" +
             "    \"comment\": \"Log Comment\"\n" +
             "  }\n" +
@@ -314,6 +321,17 @@ public class HarReaderTest {
         Assert.assertNotNull(log.getEntry(0).getPageref(), "Expected a nonnull log.entries[0].pageref object.");
         Assert.assertEquals(log.getEntry(0).getPageref(), "id0",
                 "Expected the entries[0].pageref to be \"id0\".");
+    }
+
+    @Test
+    public void testReadLogEntriesStartedDateTime() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getStartedDateTime(),
+                "Expected a nonnull log.entries[0].startedDateTime object.");
+        Assert.assertEquals(log.getEntry(0).getStartedDateTime().format(DateTimeFormatter.ISO_DATE_TIME),
+                "2017-12-23T14:15:02+01:00",
+                "Expected the entries[0].startedDateTime to be \"2017-12-23T14:15:02+01:00\".");
     }
 
     @Test

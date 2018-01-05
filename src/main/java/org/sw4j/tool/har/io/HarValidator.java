@@ -218,12 +218,12 @@ public final class HarValidator {
      */
     private static List<RequiredAttribute> getMissingRequiredEntryAttributes(final int i, final Entry entry) {
         List<RequiredAttribute> result = new LinkedList<>();
-//        if (entry != null) {
-//            String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
-//            if (entry.getStartedDateTime() == null) {
-//                result.add(new RequiredAttribute(parent, "startedDateTime"));
-//            }
-//        }
+        if (entry != null) {
+            String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
+            if (entry.getStartedDateTime() == null) {
+                result.add(new RequiredAttribute(parent, "startedDateTime"));
+            }
+        }
         return result;
     }
 

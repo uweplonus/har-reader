@@ -16,6 +16,7 @@
 package org.sw4j.tool.har.model;
 
 import com.google.gson.annotations.Expose;
+import java.time.OffsetDateTime;
 
 /**
  * <p>
@@ -32,6 +33,10 @@ public class Entry {
     /** The optional pageref of the entry. */
     @Expose
     private String pageref;
+
+    /** The date and time when the request started. */
+    @Expose
+    private OffsetDateTime startedDateTime;
 
     /** The default constructor. */
     public Entry() { }
@@ -56,6 +61,28 @@ public class Entry {
      */
     public void setPageref(final String pageref) {
         this.pageref = pageref;
+    }
+
+    /**
+     * <p>
+     * Returns the date and time when the request started.
+     * </p>
+     *
+     * @return the date and time of the request.
+     */
+    public OffsetDateTime getStartedDateTime() {
+        return startedDateTime;
+    }
+
+    /**
+     * <p>
+     * Sets the date and time when the request started.
+     * </p>
+     *
+     * @param startedDateTime the date and time of the request.
+     */
+    public void setStartedDateTime(final OffsetDateTime startedDateTime) {
+        this.startedDateTime = startedDateTime;
     }
 
 }
