@@ -105,6 +105,7 @@ public class HarValidatorTest {
         request.setMethod("GET");
         request.setUrl("https://example.org/example1");
         request.setHttpVersion("HTTP/1.1");
+        request.createEmptyCookies();
 
         Entry entry2 = new Entry();
         entries.add(entry2);
@@ -116,6 +117,8 @@ public class HarValidatorTest {
         request.setMethod("POST");
         request.setUrl("https://example.com/example2");
         request.setHttpVersion("http/2.0");
+        Cookie cookie = new Cookie();
+        request.addCookie(cookie);
 
         // Gson reads a null element if the array ends with a comma.
         entries.add(null);
@@ -493,6 +496,38 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log.entries[0].request\"");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "httpVersion",
                 "Expected the attribute to be \"httpVersion\"");
+    }
+
+    @Test
+    public void testEntriesCookiesMissing() {
+        entries.get(0).getRequest().clearCookies();
+        addEntriesToLog();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.entries[0].request",
+                "Expected the parent to be \"log.entries[0].request\"");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "cookies",
+                "Expected the attribute to be \"cookies\"");
+    }
+
+    @Test
+    public void testEntriesCookiesEmpty() {
+        entries.get(0).getRequest().createEmptyCookies();
+        addEntriesToLog();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+        Assert.assertEquals(model.getLog().getEntry(0).getRequest().getCookiesSize(), 0,
+                "Expected the number of cookies to be 0.");
+        Assert.assertNotNull(model.getLog().getEntry(0).getRequest().getCookies(),
+                "Expected the cookies not to be null.");
+        Assert.assertNull(model.getLog().getEntry(0).getRequest().getCookie(0),
+                "Expected the entry #0 to be null.");
+        Assert.assertNull(model.getLog().getEntry(0).getRequest().getCookie(-1),
+                "Expected the entry #-1 to be null.");
+        Assert.assertNull(model.getLog().getEntry(0).getRequest().getCookie(Integer.MAX_VALUE),
+                "Expected the entry #MAX_VAL to be null.");
     }
 
     @Test

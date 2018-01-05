@@ -12,7 +12,9 @@
         "request": {
           "method": "GET",
           "url": "https://example.org/example1",
-          "httpVersion": "HTTP/1.1"
+          "httpVersion": "HTTP/1.1",
+          "cookies": [
+          ]
         }
       },
       {
@@ -21,7 +23,10 @@
         "request": {
           "method": "POST",
           "url": "https://example.com/example2",
-          "httpVersion": "http/2.0"
+          "httpVersion": "http/2.0",
+          "cookies": [
+            {}
+          ]
         }
       }
     ]

@@ -16,10 +16,13 @@
 package org.sw4j.tool.har.model;
 
 import com.google.gson.annotations.Expose;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * <p>
- * This is an request object of the entry.
+ * This is a request object of the entry.
  * </p>
  * <p>
  * This class is not thread safe.
@@ -40,6 +43,10 @@ public class Request {
     /** The HTTP version of the request. */
     @Expose
     private String httpVersion;
+
+    /** The cookies sent with the request. */
+    @Expose
+    private List<Cookie> cookies;
 
     /** The default constructor. */
     public Request() { }
@@ -108,6 +115,78 @@ public class Request {
      */
     public void setHttpVersion(final String httpVersion) {
         this.httpVersion = httpVersion;
+    }
+
+    /**
+     * Clears the cookies that means that the cookies are set to {@code null}.
+     */
+    public void clearCookies() {
+        cookies = null;
+    }
+
+    /**
+     * Creates an empty cookie list.
+     */
+    public void createEmptyCookies() {
+        cookies = new LinkedList<>();
+    }
+
+    /**
+     * <p>
+     * Returns all cookies as unmodifiable list.
+     * </p>
+     *
+     * @return an unmodifiable list with all cookies or {@code null} if there are no cookies.
+     */
+    public List<Cookie> getCookies() {
+        if (cookies == null) {
+            return cookies;
+        }
+        return Collections.unmodifiableList(cookies);
+    }
+
+    /**
+     * <p>
+     * Returns the size of the list of cookies.
+     * </p>
+     *
+     * @return the size of the list of cookies. If there are no entries then {@code 0} is returned.
+     */
+    public int getCookiesSize() {
+        if (cookies != null) {
+            return cookies.size();
+        }
+        return 0;
+    }
+
+    /**
+     * <p>
+     * Returns the cookie at index {@code i}.
+     * </p>
+     *
+     * @param i the index.
+     * @return the cookie at the given index or {@code null} if either the given index is invalid or no entries are
+     *     available.
+     */
+    public Cookie getCookie(final int i) {
+        if (cookies == null || i < 0 || i >= cookies.size()) {
+            return null;
+        }
+        return cookies.get(i);
+    }
+
+    /**
+     * <p>
+     * Adds the given cookie to the list of cookies.
+     * </p>
+     *
+     * @param cookie the cookie to add to the list.
+     */
+    public void addCookie(final Cookie cookie) {
+        if (cookies == null) {
+            cookies = new LinkedList<>();
+        }
+        cookies.add(cookie);
     }
 
 }

@@ -41,7 +41,9 @@ public class HarReaderTest {
             "        \"request\": {\n" +
             "          \"method\": \"GET\",\n" +
             "          \"url\": \"https://example.org/example1\",\n" +
-            "          \"httpVersion\": \"HTTP/1.1\"\n" +
+            "          \"httpVersion\": \"HTTP/1.1\",\n" +
+            "          \"cookies\": [\n" +
+            "          ]\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
@@ -50,7 +52,11 @@ public class HarReaderTest {
             "        \"request\": {\n" +
             "          \"method\": \"POST\",\n" +
             "          \"url\": \"https://example.com/example2\",\n" +
-            "          \"httpVersion\": \"http/2.0\"\n" +
+            "          \"httpVersion\": \"http/2.0\",\n" +
+            "          \"cookies\": [\n" +
+            "            {},\n" +
+            "            {}\n" +
+            "          ]\n" +
             "        }\n" +
             "      }\n" +
             "    ]\n" +
@@ -99,7 +105,9 @@ public class HarReaderTest {
             "        \"request\": {\n" +
             "          \"method\": \"GET\",\n" +
             "          \"url\": \"https://example.org/example1\",\n" +
-            "          \"httpVersion\": \"HTTP/1.1\"\n" +
+            "          \"httpVersion\": \"HTTP/1.1\",\n" +
+            "          \"cookies\": [\n" +
+            "          ]\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
@@ -108,7 +116,11 @@ public class HarReaderTest {
             "        \"request\": {\n" +
             "          \"method\": \"POST\",\n" +
             "          \"url\": \"https://example.com/example2\",\n" +
-            "          \"httpVersion\": \"http/2.0\"\n" +
+            "          \"httpVersion\": \"http/2.0\",\n" +
+            "          \"cookies\": [\n" +
+            "            {},\n" +
+            "            {}\n" +
+            "          ]\n" +
             "        }\n" +
             "      }" +
             "    ],\n" +
@@ -404,6 +416,26 @@ public class HarReaderTest {
                 "Expected a nonnull log.entries[0].request.httpVersion object.");
         Assert.assertEquals(log.getEntry(0).getRequest().getHttpVersion(), "HTTP/1.1",
                 "Expected the request.httpVersion to be \"HTTP/1.1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesEmpty() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getRequest().getCookies(),
+                "Expected a nonnull log.entries[0].request.cookies object.");
+        Assert.assertEquals(log.getEntry(0).getRequest().getCookiesSize(), 0,
+                "Expected the request.cookies to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesFilled() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(1).getRequest().getCookies(),
+                "Expected a nonnull log.entries[0].request.cookies object.");
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookiesSize(), 2,
+                "Expected the request.cookies not to be empty.");
     }
 
     @Test
