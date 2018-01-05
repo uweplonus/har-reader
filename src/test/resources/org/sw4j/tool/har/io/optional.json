@@ -33,6 +33,24 @@
         }
       }
     ],
+    "entries": [
+      {
+        "startedDateTime": "2017-12-23T14:15:02+01:00",
+        "time": 100.01,
+        "request": {
+          "method": "GET",
+          "url": "https://example.org/example1"
+        }
+      },
+      {
+        "startedDateTime": "2017-12-23T14:15:03+01:00",
+        "time": 200.02,
+        "request": {
+          "method": "POST",
+          "url": "https://example.com/example2"
+        }
+      }
+    ],
     "comment": "Log Comment"
   }
 }

@@ -39,14 +39,16 @@ public class HarReaderTest {
             "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
             "        \"time\": 100.01,\n" +
             "        \"request\": {\n" +
-            "          \"method\": \"GET\"\n" +
+            "          \"method\": \"GET\",\n" +
+            "          \"url\": \"https://example.org/example1\"\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
             "        \"time\": 200.02,\n" +
             "        \"request\": {\n" +
-            "          \"method\": \"POST\"\n" +
+            "          \"method\": \"POST\",\n" +
+            "          \"url\": \"https://example.com/example2\"\n" +
             "        }\n" +
             "      }\n" +
             "    ]\n" +
@@ -93,14 +95,16 @@ public class HarReaderTest {
             "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
             "        \"time\": 101.01,\n" +
             "        \"request\": {\n" +
-            "          \"method\": \"GET\"\n" +
+            "          \"method\": \"GET\",\n" +
+            "          \"url\": \"https://example.org/example1\"\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
             "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
             "        \"time\": 202.02,\n" +
             "        \"request\": {\n" +
-            "          \"method\": \"POST\"\n" +
+            "          \"method\": \"POST\",\n" +
+            "          \"url\": \"https://example.com/example2\"\n" +
             "        }\n" +
             "      }" +
             "    ],\n" +
@@ -376,6 +380,16 @@ public class HarReaderTest {
                 "Expected a nonnull log.entries[0].request.method object.");
         Assert.assertEquals(log.getEntry(0).getRequest().getMethod(), "GET",
                 "Expected the request.method to be \"GET\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestUrl() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getRequest().getUrl(),
+                "Expected a nonnull log.entries[0].request.url object.");
+        Assert.assertEquals(log.getEntry(0).getRequest().getUrl(), "https://example.org/example1",
+                "Expected the request.url to be \"https://example.org/example1\".");
     }
 
     @Test

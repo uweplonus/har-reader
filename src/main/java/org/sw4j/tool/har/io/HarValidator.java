@@ -160,6 +160,9 @@ public final class HarValidator {
             if (request.getMethod() == null) {
                 result.add(new RequiredAttribute(parent, "method"));
             }
+            if (request.getUrl() == null) {
+                result.add(new RequiredAttribute(parent, "url"));
+            }
         }
         return result;
     }

@@ -33,6 +33,10 @@ public class Request {
     @Expose
     private String method;
 
+    /** The URL of the request. */
+    @Expose
+    private String url;
+
     /** The default constructor. */
     public Request() { }
 
@@ -56,6 +60,28 @@ public class Request {
      */
     public void setMethod(final String method) {
         this.method = method;
+    }
+
+    /**
+     * <p>
+     * Returns the URL of the request.
+     * </p>
+     *
+     * @return the URL of the request.
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * <p>
+     * Sets the URL of the request.
+     * </p>
+     *
+     * @param url the URL of the request.
+     */
+    public void setUrl(final String url) {
+        this.url = url;
     }
 
 }
