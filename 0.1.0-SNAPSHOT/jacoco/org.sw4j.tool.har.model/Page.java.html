@@ -31,8 +31,24 @@ public class Page {
     @Expose
     private OffsetDateTime startedDateTime;
 
+    /** The unique identifier of the page. */
+    @Expose
+    private String id;
+
+    /** The title of the page. */
+    @Expose
+    private String title;
+
+    /** The page timings of the page. */
+    @Expose
+    private PageTimings pageTimings;
+
+    /** Comment to the page timings. */
+    @Expose
+    private String comment;
+
     /** The default constructor. */
-<span class="fc" id="L35">    public Page() { }</span>
+<span class="fc" id="L51">    public Page() { }</span>
 
     /**
      * &lt;p&gt;
@@ -42,7 +58,7 @@ public class Page {
      * @return the date and time of the page load.
      */
     public OffsetDateTime getStartedDateTime() {
-<span class="fc" id="L45">        return startedDateTime;</span>
+<span class="fc" id="L61">        return startedDateTime;</span>
     }
 
     /**
@@ -53,8 +69,96 @@ public class Page {
      * @param startedDateTime the date and time of the page load.
      */
     public void setStartedDateTime(final OffsetDateTime startedDateTime) {
-<span class="fc" id="L56">        this.startedDateTime = startedDateTime;</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L72">        this.startedDateTime = startedDateTime;</span>
+<span class="fc" id="L73">    }</span>
+
+    /**
+     * &lt;p&gt;
+     * Returns the unique identifier of the page within the log.
+     * &lt;/p&gt;
+     *
+     * @return the unique identifier.
+     */
+    public String getId() {
+<span class="fc" id="L83">        return id;</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Sets the unique identifier of the page within the log.
+     * &lt;/p&gt;
+     *
+     * @param id the unique identifier.
+     */
+    public void setId(final String id) {
+<span class="fc" id="L94">        this.id = id;</span>
+<span class="fc" id="L95">    }</span>
+
+    /**
+     * &lt;p&gt;
+     * Returns the title of the page.
+     * &lt;/p&gt;
+     *
+     * @return the title.
+     */
+    public String getTitle() {
+<span class="fc" id="L105">        return title;</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Sets the title of the page.
+     * &lt;/p&gt;
+     *
+     * @param title the title.
+     */
+    public void setTitle(final String title) {
+<span class="fc" id="L116">        this.title = title;</span>
+<span class="fc" id="L117">    }</span>
+
+    /**
+     * &lt;p&gt;
+     * Returns the timings of this page.
+     * &lt;/p&gt;
+     *
+     * @return the timings of this page.
+     */
+    public PageTimings getPageTimings() {
+<span class="fc" id="L127">        return pageTimings;</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Sets the timings of this page.
+     * &lt;/p&gt;
+     *
+     * @param pageTimings the timings of this page.
+     */
+    public void setPageTimings(final PageTimings pageTimings) {
+<span class="fc" id="L138">        this.pageTimings = pageTimings;</span>
+<span class="fc" id="L139">    }</span>
+
+    /**
+     * &lt;p&gt;
+     * Returns the comment to the page.
+     * &lt;/p&gt;
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+<span class="fc" id="L149">        return comment;</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Sets the comment to the page.
+     * &lt;/p&gt;
+     *
+     * @param comment the comment.
+     */
+    public void setComment(final String comment) {
+<span class="fc" id="L160">        this.comment = comment;</span>
+<span class="fc" id="L161">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

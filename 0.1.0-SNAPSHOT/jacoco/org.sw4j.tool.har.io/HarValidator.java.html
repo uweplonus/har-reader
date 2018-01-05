@@ -172,8 +172,17 @@ public final class HarValidator {
 <span class="fc bfc" id="L172" title="All 2 branches covered.">            if (page.getStartedDateTime() == null) {</span>
 <span class="fc" id="L173">                result.add(new RequiredAttribute(parent, &quot;startedDateTime&quot;));</span>
             }
+<span class="fc bfc" id="L175" title="All 2 branches covered.">            if (page.getId() == null) {</span>
+<span class="fc" id="L176">                result.add(new RequiredAttribute(parent, &quot;id&quot;));</span>
+            }
+<span class="fc bfc" id="L178" title="All 2 branches covered.">            if (page.getTitle() == null) {</span>
+<span class="fc" id="L179">                result.add(new RequiredAttribute(parent, &quot;title&quot;));</span>
+            }
+<span class="fc bfc" id="L181" title="All 2 branches covered.">            if (page.getPageTimings() == null) {</span>
+<span class="fc" id="L182">                result.add(new RequiredAttribute(parent, &quot;pageTimings&quot;));</span>
+            }
         }
-<span class="fc" id="L176">        return result;</span>
+<span class="fc" id="L185">        return result;</span>
     }
 
     /**
@@ -186,12 +195,12 @@ public final class HarValidator {
      * @throws AttributeRequiredException if at least one required attribute in the model is missing.
      */
     public static void checkRequiredAttributes(final Har har) throws AttributeRequiredException {
-<span class="fc" id="L189">        List&lt;RequiredAttribute&gt; missingAttributes = getMissingRequiredAttributes(har);</span>
-<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (!missingAttributes.isEmpty()) {</span>
-<span class="fc" id="L191">            RequiredAttribute firstEntry = missingAttributes.get(0);</span>
-<span class="fc" id="L192">            throw new AttributeRequiredException(firstEntry.getParent(), firstEntry.getAttribute());</span>
+<span class="fc" id="L198">        List&lt;RequiredAttribute&gt; missingAttributes = getMissingRequiredAttributes(har);</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        if (!missingAttributes.isEmpty()) {</span>
+<span class="fc" id="L200">            RequiredAttribute firstEntry = missingAttributes.get(0);</span>
+<span class="fc" id="L201">            throw new AttributeRequiredException(firstEntry.getParent(), firstEntry.getAttribute());</span>
         }
-<span class="fc" id="L194">    }</span>
+<span class="fc" id="L203">    }</span>
 
 
     /**
@@ -217,10 +226,10 @@ public final class HarValidator {
          * @param parent    the parent object of the attribute.
          * @param attribute the attribute.
          */
-<span class="fc" id="L220">        public RequiredAttribute(final String parent, final String attribute) {</span>
-<span class="fc" id="L221">            this.parent = parent;</span>
-<span class="fc" id="L222">            this.attribute = attribute;</span>
-<span class="fc" id="L223">        }</span>
+<span class="fc" id="L229">        public RequiredAttribute(final String parent, final String attribute) {</span>
+<span class="fc" id="L230">            this.parent = parent;</span>
+<span class="fc" id="L231">            this.attribute = attribute;</span>
+<span class="fc" id="L232">        }</span>
 
         /**
          * &lt;p&gt;
@@ -230,7 +239,7 @@ public final class HarValidator {
          * @return the parent.
          */
         public String getParent() {
-<span class="fc" id="L233">            return parent;</span>
+<span class="fc" id="L242">            return parent;</span>
         }
 
         /**
@@ -241,7 +250,7 @@ public final class HarValidator {
          * @return the attribute.
          */
         public String getAttribute() {
-<span class="fc" id="L244">            return attribute;</span>
+<span class="fc" id="L253">            return attribute;</span>
         }
 
     }
