@@ -45,6 +45,10 @@ public class Log {
     @Expose
     private List<Page> pages;
 
+    /** Comment to the log. */
+    @Expose
+    private String comment;
+
     /** The default constructor. */
     public Log() { }
 
@@ -170,6 +174,28 @@ public class Log {
             pages = new LinkedList<>();
         }
         pages.add(page);
+    }
+
+    /**
+     * <p>
+     * Returns the comment to the log.
+     * </p>
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * <p>
+     * Sets the comment to the log.
+     * </p>
+     *
+     * @param comment the comment.
+     */
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 
 }

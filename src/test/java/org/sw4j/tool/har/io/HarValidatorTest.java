@@ -74,6 +74,8 @@ public class HarValidatorTest {
 
         // Gson reads a null element if the array ends with a comma.
         pages.add(null);
+
+        log.setComment("Log Comment");
     }
 
     @Test
@@ -322,6 +324,14 @@ public class HarValidatorTest {
         for (Page page: pages) {
             model.getLog().addPage(page);
         }
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testLogCommentMissing() {
+        model.getLog().setComment(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");

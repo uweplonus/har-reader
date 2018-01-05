@@ -32,6 +32,7 @@
           "comment": "Comment 2"
         }
       }
-    ]
+    ],
+    "comment": "Log Comment"
   }
 }

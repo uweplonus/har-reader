@@ -43,7 +43,7 @@ public class Page {
     @Expose
     private PageTimings pageTimings;
 
-    /** Comment to the page timings. */
+    /** Comment to the page. */
     @Expose
     private String comment;
 
