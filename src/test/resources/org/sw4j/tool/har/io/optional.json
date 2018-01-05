@@ -39,7 +39,8 @@
         "time": 100.01,
         "request": {
           "method": "GET",
-          "url": "https://example.org/example1"
+          "url": "https://example.org/example1",
+          "httpVersion": "HTTP/1.1"
         }
       },
       {
@@ -47,7 +48,8 @@
         "time": 200.02,
         "request": {
           "method": "POST",
-          "url": "https://example.com/example2"
+          "url": "https://example.com/example2",
+          "httpVersion": "http/2.0"
         }
       }
     ],

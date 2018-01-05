@@ -37,6 +37,10 @@ public class Request {
     @Expose
     private String url;
 
+    /** The HTTP version of the request. */
+    @Expose
+    private String httpVersion;
+
     /** The default constructor. */
     public Request() { }
 
@@ -82,6 +86,28 @@ public class Request {
      */
     public void setUrl(final String url) {
         this.url = url;
+    }
+
+    /**
+     * <p>
+     * Returns the HTTP version of the request.
+     * </p>
+     *
+     * @return the HTTP version of the request.
+     */
+    public String getHttpVersion() {
+        return httpVersion;
+    }
+
+    /**
+     * <p>
+     * Sets the HTTP version of the request.
+     * </p>
+     *
+     * @param httpVersion the HTTP version of the request.
+     */
+    public void setHttpVersion(final String httpVersion) {
+        this.httpVersion = httpVersion;
     }
 
 }

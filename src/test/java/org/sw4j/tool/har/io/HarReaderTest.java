@@ -40,7 +40,8 @@ public class HarReaderTest {
             "        \"time\": 100.01,\n" +
             "        \"request\": {\n" +
             "          \"method\": \"GET\",\n" +
-            "          \"url\": \"https://example.org/example1\"\n" +
+            "          \"url\": \"https://example.org/example1\",\n" +
+            "          \"httpVersion\": \"HTTP/1.1\"\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
@@ -48,7 +49,8 @@ public class HarReaderTest {
             "        \"time\": 200.02,\n" +
             "        \"request\": {\n" +
             "          \"method\": \"POST\",\n" +
-            "          \"url\": \"https://example.com/example2\"\n" +
+            "          \"url\": \"https://example.com/example2\",\n" +
+            "          \"httpVersion\": \"http/2.0\"\n" +
             "        }\n" +
             "      }\n" +
             "    ]\n" +
@@ -96,7 +98,8 @@ public class HarReaderTest {
             "        \"time\": 101.01,\n" +
             "        \"request\": {\n" +
             "          \"method\": \"GET\",\n" +
-            "          \"url\": \"https://example.org/example1\"\n" +
+            "          \"url\": \"https://example.org/example1\",\n" +
+            "          \"httpVersion\": \"HTTP/1.1\"\n" +
             "        }\n" +
             "      },\n" +
             "      {\n" +
@@ -104,7 +107,8 @@ public class HarReaderTest {
             "        \"time\": 202.02,\n" +
             "        \"request\": {\n" +
             "          \"method\": \"POST\",\n" +
-            "          \"url\": \"https://example.com/example2\"\n" +
+            "          \"url\": \"https://example.com/example2\",\n" +
+            "          \"httpVersion\": \"http/2.0\"\n" +
             "        }\n" +
             "      }" +
             "    ],\n" +
@@ -390,6 +394,16 @@ public class HarReaderTest {
                 "Expected a nonnull log.entries[0].request.url object.");
         Assert.assertEquals(log.getEntry(0).getRequest().getUrl(), "https://example.org/example1",
                 "Expected the request.url to be \"https://example.org/example1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHttpVersion() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getRequest().getHttpVersion(),
+                "Expected a nonnull log.entries[0].request.httpVersion object.");
+        Assert.assertEquals(log.getEntry(0).getRequest().getHttpVersion(), "HTTP/1.1",
+                "Expected the request.httpVersion to be \"HTTP/1.1\".");
     }
 
     @Test

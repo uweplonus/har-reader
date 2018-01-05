@@ -104,6 +104,7 @@ public class HarValidatorTest {
         entry1.setRequest(request);
         request.setMethod("GET");
         request.setUrl("https://example.org/example1");
+        request.setHttpVersion("HTTP/1.1");
 
         Entry entry2 = new Entry();
         entries.add(entry2);
@@ -114,6 +115,7 @@ public class HarValidatorTest {
         entry2.setRequest(request);
         request.setMethod("POST");
         request.setUrl("https://example.com/example2");
+        request.setHttpVersion("http/2.0");
 
         // Gson reads a null element if the array ends with a comma.
         entries.add(null);
@@ -478,6 +480,19 @@ public class HarValidatorTest {
                 "Expected the parent to be \"log.entries[0].request\"");
         Assert.assertEquals(missingAttributes.get(0).getAttribute(), "url",
                 "Expected the attribute to be \"url\"");
+    }
+
+    @Test
+    public void testEntriesRequestHttpVersionMissing() {
+        entries.get(0).getRequest().setHttpVersion(null);
+        addEntriesToLog();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
+        Assert.assertEquals(missingAttributes.get(0).getParent(), "log.entries[0].request",
+                "Expected the parent to be \"log.entries[0].request\"");
+        Assert.assertEquals(missingAttributes.get(0).getAttribute(), "httpVersion",
+                "Expected the attribute to be \"httpVersion\"");
     }
 
     @Test

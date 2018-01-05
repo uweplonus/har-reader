@@ -163,6 +163,9 @@ public final class HarValidator {
             if (request.getUrl() == null) {
                 result.add(new RequiredAttribute(parent, "url"));
             }
+            if (request.getHttpVersion() == null) {
+                result.add(new RequiredAttribute(parent, "httpVersion"));
+            }
         }
         return result;
     }
