@@ -20,6 +20,7 @@ import java.util.List;
 import org.sw4j.tool.har.model.Browser;
 import org.sw4j.tool.har.model.Creator;
 import org.sw4j.tool.har.model.CreatorBrowser;
+import org.sw4j.tool.har.model.Entry;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 import org.sw4j.tool.har.model.Page;
@@ -78,7 +79,8 @@ public final class HarValidator {
             }
             result.addAll(getMissingRequiredAttributes(log.getCreator()));
             result.addAll(getMissingRequiredAttributes(log.getBrowser()));
-            result.addAll(getMissingRequiredAttributes(log.getPages()));
+            result.addAll(getMissingRequiredPagesAttributes(log.getPages()));
+            result.addAll(getMissingRequiredEntriesAttributes(log.getEntries()));
         }
         return result;
     }
@@ -146,7 +148,7 @@ public final class HarValidator {
      * @param pages the list of pages to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final List<Page> pages) {
+    private static List<RequiredAttribute> getMissingRequiredPagesAttributes(final List<Page> pages) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (pages != null) {
             for (int i = 0; i < pages.size(); i++) {
@@ -181,6 +183,46 @@ public final class HarValidator {
             if (page.getPageTimings() == null) {
                 result.add(new RequiredAttribute(parent, "pageTimings"));
             }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the list of entries.
+     * </p>
+     *
+     * @param entries the list of entries to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredEntriesAttributes(final List<Entry> entries) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (entries == null) {
+            result.add(new RequiredAttribute("log", "entries"));
+        } else {
+            for (int i = 0; i < entries.size(); i++) {
+                result.addAll(getMissingRequiredAttributes(i, entries.get(i)));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the entry object.
+     * </p>
+     *
+     * @param i the index in the original list (or array).
+     * @param entry the entry object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredAttributes(final int i, final Entry entry) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (entry != null) {
+            String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
+//            if (entry.getStartedDateTime() == null) {
+//                result.add(new RequiredAttribute(parent, "startedDateTime"));
+//            }
         }
         return result;
     }

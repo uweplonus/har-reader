@@ -33,7 +33,11 @@ public class HarReaderTest {
             "    \"creator\": {\n" +
             "      \"name\": \"HAR Test\",\n" +
             "      \"version\": \"2.2\"\n" +
-            "    }\n" +
+            "    },\n" +
+            "    \"entries\": [\n" +
+            "      {},\n" +
+            "      {}\n" +
+            "    ]\n" +
             "  }\n" +
             "}\n";
 
@@ -70,6 +74,8 @@ public class HarReaderTest {
             "        \"pageTimings\": {\n" +
             "        }\n" +
             "      }\n" +
+            "    ],\n" +
+            "    \"entries\": [\n" +
             "    ],\n" +
             "    \"comment\": \"Log Comment\"\n" +
             "  }\n" +
@@ -296,6 +302,15 @@ public class HarReaderTest {
                 "Expected a nonnull log.comment object.");
         Assert.assertEquals(log.getComment(), "Log Comment",
                 "Expected the log.comment to be \"Log Comment \".");
+    }
+
+    @Test
+    public void testReadLogEntries() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntries(), "Expected a nonnull log.entries object.");
+        Assert.assertEquals(log.getEntriesSize(), 2,
+                "Expected the entries size to be 2.");
     }
 
 }
