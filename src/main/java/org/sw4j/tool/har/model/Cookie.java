@@ -33,6 +33,10 @@ public class Cookie {
     @Expose
     private String name;
 
+    /** The value of the cookie. */
+    @Expose
+    private String value;
+
     /** The default constructor. */
     public Cookie() { }
 
@@ -56,6 +60,28 @@ public class Cookie {
      */
     public void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * <p>
+     * Returns the value of the cookie.
+     * </p>
+     *
+     * @return the value of the cookie.
+     */
+    public String getValue() {
+        return value;
+    }
+
+    /**
+     * <p>
+     * Sets the value of the cookie.
+     * </p>
+     *
+     * @param value the value of the cookie.
+     */
+    public void setValue(final String value) {
+        this.value = value;
     }
 
 }

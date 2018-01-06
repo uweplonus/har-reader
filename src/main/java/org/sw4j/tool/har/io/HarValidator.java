@@ -267,6 +267,7 @@ public final class HarValidator {
      * Return all missing required attributes from the list of cookies.
      * </p>
      *
+     * @param parent the parent of the cookies.
      * @param cookies the list of cookies to check.
      * @return a list containing all required but missing attributes.
      */
@@ -288,6 +289,7 @@ public final class HarValidator {
      * Return all missing required attributes from the cookie object.
      * </p>
      *
+     * @param parent the parent of the cookie.
      * @param i the index in the original list (or array).
      * @param cookie the cookie object to check.
      * @return a list containing all required but missing attributes.
@@ -299,6 +301,9 @@ public final class HarValidator {
             String newParent = new StringBuilder(parent).append(".cookies[").append(i).append("]").toString();
             if (cookie.getName() == null) {
                 result.add(new RequiredAttribute(newParent, "name"));
+            }
+            if (cookie.getValue() == null) {
+                result.add(new RequiredAttribute(newParent, "value"));
             }
         }
         return result;
