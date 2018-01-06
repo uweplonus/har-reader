@@ -72,14 +72,14 @@ public class AttributeRequiredException extends RuntimeException {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AttributeRequiredException that = (AttributeRequiredException) o;
+        AttributeRequiredException that = (AttributeRequiredException)o;
         return Objects.equals(getObject(), that.getObject()) &&
                 Objects.equals(getAttribute(), that.getAttribute());
     }

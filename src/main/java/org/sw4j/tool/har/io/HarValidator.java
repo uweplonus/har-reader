@@ -335,14 +335,14 @@ public final class HarValidator {
 
         /** {@inheritDoc} */
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (this == o) {
                 return true;
             }
             if (o == null || getClass() != o.getClass()) {
                 return false;
             }
-            RequiredAttribute that = (RequiredAttribute) o;
+            RequiredAttribute that = (RequiredAttribute)o;
             return Objects.equals(getParent(), that.getParent()) &&
                     Objects.equals(getAttribute(), that.getAttribute());
         }
