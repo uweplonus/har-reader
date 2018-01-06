@@ -69,4 +69,11 @@ public class AttributeRequiredExceptionTest {
                 "Expected the object to be equals to another object.");
     }
 
+    @Test
+    public void testEqualsToNull() {
+        AttributeRequiredException ra1 = new AttributeRequiredException("parent", "attribute");
+        Assert.assertFalse(ra1.equals(null),
+                "Expected the object not to be equals to null.");
+    }
+
 }

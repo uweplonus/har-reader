@@ -70,6 +70,13 @@ public class RequiredAttributeTest {
     }
 
     @Test
+    public void testEqualsToNull() {
+        HarValidator.RequiredAttribute ra1 = new HarValidator.RequiredAttribute("parent", "attribute");
+        Assert.assertFalse(ra1.equals(null),
+                "Expected the object not to be equals to null.");
+    }
+
+    @Test
     public void testToString() {
         HarValidator.RequiredAttribute requiredAttribute = new HarValidator.RequiredAttribute("parent", "attribute");
         Assert.assertEquals(requiredAttribute.toString(), "RequiredAttribute{parent='parent', attribute='attribute'}",
