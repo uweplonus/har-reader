@@ -126,11 +126,13 @@ public class HarReaderTest {
             "          \"cookies\": [\n" +
             "            {\n" +
             "              \"name\": \"cookie1\",\n" +
-            "              \"value\": \"value1\"\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"path\": \"/\"" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"cookie2\",\n" +
-            "              \"value\": \"value2\"\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"path\": \"/path\"" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -419,6 +421,30 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getCookiesSize(), 2,
                 "Expected the request.cookies not to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesName() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getName(), "cookie1",
+                "Expected the cookie.name to be \"cookie1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesValue() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getValue(), "value1",
+                "Expected the cookie.value to be \"value1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesPath() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getPath(), "/",
+                "Expected the cookie.path to be \"/\".");
     }
 
     @Test

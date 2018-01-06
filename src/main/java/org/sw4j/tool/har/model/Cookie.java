@@ -37,6 +37,10 @@ public class Cookie {
     @Expose
     private String value;
 
+    /** The optional path of the cookie. */
+    @Expose
+    private String path;
+
     /** The default constructor. */
     public Cookie() { }
 
@@ -82,6 +86,28 @@ public class Cookie {
      */
     public void setValue(final String value) {
         this.value = value;
+    }
+
+    /**
+     * <p>
+     * Returns the optional path of the cookie.
+     * </p>
+     *
+     * @return the path of the cookie.
+     */
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * <p>
+     * Sets the optional path of the cookie.
+     * </p>
+     *
+     * @param path the path of the cookie.
+     */
+    public void setPath(final String path) {
+        this.path = path;
     }
 
 }

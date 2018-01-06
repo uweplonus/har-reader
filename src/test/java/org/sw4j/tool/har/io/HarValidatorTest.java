@@ -611,6 +611,14 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testEntriesCookiesPathMissing() {
+        model.getLog().getEntry(1).getRequest().getCookie(0).setPath(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
     public void testLogCommentMissing() {
         model.getLog().setComment(null);
 
