@@ -110,11 +110,23 @@ public class HarValidatorTest {
         request.setMethod("POST");
         request.setUrl("https://example.com/example2");
         request.setHttpVersion("http/2.0");
-        Cookie cookie = new Cookie();
-        request.addCookie(cookie);
+        createCookies(request);
 
         // Gson reads a null element if the array ends with a comma.
         log.addEntry(null);
+    }
+
+    private void createCookies(Request request) {
+        Cookie cookie1 = new Cookie();
+        request.addCookie(cookie1);
+        cookie1.setName("cookie1");
+
+        Cookie cookie2 = new Cookie();
+        request.addCookie(cookie2);
+        cookie2.setName("cookie2");
+
+        // Gson reads a null element if the array ends with a comma.
+        request.addCookie(null);
     }
 
     @Test
@@ -558,6 +570,24 @@ public class HarValidatorTest {
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesCookiesNameMissingSize() {
+        model.getLog().getEntry(1).getRequest().getCookie(0).setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesCookiesNameMissingValue() {
+        model.getLog().getEntry(1).getRequest().getCookie(0).setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        Assert.assertEquals(missingAttributes.get(0),
+                new HarValidator.RequiredAttribute("log.entries[1].request.cookies[0]", "name"),
+                "Expected the parent to be \"log.entries[1].request.cookies[0]\" and the attribute to be \"name\"");
     }
 
     @Test

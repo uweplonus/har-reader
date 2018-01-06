@@ -15,6 +15,8 @@
  */
 package org.sw4j.tool.har.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * <p>
  * This is a cookie object of the request or response.
@@ -27,7 +29,33 @@ package org.sw4j.tool.har.model;
  */
 public class Cookie {
 
+    /** The name of the cookie. */
+    @Expose
+    private String name;
+
     /** The default constructor. */
     public Cookie() { }
+
+    /**
+     * <p>
+     * Returns the name of the cookie.
+     * </p>
+     *
+     * @return the name of the cookie.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * <p>
+     * Sets the name of the cookie.
+     * </p>
+     *
+     * @param name the name of the cookie.
+     */
+    public void setName(final String name) {
+        this.name = name;
+    }
 
 }

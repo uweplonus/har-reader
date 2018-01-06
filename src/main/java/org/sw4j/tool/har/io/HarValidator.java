@@ -19,6 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import org.sw4j.tool.har.model.Browser;
+import org.sw4j.tool.har.model.Cookie;
 import org.sw4j.tool.har.model.Creator;
 import org.sw4j.tool.har.model.CreatorBrowser;
 import org.sw4j.tool.har.model.Entry;
@@ -34,9 +35,7 @@ import org.sw4j.tool.har.model.Request;
  */
 public final class HarValidator {
 
-    /**
-     * Hidden constructor for an utility class.
-     */
+    /** Hidden constructor for an utility class. */
     private HarValidator() {
     }
 
@@ -167,9 +166,7 @@ public final class HarValidator {
             if (request.getHttpVersion() == null) {
                 result.add(new RequiredAttribute(parent, "httpVersion"));
             }
-            if (request.getCookies() == null) {
-                result.add(new RequiredAttribute(parent, "cookies"));
-            }
+            result.addAll(getMissingRequiredCookiesAttributes(parent, request.getCookies()));
         }
         return result;
     }
@@ -261,6 +258,48 @@ public final class HarValidator {
                 result.add(new RequiredAttribute(parent, "time"));
             }
             result.addAll(getMissingRequiredAttributes(i, entry.getRequest()));
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the list of cookies.
+     * </p>
+     *
+     * @param cookies the list of cookies to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredCookiesAttributes(final String parent,
+            final List<Cookie> cookies) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (cookies == null) {
+            result.add(new RequiredAttribute(parent, "cookies"));
+        } else {
+            for (int i = 0; i < cookies.size(); i++) {
+                result.addAll(getMissingRequiredCookieAttributes(parent, i, cookies.get(i)));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the cookie object.
+     * </p>
+     *
+     * @param i the index in the original list (or array).
+     * @param cookie the cookie object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequiredCookieAttributes(final String parent, final int i,
+            final Cookie cookie) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (cookie != null) {
+            String newParent = new StringBuilder(parent).append(".cookies[").append(i).append("]").toString();
+            if (cookie.getName() == null) {
+                result.add(new RequiredAttribute(newParent, "name"));
+            }
         }
         return result;
     }

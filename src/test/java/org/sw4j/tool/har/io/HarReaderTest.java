@@ -54,8 +54,12 @@ public class HarReaderTest {
             "          \"url\": \"https://example.com/example2\",\n" +
             "          \"httpVersion\": \"http/2.0\",\n" +
             "          \"cookies\": [\n" +
-            "            {},\n" +
-            "            {}\n" +
+            "            {\n" +
+            "              \"name\": \"cookie1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"cookie2\"\n" +
+            "            }\n" +
             "          ]\n" +
             "        }\n" +
             "      }\n" +
@@ -118,8 +122,12 @@ public class HarReaderTest {
             "          \"url\": \"https://example.com/example2\",\n" +
             "          \"httpVersion\": \"http/2.0\",\n" +
             "          \"cookies\": [\n" +
-            "            {},\n" +
-            "            {}\n" +
+            "            {\n" +
+            "              \"name\": \"cookie1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"cookie2\"\n" +
+            "            }\n" +
             "          ]\n" +
             "        }\n" +
             "      }" +
