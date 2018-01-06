@@ -126,6 +126,20 @@ public class Log {
     }
 
     /**
+     * Clears the pages that means that the pages are set to {@code null}.
+     */
+    public void clearPages() {
+        pages = null;
+    }
+
+    /**
+     * Creates an empty page list.
+     */
+    public void createEmptyPages() {
+        pages = new LinkedList<>();
+    }
+
+    /**
      * <p>
      * Returns all pages as unmodifiable list.
      * </p>
@@ -181,6 +195,20 @@ public class Log {
             pages = new LinkedList<>();
         }
         pages.add(page);
+    }
+
+    /**
+     * Clears the entries that means that the entries are set to {@code null}.
+     */
+    public void clearEntries() {
+        entries = null;
+    }
+
+    /**
+     * Creates an empty entry list.
+     */
+    public void createEmptyEntries() {
+        entries = new LinkedList<>();
     }
 
     /**

@@ -17,6 +17,7 @@ package org.sw4j.tool.har.io;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import org.sw4j.tool.har.model.Browser;
 import org.sw4j.tool.har.model.Creator;
 import org.sw4j.tool.har.model.CreatorBrowser;
@@ -330,6 +331,36 @@ public final class HarValidator {
          */
         public String getAttribute() {
             return attribute;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            RequiredAttribute that = (RequiredAttribute) o;
+            return Objects.equals(getParent(), that.getParent()) &&
+                    Objects.equals(getAttribute(), that.getAttribute());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public int hashCode() {
+            return Objects.hash(getParent(), getAttribute());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("RequiredAttribute{");
+            sb.append("parent='").append(parent).append('\'');
+            sb.append(", attribute='").append(attribute).append('\'');
+            sb.append('}');
+            return sb.toString();
         }
 
     }
