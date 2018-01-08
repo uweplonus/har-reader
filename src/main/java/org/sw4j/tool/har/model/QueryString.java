@@ -27,4 +27,7 @@ package org.sw4j.tool.har.model;
  */
 public class QueryString extends NameValuePair {
 
+    /** The default constructor. */
+    public QueryString() { }
+
 }

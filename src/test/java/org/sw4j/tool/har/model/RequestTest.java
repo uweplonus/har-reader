@@ -263,71 +263,71 @@ public class RequestTest {
     @Test
     public void testRequestNoQueryString() {
         Request request = new Request();
-        request.clearQueryString();
-        Assert.assertNull(request.getQueryString(), "Expected the query string to be null.");
+        request.clearQueryStrings();
+        Assert.assertNull(request.getQueryStringsList(), "Expected the query string to be null.");
     }
 
     @Test
     public void testRequestNoQueryStringSize() {
         Request request = new Request();
-        request.clearQueryString();
-        Assert.assertEquals(request.getQueryStringSize(), 0, "Expected the number of query string to be 0.");
+        request.clearQueryStrings();
+        Assert.assertEquals(request.getQueryStringsSize(), 0, "Expected the number of query string to be 0.");
     }
 
     @Test
     public void testRequestNoQueryStringQueryStringNull() {
         Request request = new Request();
-        request.clearQueryString();
-        Assert.assertNull(request.getQueryString(0), "Expected the query string #0 to be null.");
+        request.clearQueryStrings();
+        Assert.assertNull(request.getQueryStrings(0), "Expected the query string #0 to be null.");
     }
 
     @Test
     public void testRequestNoQueryStringNegIndex() {
         Request request = new Request();
-        request.clearQueryString();
-        Assert.assertNull(request.getQueryString(-1), "Expected the query string #-1 to be null.");
+        request.clearQueryStrings();
+        Assert.assertNull(request.getQueryStrings(-1), "Expected the query string #-1 to be null.");
     }
 
     @Test
     public void testRequestNoQueryStringLargeIndex() {
         Request request = new Request();
-        request.clearQueryString();
-        Assert.assertNull(request.getQueryString(Integer.MAX_VALUE), "Expected the query string #MAX_VAL to be null.");
+        request.clearQueryStrings();
+        Assert.assertNull(request.getQueryStrings(Integer.MAX_VALUE), "Expected the query string #MAX_VAL to be null.");
     }
 
     @Test
     public void testRequestEmptyQueryString() {
         Request request = new Request();
-        request.createEmptyQueryString();
-        Assert.assertNotNull(request.getQueryString(), "Expected the query string not to be null.");
+        request.createEmptyQueryStrings();
+        Assert.assertNotNull(request.getQueryStringsList(), "Expected the query string not to be null.");
     }
 
     @Test
     public void testRequestEmptyQueryStringSize() {
         Request request = new Request();
-        request.createEmptyQueryString();
-        Assert.assertEquals(request.getQueryStringSize(), 0, "Expected the query string of headers to be 0.");
+        request.createEmptyQueryStrings();
+        Assert.assertEquals(request.getQueryStringsSize(), 0, "Expected the query string of headers to be 0.");
     }
 
     @Test
     public void testRequestEmptyQueryStringQueryStringNull() {
         Request request = new Request();
-        request.createEmptyQueryString();
-        Assert.assertNull(request.getQueryString(0), "Expected the query string #0 to be null.");
+        request.createEmptyQueryStrings();
+        Assert.assertNull(request.getQueryStrings(0), "Expected the query string #0 to be null.");
     }
 
     @Test
     public void testRequestEmptyQueryStringNegIndex() {
         Request request = new Request();
-        request.createEmptyQueryString();
-        Assert.assertNull(request.getQueryString(-1), "Expected the query string #-1 to be null.");
+        request.createEmptyQueryStrings();
+        Assert.assertNull(request.getQueryStrings(-1), "Expected the query string #-1 to be null.");
     }
 
     @Test
     public void testRequestEmptyQueryStringLargeIndex() {
         Request request = new Request();
-        request.createEmptyQueryString();
-        Assert.assertNull(request.getQueryString(Integer.MAX_VALUE), "Expected the query string #MAX_VAL to be null.");
+        request.createEmptyQueryStrings();
+        Assert.assertNull(request.getQueryStrings(Integer.MAX_VALUE), "Expected the query string #MAX_VAL to be null.");
     }
 
     @Test
@@ -335,7 +335,7 @@ public class RequestTest {
         Request request = new Request();
         QueryString queryString = new QueryString();
         request.addQueryString(queryString);
-        Assert.assertNotNull(request.getQueryString(), "Expected the query string not to be null.");
+        Assert.assertNotNull(request.getQueryStringsList(), "Expected the query string not to be null.");
     }
 
     @Test
@@ -343,7 +343,7 @@ public class RequestTest {
         Request request = new Request();
         QueryString queryString = new QueryString();
         request.addQueryString(queryString);
-        Assert.assertEquals(request.getQueryStringSize(), 1, "Expected the number of query strings to be 1.");
+        Assert.assertEquals(request.getQueryStringsSize(), 1, "Expected the number of query strings to be 1.");
     }
 
     @Test
@@ -351,7 +351,7 @@ public class RequestTest {
         Request request = new Request();
         QueryString queryString = new QueryString();
         request.addQueryString(queryString);
-        Assert.assertNotNull(request.getQueryString(0), "Expected the query string #0 not to be null.");
+        Assert.assertNotNull(request.getQueryStrings(0), "Expected the query string #0 not to be null.");
     }
 
     @Test
@@ -361,7 +361,7 @@ public class RequestTest {
         request.addQueryString(queryString);
         queryString = new QueryString();
         request.addQueryString(queryString);
-        Assert.assertSame(request.getQueryString(1), queryString,
+        Assert.assertSame(request.getQueryStrings(1), queryString,
                 "Expected the query string #1 to be the same as set.");
     }
 
@@ -370,7 +370,7 @@ public class RequestTest {
         Request request = new Request();
         QueryString queryString = new QueryString();
         request.addQueryString(queryString);
-        Assert.assertNull(request.getQueryString(-1), "Expected the query string #-1 to be null.");
+        Assert.assertNull(request.getQueryStrings(-1), "Expected the query string #-1 to be null.");
     }
 
     @Test
@@ -378,7 +378,7 @@ public class RequestTest {
         Request request = new Request();
         QueryString queryString = new QueryString();
         request.addQueryString(queryString);
-        Assert.assertNull(request.getQueryString(Integer.MAX_VALUE), "Expected the query string #MAX_VAL to be null.");
+        Assert.assertNull(request.getQueryStrings(Integer.MAX_VALUE), "Expected the query string #MAX_VAL to be null.");
     }
 
 }

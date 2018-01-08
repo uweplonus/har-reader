@@ -25,9 +25,9 @@ import com.google.gson.annotations.Expose;
  * This class is not thread safe.
  * </p>
  *
+ * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  * @see Header
  * @see QueryString
- * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
 public abstract class NameValuePair {
 

@@ -54,7 +54,7 @@ public class Request {
 
     /** The query string sent with the request. */
     @Expose
-    private List<QueryString> queryString;
+    private List<QueryString> queryStrings;
 
     /** The default constructor. */
     public Request() { }
@@ -272,15 +272,15 @@ public class Request {
     /**
      * Clears the query string that means that the query string are set to {@code null}.
      */
-    public void clearQueryString() {
-        this.queryString = null;
+    public void clearQueryStrings() {
+        queryStrings = null;
     }
 
     /**
      * Creates an empty query string list.
      */
-    public void createEmptyQueryString() {
-        this.queryString = new LinkedList<>();
+    public void createEmptyQueryStrings() {
+        queryStrings = new LinkedList<>();
     }
 
     /**
@@ -290,11 +290,11 @@ public class Request {
      *
      * @return an unmodifiable list with the query string or {@code null} if the query string are {@code null}.
      */
-    public List<QueryString> getQueryString() {
-        if (this.queryString == null) {
-            return this.queryString;
+    public List<QueryString> getQueryStringsList() {
+        if (queryStrings == null) {
+            return queryStrings;
         }
-        return Collections.unmodifiableList(this.queryString);
+        return Collections.unmodifiableList(queryStrings);
     }
 
     /**
@@ -304,9 +304,9 @@ public class Request {
      *
      * @return the size of the list of the query string. If there is no query string then {@code 0} is returned.
      */
-    public int getQueryStringSize() {
-        if (this.queryString != null) {
-            return this.queryString.size();
+    public int getQueryStringsSize() {
+        if (queryStrings != null) {
+            return queryStrings.size();
         }
         return 0;
     }
@@ -320,11 +320,11 @@ public class Request {
      * @return the query string at the given index or {@code null} if either the given index is invalid or no query
      *     string is available.
      */
-    public QueryString getQueryString(final int i) {
-        if (this.queryString == null || i < 0 || i >= this.queryString.size()) {
+    public QueryString getQueryStrings(final int i) {
+        if (queryStrings == null || i < 0 || i >= queryStrings.size()) {
             return null;
         }
-        return this.queryString.get(i);
+        return queryStrings.get(i);
     }
 
     /**
@@ -335,10 +335,10 @@ public class Request {
      * @param queryString the query string to add to the list.
      */
     public void addQueryString(final QueryString queryString) {
-        if (this.queryString == null) {
-            this.queryString = new LinkedList<>();
+        if (queryStrings == null) {
+            queryStrings = new LinkedList<>();
         }
-        this.queryString.add(queryString);
+        queryStrings.add(queryString);
     }
 
 }

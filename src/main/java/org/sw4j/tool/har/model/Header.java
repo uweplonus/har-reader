@@ -27,4 +27,7 @@ package org.sw4j.tool.har.model;
  */
 public class Header extends NameValuePair {
 
+    /** The default constructor. */
+    public Header() { }
+
 }
