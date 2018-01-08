@@ -131,7 +131,8 @@ public class HarReaderTest {
             "              \"domain\": \"example.org\",\n" +
             "              \"expires\": \"2019-12-23T15:15:03+01:00\",\n" +
             "              \"httpOnly\": true,\n" +
-            "              \"secure\": true\n" +
+            "              \"secure\": true,\n" +
+            "              \"comment\": \"Cookie Comment 1\"\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"cookie2\",\n" +
@@ -140,7 +141,8 @@ public class HarReaderTest {
             "              \"domain\": \"example.org\",\n" +
             "              \"expires\": \"2018-12-23T15:15:03+01:00\",\n" +
             "              \"httpOnly\": false,\n" +
-            "              \"secure\": false\n" +
+            "              \"secure\": false,\n" +
+            "              \"comment\": \"Cookie Comment 2\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -487,6 +489,14 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getSecure(), Boolean.TRUE,
                 "Expected the cookie.secure to be true.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getComment(), "Cookie Comment 1",
+                "Expected the cookie.comment to be \"Cookie Comment 1\".");
     }
 
     @Test

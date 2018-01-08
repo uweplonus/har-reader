@@ -58,6 +58,10 @@ public class Cookie {
     @Expose
     private Boolean secure;
 
+    /** The optional comment of the cookie. */
+    @Expose
+    private String comment;
+
     /** The default constructor. */
     public Cookie() { }
 
@@ -213,6 +217,28 @@ public class Cookie {
      */
     public void setSecure(final Boolean secure) {
         this.secure = secure;
+    }
+
+    /**
+     * <p>
+     * Returns the optional comment of the cookie.
+     * </p>
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * <p>
+     * Sets the optional comment of the cookie.
+     * </p>
+     *
+     * @param comment the comment of the cookie.
+     */
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 
 }
