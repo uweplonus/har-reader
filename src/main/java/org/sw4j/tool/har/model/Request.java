@@ -54,7 +54,7 @@ public class Request {
 
     /** The query string sent with the request. */
     @Expose
-    private List<Header> queryString;
+    private List<QueryString> queryString;
 
     /** The default constructor. */
     public Request() { }
@@ -267,6 +267,78 @@ public class Request {
             headers = new LinkedList<>();
         }
         headers.add(header);
+    }
+
+    /**
+     * Clears the query string that means that the query string are set to {@code null}.
+     */
+    public void clearQueryString() {
+        this.queryString = null;
+    }
+
+    /**
+     * Creates an empty query string list.
+     */
+    public void createEmptyQueryString() {
+        this.queryString = new LinkedList<>();
+    }
+
+    /**
+     * <p>
+     * Returns the query string as unmodifiable list.
+     * </p>
+     *
+     * @return an unmodifiable list with the query string or {@code null} if the query string are {@code null}.
+     */
+    public List<QueryString> getQueryString() {
+        if (this.queryString == null) {
+            return this.queryString;
+        }
+        return Collections.unmodifiableList(this.queryString);
+    }
+
+    /**
+     * <p>
+     * Returns the size of the list of the query string.
+     * </p>
+     *
+     * @return the size of the list of the query string. If there is no query string then {@code 0} is returned.
+     */
+    public int getQueryStringSize() {
+        if (this.queryString != null) {
+            return this.queryString.size();
+        }
+        return 0;
+    }
+
+    /**
+     * <p>
+     * Returns the query string at index {@code i}.
+     * </p>
+     *
+     * @param i the index.
+     * @return the query string at the given index or {@code null} if either the given index is invalid or no query
+     *     string is available.
+     */
+    public QueryString getQueryString(final int i) {
+        if (this.queryString == null || i < 0 || i >= this.queryString.size()) {
+            return null;
+        }
+        return this.queryString.get(i);
+    }
+
+    /**
+     * <p>
+     * Adds the given query string to the list of query strings.
+     * </p>
+     *
+     * @param queryString the query string to add to the list.
+     */
+    public void addQueryString(final QueryString queryString) {
+        if (this.queryString == null) {
+            this.queryString = new LinkedList<>();
+        }
+        this.queryString.add(queryString);
     }
 
 }
