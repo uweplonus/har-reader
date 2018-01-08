@@ -42,6 +42,18 @@
           "url": "https://example.org/example1",
           "httpVersion": "HTTP/1.1",
           "cookies": [
+            {
+              "name": "cookie1",
+              "value": "value1",
+              "path": "/",
+              "domain": "example.org"
+            },
+            {
+              "name": "cookie2",
+              "value": "value2",
+              "path": "/path",
+              "domain": "example.org"
+            }
           ]
         }
       },

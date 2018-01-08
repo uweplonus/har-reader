@@ -127,16 +127,18 @@ public class HarReaderTest {
             "            {\n" +
             "              \"name\": \"cookie1\",\n" +
             "              \"value\": \"value1\",\n" +
-            "              \"path\": \"/\"" +
+            "              \"path\": \"/\",\n" +
+            "              \"domain\": \"example.org\"\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"cookie2\",\n" +
             "              \"value\": \"value2\",\n" +
-            "              \"path\": \"/path\"" +
+            "              \"path\": \"/path\",\n" +
+            "              \"domain\": \"example.org\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
-            "      }" +
+            "      }\n" +
             "    ],\n" +
             "    \"comment\": \"Log Comment\"\n" +
             "  }\n" +
@@ -445,6 +447,14 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getPath(), "/",
                 "Expected the cookie.path to be \"/\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesDomain() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getDomain(), "example.org",
+                "Expected the cookie.domain to be \"domain.org\".");
     }
 
     @Test

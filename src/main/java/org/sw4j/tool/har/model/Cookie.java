@@ -41,6 +41,10 @@ public class Cookie {
     @Expose
     private String path;
 
+    /** The optional domain of the cookie. */
+    @Expose
+    private String domain;
+
     /** The default constructor. */
     public Cookie() { }
 
@@ -108,6 +112,28 @@ public class Cookie {
      */
     public void setPath(final String path) {
         this.path = path;
+    }
+
+    /**
+     * <p>
+     * Returns the optional domain of the cookie.
+     * </p>
+     *
+     * @return the domain of the cookie.
+     */
+    public String getDomain() {
+        return domain;
+    }
+
+    /**
+     * <p>
+     * Sets the optional domain of the cookie.
+     * </p>
+     *
+     * @param domain the domain of the cookie.
+     */
+    public void setDomain(final String domain) {
+        this.domain = domain;
     }
 
 }
