@@ -59,7 +59,7 @@ public class RequestTest {
     public void testRequestEmptyCookies() {
         Request request = new Request();
         request.createEmptyCookies();
-        Assert.assertNotNull(request.getCookies(), "Expected the cookies notto be null.");
+        Assert.assertNotNull(request.getCookies(), "Expected the cookies not to be null.");
     }
 
     @Test
@@ -138,6 +138,126 @@ public class RequestTest {
         Cookie cookie = new Cookie();
         request.addCookie(cookie);
         Assert.assertNull(request.getCookie(Integer.MAX_VALUE), "Expected the cookie #MAX_VAL to be null.");
+    }
+
+    @Test
+    public void testRequestNoHeaders() {
+        Request request = new Request();
+        request.clearHeaders();
+        Assert.assertNull(request.getHeaders(), "Expected the headers to be null.");
+    }
+
+    @Test
+    public void testRequestNoHeadersSize() {
+        Request request = new Request();
+        request.clearHeaders();
+        Assert.assertEquals(request.getHeadersSize(), 0, "Expected the number of headers to be 0.");
+    }
+
+    @Test
+    public void testRequestNoHeadersHeaderNull() {
+        Request request = new Request();
+        request.clearHeaders();
+        Assert.assertNull(request.getHeader(0), "Expected the header #0 to be null.");
+    }
+
+    @Test
+    public void testRequestNoHeadersNegIndex() {
+        Request request = new Request();
+        request.clearHeaders();
+        Assert.assertNull(request.getHeader(-1), "Expected the header #-1 to be null.");
+    }
+
+    @Test
+    public void testRequestNoHeadersLargeIndex() {
+        Request request = new Request();
+        request.clearHeaders();
+        Assert.assertNull(request.getHeader(Integer.MAX_VALUE), "Expected the header #MAX_VAL to be null.");
+    }
+
+    @Test
+    public void testRequestEmptyHeaders() {
+        Request request = new Request();
+        request.createEmptyHeaders();
+        Assert.assertNotNull(request.getHeaders(), "Expected the headers not to be null.");
+    }
+
+    @Test
+    public void testRequestEmptyHeadersSize() {
+        Request request = new Request();
+        request.createEmptyHeaders();
+        Assert.assertEquals(request.getHeadersSize(), 0, "Expected the number of headers to be 0.");
+    }
+
+    @Test
+    public void testRequestEmptyHeadersHeaderNull() {
+        Request request = new Request();
+        request.createEmptyHeaders();
+        Assert.assertNull(request.getHeader(0), "Expected the header #0 to be null.");
+    }
+
+    @Test
+    public void testRequestEmptyHeadersNegIndex() {
+        Request request = new Request();
+        request.createEmptyHeaders();
+        Assert.assertNull(request.getHeader(-1), "Expected the header #-1 to be null.");
+    }
+
+    @Test
+    public void testRequestEmptyHeadersLargeIndex() {
+        Request request = new Request();
+        request.createEmptyHeaders();
+        Assert.assertNull(request.getHeader(Integer.MAX_VALUE), "Expected the header #MAX_VAL to be null.");
+    }
+
+    @Test
+    public void testRequestHeaders() {
+        Request request = new Request();
+        Header header = new Header();
+        request.addHeader(header);
+        Assert.assertNotNull(request.getHeaders(), "Expected the headers not to be null.");
+    }
+
+    @Test
+    public void testRequestHeadersSize() {
+        Request request = new Request();
+        Header header = new Header();
+        request.addHeader(header);
+        Assert.assertEquals(request.getHeadersSize(), 1, "Expected the number of headers to be 1.");
+    }
+
+    @Test
+    public void testRequestHeadersHeaderNotNull() {
+        Request request = new Request();
+        Header header = new Header();
+        request.addHeader(header);
+        Assert.assertNotNull(request.getHeader(0), "Expected the header #0 not to be null.");
+    }
+
+    @Test
+    public void testRequestHeaders2ndHeaderNotNull() {
+        Request request = new Request();
+        Header header = new Header();
+        request.addHeader(header);
+        header = new Header();
+        request.addHeader(header);
+        Assert.assertSame(request.getHeader(1), header, "Expected the header #1 to be the same as set.");
+    }
+
+    @Test
+    public void testRequestHeadersNegIndex() {
+        Request request = new Request();
+        Header header = new Header();
+        request.addHeader(header);
+        Assert.assertNull(request.getHeader(-1), "Expected the header #-1 to be null.");
+    }
+
+    @Test
+    public void testRequestHeadersLargeIndex() {
+        Request request = new Request();
+        Header header = new Header();
+        request.addHeader(header);
+        Assert.assertNull(request.getHeader(Integer.MAX_VALUE), "Expected the header #MAX_VAL to be null.");
     }
 
 }

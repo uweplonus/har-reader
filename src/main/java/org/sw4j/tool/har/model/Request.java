@@ -48,6 +48,14 @@ public class Request {
     @Expose
     private List<Cookie> cookies;
 
+    /** The headers sent with the request. */
+    @Expose
+    private List<Header> headers;
+
+    /** The query string sent with the request. */
+    @Expose
+    private List<Header> queryString;
+
     /** The default constructor. */
     public Request() { }
 
@@ -136,7 +144,7 @@ public class Request {
      * Returns all cookies as unmodifiable list.
      * </p>
      *
-     * @return an unmodifiable list with all cookies or {@code null} if there are no cookies.
+     * @return an unmodifiable list with all cookies or {@code null} if the cookies are {@code null}.
      */
     public List<Cookie> getCookies() {
         if (cookies == null) {
@@ -150,7 +158,7 @@ public class Request {
      * Returns the size of the list of cookies.
      * </p>
      *
-     * @return the size of the list of cookies. If there are no entries then {@code 0} is returned.
+     * @return the size of the list of cookies. If there are no cookies then {@code 0} is returned.
      */
     public int getCookiesSize() {
         if (cookies != null) {
@@ -165,7 +173,7 @@ public class Request {
      * </p>
      *
      * @param i the index.
-     * @return the cookie at the given index or {@code null} if either the given index is invalid or no entries are
+     * @return the cookie at the given index or {@code null} if either the given index is invalid or no cookies are
      *     available.
      */
     public Cookie getCookie(final int i) {
@@ -187,6 +195,78 @@ public class Request {
             cookies = new LinkedList<>();
         }
         cookies.add(cookie);
+    }
+
+    /**
+     * Clears the headers that means that the headers are set to {@code null}.
+     */
+    public void clearHeaders() {
+        headers = null;
+    }
+
+    /**
+     * Creates an empty headers list.
+     */
+    public void createEmptyHeaders() {
+        headers = new LinkedList<>();
+    }
+
+    /**
+     * <p>
+     * Returns all headers as unmodifiable list.
+     * </p>
+     *
+     * @return an unmodifiable list with all headers or {@code null} if headers are {@code null}.
+     */
+    public List<Header> getHeaders() {
+        if (headers == null) {
+            return headers;
+        }
+        return Collections.unmodifiableList(headers);
+    }
+
+    /**
+     * <p>
+     * Returns the size of the list of headers.
+     * </p>
+     *
+     * @return the size of the list of headers. If there are no headers then {@code 0} is returned.
+     */
+    public int getHeadersSize() {
+        if (headers != null) {
+            return headers.size();
+        }
+        return 0;
+    }
+
+    /**
+     * <p>
+     * Returns the header at index {@code i}.
+     * </p>
+     *
+     * @param i the index.
+     * @return the header at the given index or {@code null} if either the given index is invalid or no headers are
+     *     available.
+     */
+    public Header getHeader(final int i) {
+        if (headers == null || i < 0 || i >= headers.size()) {
+            return null;
+        }
+        return headers.get(i);
+    }
+
+    /**
+     * <p>
+     * Adds the given header to the list of headers.
+     * </p>
+     *
+     * @param header the header to add to the list.
+     */
+    public void addHeader(final Header header) {
+        if (headers == null) {
+            headers = new LinkedList<>();
+        }
+        headers.add(header);
     }
 
 }
