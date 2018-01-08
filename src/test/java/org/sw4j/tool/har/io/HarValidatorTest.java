@@ -133,13 +133,13 @@ public class HarValidatorTest {
 
     @Test
     public void testHarNullMissingSize() {
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(null);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(null);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected a single attribute to be missing.");
     }
 
     @Test
     public void testHarNullMissingValue() {
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(null);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(null);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("", "har"),
                 "Expected the parent to be \"\" and the attribute to be \"har\"");
     }
@@ -148,7 +148,7 @@ public class HarValidatorTest {
     public void testLogNullMissingSize() {
         model.setLog(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected a single attribute to be missing.");
     }
 
@@ -156,14 +156,14 @@ public class HarValidatorTest {
     public void testLogNullMissingValue() {
         model.setLog(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("", "log"),
                 "Expected the parent to be \"\" and the attribute to be \"log\"");
     }
 
     @Test
     public void testNoMissing() {
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -171,7 +171,7 @@ public class HarValidatorTest {
     public void testLogVersionMissingSize() {
         model.getLog().setVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -179,7 +179,7 @@ public class HarValidatorTest {
     public void testLogVersionMissingValue() {
         model.getLog().setVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log", "version"),
                 "Expected the parent to be \"log\" and the attribute to be \"version\".");
     }
@@ -188,7 +188,7 @@ public class HarValidatorTest {
     public void testCreatorMissingSize() {
         model.getLog().setCreator(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -196,7 +196,7 @@ public class HarValidatorTest {
     public void testCreatorMissingValue() {
         model.getLog().setCreator(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log", "creator"),
                 "Expected the parent to be \"log\" and the attribute to be \"creator\".");
     }
@@ -205,7 +205,7 @@ public class HarValidatorTest {
     public void testCreatorNameMissingSize() {
         model.getLog().getCreator().setName(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -213,7 +213,7 @@ public class HarValidatorTest {
     public void testCreatorNameMissingValue() {
         model.getLog().getCreator().setName(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.creator", "name"),
                 "Expected the parent to be \"log.creator\" and the attribute to be \"name\".");
     }
@@ -222,7 +222,7 @@ public class HarValidatorTest {
     public void testCreatorVersionMissingSize() {
         model.getLog().getCreator().setVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -230,7 +230,7 @@ public class HarValidatorTest {
     public void testCreatorVersionMissingValue() {
         model.getLog().getCreator().setVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.creator", "version"),
                 "Expected the parent to be \"log.creator\" and the attribute to be \"version\".");
     }
@@ -239,7 +239,7 @@ public class HarValidatorTest {
     public void testCreatorCommentMissing() {
         model.getLog().getCreator().setComment(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -247,7 +247,7 @@ public class HarValidatorTest {
     public void testBrowserMissing() {
         model.getLog().setBrowser(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -255,7 +255,7 @@ public class HarValidatorTest {
     public void testBrowserNameMissingSize() {
         model.getLog().getBrowser().setName(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -263,7 +263,7 @@ public class HarValidatorTest {
     public void testBrowserNameMissingValue() {
         model.getLog().getBrowser().setName(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.browser", "name"),
                 "Expected the parent to be \"log.browser\" and the attribute to be \"name\".");
     }
@@ -272,7 +272,7 @@ public class HarValidatorTest {
     public void testBrowserVersionMissingSize() {
         model.getLog().getBrowser().setVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -280,7 +280,7 @@ public class HarValidatorTest {
     public void testBrowserVersionMissingValue() {
         model.getLog().getBrowser().setVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.browser", "version"),
                 "Expected the parent to be \"log.browser\" and the attribute to be \"version\".");
     }
@@ -289,7 +289,7 @@ public class HarValidatorTest {
     public void testBrowserCommentMissing() {
         model.getLog().getBrowser().setComment(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -297,13 +297,13 @@ public class HarValidatorTest {
     public void testPagesMissing() {
         model.getLog().clearPages();
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
     @Test
     public void testPagesAvailable() {
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -311,7 +311,7 @@ public class HarValidatorTest {
     public void testPagesStartedDateTimeMissingSize() {
         model.getLog().getPage(0).setStartedDateTime(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -319,7 +319,7 @@ public class HarValidatorTest {
     public void testPagesStartedDateTimeMissingValue() {
         model.getLog().getPage(0).setStartedDateTime(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.pages[0]",
                 "startedDateTime"),
                 "Expected the parent to be \"log.pages[0]\" and the attribute to be \"startedDateTime\"");
@@ -329,7 +329,7 @@ public class HarValidatorTest {
     public void testPagesIdMissingSize() {
         model.getLog().getPage(0).setId(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -337,7 +337,7 @@ public class HarValidatorTest {
     public void testPagesIdMissingValue() {
         model.getLog().getPage(0).setId(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.pages[0]", "id"),
                 "Expected the parent to be \"log.pages[0]\" and the attribute to be \"id\"");
     }
@@ -346,7 +346,7 @@ public class HarValidatorTest {
     public void testPagesTitleMissingSize() {
         model.getLog().getPage(0).setTitle(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -354,7 +354,7 @@ public class HarValidatorTest {
     public void testPagesTitleMissingValue() {
         model.getLog().getPage(0).setTitle(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.pages[0]", "title"),
                 "Expected the parent to be \"log.pages[0]\" and the attribute to be \"title\"");
     }
@@ -363,7 +363,7 @@ public class HarValidatorTest {
     public void testPagesPageTimingsMissingSize() {
         model.getLog().getPage(0).setPageTimings(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -371,7 +371,7 @@ public class HarValidatorTest {
     public void testPagesPageTimingsMissingValue() {
         model.getLog().getPage(0).setPageTimings(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.pages[0]", "pageTimings"),
                 "Expected the parent to be \"log.pages[0]\" and the attribute to be \"pageTimings\"");
@@ -381,7 +381,7 @@ public class HarValidatorTest {
     public void testPagesPageTimingsOnContentLoadMissing() {
         model.getLog().getPage(0).getPageTimings().setOnContentLoad(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -389,7 +389,7 @@ public class HarValidatorTest {
     public void testPagesPageTimingsOnLoadMissing() {
         model.getLog().getPage(0).getPageTimings().setOnLoad(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -397,7 +397,7 @@ public class HarValidatorTest {
     public void testPagesPageTimingsCommentMissing() {
         model.getLog().getPage(0).getPageTimings().setComment(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -405,7 +405,7 @@ public class HarValidatorTest {
     public void testPagesCommentMissing() {
         model.getLog().getPage(0).setComment(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -413,7 +413,7 @@ public class HarValidatorTest {
     public void testEntriesMissingSize() {
         model.getLog().clearEntries();
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
     }
 
@@ -421,7 +421,7 @@ public class HarValidatorTest {
     public void testEntriesMissingValue() {
         model.getLog().clearEntries();
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log", "entries"),
                 "Expected the parent to be \"log\" and the attribute to be \"entries\"");
     }
@@ -430,7 +430,7 @@ public class HarValidatorTest {
     public void testEntriesAvailable() {
         model.getLog().createEmptyEntries();
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -438,7 +438,7 @@ public class HarValidatorTest {
     public void testEntriesPagerefMissing() {
         model.getLog().getEntry(0).setPageref(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -446,7 +446,7 @@ public class HarValidatorTest {
     public void testEntriesStartedDateTimeMissingSize() {
         model.getLog().getEntry(0).setStartedDateTime(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -454,7 +454,7 @@ public class HarValidatorTest {
     public void testEntriesStartedDateTimeMissingValue() {
         model.getLog().getEntry(0).setStartedDateTime(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[0]", "startedDateTime"),
                 "Expected the parent to be \"log.entries[0]\" and the attribute to be \"startedDateTime\"");
@@ -464,7 +464,7 @@ public class HarValidatorTest {
     public void testEntriesTimeMissingSize() {
         model.getLog().getEntry(0).setTime(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -472,7 +472,7 @@ public class HarValidatorTest {
     public void testEntriesTimeMissingValue() {
         model.getLog().getEntry(0).setTime(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.entries[0]", "time"),
                 "Expected the parent to be \"log.entries[0]\" and the attribute to be \"time\"");
     }
@@ -481,7 +481,7 @@ public class HarValidatorTest {
     public void testEntriesRequestMissingSize() {
         model.getLog().getEntry(0).setRequest(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -489,7 +489,7 @@ public class HarValidatorTest {
     public void testEntriesRequestMissingValue() {
         model.getLog().getEntry(0).setRequest(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0), new HarValidator.RequiredAttribute("log.entries[0]", "request"),
                 "Expected the parent to be \"log.entries[0]\" and the attribute to be \"request\"");
     }
@@ -498,7 +498,7 @@ public class HarValidatorTest {
     public void testEntriesRequestMethodMissingSize() {
         model.getLog().getEntry(0).getRequest().setMethod(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -506,7 +506,7 @@ public class HarValidatorTest {
     public void testEntriesRequestMethodMissingValue() {
         model.getLog().getEntry(0).getRequest().setMethod(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[0].request", "method"),
                 "Expected the parent to be \"log.entries[0].request\" and the attribute to be \"method\"");
@@ -516,7 +516,7 @@ public class HarValidatorTest {
     public void testEntriesRequestUrlMissingSize() {
         model.getLog().getEntry(0).getRequest().setUrl(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -524,7 +524,7 @@ public class HarValidatorTest {
     public void testEntriesRequestUrlMissingValue() {
         model.getLog().getEntry(0).getRequest().setUrl(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[0].request", "url"),
                 "Expected the parent to be \"log.entries[0].request\" and the attribute to be \"url\"");
@@ -534,7 +534,7 @@ public class HarValidatorTest {
     public void testEntriesRequestHttpVersionMissingSize() {
         model.getLog().getEntry(0).getRequest().setHttpVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.size(), 1, "Expected an attribute to be missing.");
     }
 
@@ -542,7 +542,7 @@ public class HarValidatorTest {
     public void testEntriesRequestHttpVersionMissingValue() {
         model.getLog().getEntry(0).getRequest().setHttpVersion(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[0].request", "httpVersion"),
                 "Expected the parent to be \"log.entries[0].request\" and the attribute to be \"httpVersion\"");
@@ -552,7 +552,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesMissingSize() {
         model.getLog().getEntry(0).getRequest().clearCookies();
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
     }
 
@@ -560,7 +560,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesMissingValue() {
         model.getLog().getEntry(0).getRequest().clearCookies();
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[0].request", "cookies"),
                 "Expected the parent to be \"log.entries[0].request\" and the attribute to be \"cookies\"");
@@ -570,7 +570,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesEmpty() {
         model.getLog().getEntry(0).getRequest().createEmptyCookies();
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -578,7 +578,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesNameMissingSize() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setName(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
     }
 
@@ -586,7 +586,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesNameMissingValue() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setName(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[1].request.cookies[0]", "name"),
                 "Expected the parent to be \"log.entries[1].request.cookies[0]\" and the attribute to be \"name\"");
@@ -596,7 +596,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesValueMissingSize() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setValue(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
     }
 
@@ -604,7 +604,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesValueMissingValue() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setValue(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[1].request.cookies[0]", "value"),
                 "Expected the parent to be \"log.entries[1].request.cookies[0]\" and the attribute to be \"value\"");
@@ -614,7 +614,7 @@ public class HarValidatorTest {
     public void testEntriesCookiesPathMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setPath(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
@@ -622,7 +622,7 @@ public class HarValidatorTest {
     public void testLogCommentMissing() {
         model.getLog().setComment(null);
 
-        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingRequiredAttributes(model);
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 

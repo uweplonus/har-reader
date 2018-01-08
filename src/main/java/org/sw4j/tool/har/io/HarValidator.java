@@ -18,15 +18,8 @@ package org.sw4j.tool.har.io;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import org.sw4j.tool.har.model.Browser;
-import org.sw4j.tool.har.model.Cookie;
-import org.sw4j.tool.har.model.Creator;
-import org.sw4j.tool.har.model.CreatorBrowser;
-import org.sw4j.tool.har.model.Entry;
-import org.sw4j.tool.har.model.Har;
-import org.sw4j.tool.har.model.Log;
-import org.sw4j.tool.har.model.Page;
-import org.sw4j.tool.har.model.Request;
+
+import org.sw4j.tool.har.model.*;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
@@ -52,12 +45,13 @@ public final class HarValidator {
      * @return a list with all missing required attributes. If no attributes are missing the an empty list will be
      *   returned.
      */
-    public static List<RequiredAttribute> getMissingRequiredAttributes(final Har har) {
+    public static List<RequiredAttribute> getMissingAttributes(final Har har) {
         List<RequiredAttribute> result = new LinkedList<>();
+        String parent = "";
         if (har == null) {
-            result.add(new RequiredAttribute("", "har"));
+            result.add(new RequiredAttribute(parent, "har"));
         } else {
-            result.addAll(getMissingRequiredAttributes(har.getLog()));
+            result.addAll(getMissingLogAttributes(parent, har.getLog()));
         }
         return result;
     }
@@ -67,21 +61,23 @@ public final class HarValidator {
      * Return all missing required attributes from the log object.
      * </p>
      *
-     * @param log    the log object to check.
+     * @param parent the parent of the log object to check.
+     * @param log the log object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final Log log) {
+    private static List<RequiredAttribute> getMissingLogAttributes(final CharSequence parent, final Log log) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (log == null) {
-            result.add(new RequiredAttribute("", "log"));
+            result.add(new RequiredAttribute(parent, "log"));
         } else {
+            StringBuilder newParent = createNewParent(parent, "log");
             if (log.getVersion() == null) {
-                result.add(new RequiredAttribute("log", "version"));
+                result.add(new RequiredAttribute(newParent, "version"));
             }
-            result.addAll(getMissingRequiredAttributes(log.getCreator()));
-            result.addAll(getMissingRequiredAttributes(log.getBrowser()));
-            result.addAll(getMissingRequiredPagesAttributes(log.getPages()));
-            result.addAll(getMissingRequiredEntriesAttributes(log.getEntries()));
+            result.addAll(getMissingCreatorAttributes(newParent, log.getCreator()));
+            result.addAll(getMissingBrowserAttributes(newParent, log.getBrowser()));
+            result.addAll(getMissingPagesAttributes(newParent, log.getPages()));
+            result.addAll(getMissingEntriesAttributes(newParent, log.getEntries()));
         }
         return result;
     }
@@ -91,15 +87,18 @@ public final class HarValidator {
      * Return all missing required attributes from the creator.
      * </p>
      *
+     * @param parent the parent of the creator object to check.
      * @param creator the creator object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final Creator creator) {
+    private static List<RequiredAttribute> getMissingCreatorAttributes(final CharSequence parent,
+            final Creator creator) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (creator == null) {
-            result.add(new RequiredAttribute("log", "creator"));
+            result.add(new RequiredAttribute(parent, "creator"));
         } else {
-            result.addAll(getMissingRequiredAttributes("log.creator", creator));
+            StringBuilder newParent = createNewParent(parent, "creator");
+            result.addAll(getMissingCreatorBrowserAttributes(newParent, creator));
         }
         return result;
     }
@@ -109,13 +108,16 @@ public final class HarValidator {
      * Return all missing required attributes from the browser object.
      * </p>
      *
+     * @param parent the parent of the browser object to check.
      * @param browser the browser object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final Browser browser) {
+    private static List<RequiredAttribute> getMissingBrowserAttributes(final CharSequence parent,
+            final Browser browser) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (browser != null) {
-            result.addAll(getMissingRequiredAttributes("log.browser", browser));
+            StringBuilder newParent = createNewParent(parent, "browser");
+            result.addAll(getMissingCreatorBrowserAttributes(newParent, browser));
         }
         return result;
     }
@@ -129,7 +131,7 @@ public final class HarValidator {
      * @param creatorBrowser the creator or browser object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final String parent,
+    private static List<RequiredAttribute> getMissingCreatorBrowserAttributes(final CharSequence parent,
             final CreatorBrowser creatorBrowser) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (creatorBrowser.getName() == null) {
@@ -143,47 +145,21 @@ public final class HarValidator {
 
     /**
      * <p>
-     * Return all missing required attributes from the request object.
-     * </p>
-     *
-     * @param i the index in the original list (or array).
-     * @param request the request object to check.
-     * @return a list containing all required but missing attributes.
-     */
-    private static List<RequiredAttribute> getMissingRequiredAttributes(final int i, final Request request) {
-        List<RequiredAttribute> result = new LinkedList<>();
-        String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
-        if (request == null) {
-            result.add(new RequiredAttribute(parent, "request"));
-        } else {
-            parent = new StringBuilder(parent).append(".request").toString();
-            if (request.getMethod() == null) {
-                result.add(new RequiredAttribute(parent, "method"));
-            }
-            if (request.getUrl() == null) {
-                result.add(new RequiredAttribute(parent, "url"));
-            }
-            if (request.getHttpVersion() == null) {
-                result.add(new RequiredAttribute(parent, "httpVersion"));
-            }
-            result.addAll(getMissingRequiredCookiesAttributes(parent, request.getCookies()));
-        }
-        return result;
-    }
-
-    /**
-     * <p>
      * Return all missing required attributes from the list of pages.
      * </p>
      *
+     * @param parent the parent of the pages object to check.
      * @param pages the list of pages to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredPagesAttributes(final List<Page> pages) {
+    private static List<RequiredAttribute> getMissingPagesAttributes(final CharSequence parent,
+            final List<Page> pages) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (pages != null) {
             for (int i = 0; i < pages.size(); i++) {
-                result.addAll(getMissingRequiredPageAttributes(i, pages.get(i)));
+                StringBuilder indexedPage = new StringBuilder("pages[").append(i).append(']');
+                StringBuilder newParent = createNewParent(parent, indexedPage);
+                result.addAll(getMissingPageAttributes(newParent, pages.get(i)));
             }
         }
         return result;
@@ -194,14 +170,13 @@ public final class HarValidator {
      * Return all missing required attributes from the page object.
      * </p>
      *
-     * @param i the index in the original list (or array).
+     * @param parent the parent of the page object to check.
      * @param page the page object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredPageAttributes(final int i, final Page page) {
+    private static List<RequiredAttribute> getMissingPageAttributes(final CharSequence parent, final Page page) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (page != null) {
-            String parent = new StringBuilder("log.pages[").append(i).append("]").toString();
             if (page.getStartedDateTime() == null) {
                 result.add(new RequiredAttribute(parent, "startedDateTime"));
             }
@@ -211,9 +186,25 @@ public final class HarValidator {
             if (page.getTitle() == null) {
                 result.add(new RequiredAttribute(parent, "title"));
             }
-            if (page.getPageTimings() == null) {
-                result.add(new RequiredAttribute(parent, "pageTimings"));
-            }
+            result.addAll(getMissingPageTimingsAttributes(parent, page.getPageTimings()));
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the page timings object.
+     * </p>
+     *
+     * @param parent the parent of the page timings object.
+     * @param pageTimings the page timings object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingPageTimingsAttributes(final CharSequence parent,
+            final PageTimings pageTimings) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (pageTimings == null) {
+            result.add(new RequiredAttribute(parent, "pageTimings"));
         }
         return result;
     }
@@ -223,16 +214,20 @@ public final class HarValidator {
      * Return all missing required attributes from the list of entries.
      * </p>
      *
+     * @param parent the parent of the entries object.
      * @param entries the list of entries to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredEntriesAttributes(final List<Entry> entries) {
+    private static List<RequiredAttribute> getMissingEntriesAttributes(final CharSequence parent,
+            final List<Entry> entries) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (entries == null) {
-            result.add(new RequiredAttribute("log", "entries"));
+            result.add(new RequiredAttribute(parent, "entries"));
         } else {
             for (int i = 0; i < entries.size(); i++) {
-                result.addAll(getMissingRequiredEntryAttributes(i, entries.get(i)));
+                StringBuilder indexedPage = new StringBuilder("entries[").append(i).append(']');
+                StringBuilder newParent = createNewParent(parent, indexedPage);
+                result.addAll(getMissingEntryAttributes(newParent, entries.get(i)));
             }
         }
         return result;
@@ -243,21 +238,50 @@ public final class HarValidator {
      * Return all missing required attributes from the entry object.
      * </p>
      *
-     * @param i the index in the original list (or array).
+     * @param parent the parent of the entry object.
      * @param entry the entry object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredEntryAttributes(final int i, final Entry entry) {
+    private static List<RequiredAttribute> getMissingEntryAttributes(final CharSequence parent, final Entry entry) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (entry != null) {
-            String parent = new StringBuilder("log.entries[").append(i).append("]").toString();
             if (entry.getStartedDateTime() == null) {
                 result.add(new RequiredAttribute(parent, "startedDateTime"));
             }
             if (entry.getTime() == null) {
                 result.add(new RequiredAttribute(parent, "time"));
             }
-            result.addAll(getMissingRequiredAttributes(i, entry.getRequest()));
+            result.addAll(getMissingRequestAttributes(parent, entry.getRequest()));
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the request object.
+     * </p>
+     *
+     * @param parent the parent of the request object.
+     * @param request the request object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingRequestAttributes(final CharSequence parent,
+            final Request request) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (request == null) {
+            result.add(new RequiredAttribute(parent, "request"));
+        } else {
+            StringBuilder newParent = createNewParent(parent, "request");
+            if (request.getMethod() == null) {
+                result.add(new RequiredAttribute(newParent, "method"));
+            }
+            if (request.getUrl() == null) {
+                result.add(new RequiredAttribute(newParent, "url"));
+            }
+            if (request.getHttpVersion() == null) {
+                result.add(new RequiredAttribute(newParent, "httpVersion"));
+            }
+            result.addAll(getMissingCookiesAttributes(newParent, request.getCookies()));
         }
         return result;
     }
@@ -267,18 +291,20 @@ public final class HarValidator {
      * Return all missing required attributes from the list of cookies.
      * </p>
      *
-     * @param parent the parent of the cookies.
+     * @param parent the parent of the cookies object.
      * @param cookies the list of cookies to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredCookiesAttributes(final String parent,
+    private static List<RequiredAttribute> getMissingCookiesAttributes(final CharSequence parent,
             final List<Cookie> cookies) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (cookies == null) {
             result.add(new RequiredAttribute(parent, "cookies"));
         } else {
             for (int i = 0; i < cookies.size(); i++) {
-                result.addAll(getMissingRequiredCookieAttributes(parent, i, cookies.get(i)));
+                StringBuilder indexedPage = new StringBuilder("cookies[").append(i).append(']');
+                StringBuilder newParent = createNewParent(parent, indexedPage);
+                result.addAll(getMissingCookieAttributes(newParent, cookies.get(i)));
             }
         }
         return result;
@@ -289,21 +315,18 @@ public final class HarValidator {
      * Return all missing required attributes from the cookie object.
      * </p>
      *
-     * @param parent the parent of the cookie.
-     * @param i the index in the original list (or array).
+     * @param parent the parent of the cookie object.
      * @param cookie the cookie object to check.
      * @return a list containing all required but missing attributes.
      */
-    private static List<RequiredAttribute> getMissingRequiredCookieAttributes(final String parent, final int i,
-            final Cookie cookie) {
+    private static List<RequiredAttribute> getMissingCookieAttributes(final CharSequence parent, final Cookie cookie) {
         List<RequiredAttribute> result = new LinkedList<>();
         if (cookie != null) {
-            String newParent = new StringBuilder(parent).append(".cookies[").append(i).append("]").toString();
             if (cookie.getName() == null) {
-                result.add(new RequiredAttribute(newParent, "name"));
+                result.add(new RequiredAttribute(parent, "name"));
             }
             if (cookie.getValue() == null) {
-                result.add(new RequiredAttribute(newParent, "value"));
+                result.add(new RequiredAttribute(parent, "value"));
             }
         }
         return result;
@@ -319,11 +342,30 @@ public final class HarValidator {
      * @throws AttributeRequiredException if at least one required attribute in the model is missing.
      */
     public static void checkRequiredAttributes(final Har har) throws AttributeRequiredException {
-        List<RequiredAttribute> missingAttributes = getMissingRequiredAttributes(har);
+        List<RequiredAttribute> missingAttributes = getMissingAttributes(har);
         if (!missingAttributes.isEmpty()) {
             RequiredAttribute firstEntry = missingAttributes.get(0);
             throw new AttributeRequiredException(firstEntry.getParent(), firstEntry.getAttribute());
         }
+    }
+
+    /**
+     * <p>
+     * Create a new parent from the old parent and the new child. The new parent is the child appended to the old parent
+     * separated by a dot ({@code .}). If the old parent is {@code null} or empty then no dot is prepended to the child.
+     * </p>
+     *
+     * @param parent the old parent to use.
+     * @param child the child to be appended.
+     * @return the new parent consisting of the old parent and the child.
+     */
+    private static StringBuilder createNewParent(final CharSequence parent, final CharSequence child) {
+        StringBuilder newParent = new StringBuilder();
+        if (parent != null && !"".equals(parent)) {
+            newParent.append(parent).append('.');
+        }
+        newParent.append(child);
+        return newParent;
     }
 
 
@@ -335,12 +377,12 @@ public final class HarValidator {
         /**
          * The parent of the required attribute.
          */
-        private final String parent;
+        private final CharSequence parent;
 
         /**
          * The attribute.
          */
-        private final String attribute;
+        private final CharSequence attribute;
 
         /**
          * <p>
@@ -350,7 +392,7 @@ public final class HarValidator {
          * @param parent    the parent object of the attribute.
          * @param attribute the attribute.
          */
-        public RequiredAttribute(final String parent, final String attribute) {
+        public RequiredAttribute(final CharSequence parent, final CharSequence attribute) {
             this.parent = parent;
             this.attribute = attribute;
         }
@@ -363,7 +405,7 @@ public final class HarValidator {
          * @return the parent.
          */
         public String getParent() {
-            return parent;
+            return parent.toString();
         }
 
         /**
@@ -374,7 +416,7 @@ public final class HarValidator {
          * @return the attribute.
          */
         public String getAttribute() {
-            return attribute;
+            return attribute.toString();
         }
 
         /** {@inheritDoc} */
