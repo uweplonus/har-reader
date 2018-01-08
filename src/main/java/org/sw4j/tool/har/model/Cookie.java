@@ -16,6 +16,7 @@
 package org.sw4j.tool.har.model;
 
 import com.google.gson.annotations.Expose;
+import java.time.OffsetDateTime;
 
 /**
  * <p>
@@ -44,6 +45,10 @@ public class Cookie {
     /** The optional domain of the cookie. */
     @Expose
     private String domain;
+
+    /** The date and time when the cookie expires. */
+    @Expose
+    private OffsetDateTime expires;
 
     /** The default constructor. */
     public Cookie() { }
@@ -134,6 +139,28 @@ public class Cookie {
      */
     public void setDomain(final String domain) {
         this.domain = domain;
+    }
+
+    /**
+     * <p>
+     * Returns the date and time when the cookie expires.
+     * </p>
+     *
+     * @return the date and time when the cookie expires.
+     */
+    public OffsetDateTime getExpires() {
+        return expires;
+    }
+
+    /**
+     * <p>
+     * Sets the date and time when the cookie expires.
+     * </p>
+     *
+     * @param expires the date and time of the cookie expires.
+     */
+    public void setExpires(final OffsetDateTime expires) {
+        this.expires = expires;
     }
 
 }

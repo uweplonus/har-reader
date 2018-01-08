@@ -128,13 +128,15 @@ public class HarReaderTest {
             "              \"name\": \"cookie1\",\n" +
             "              \"value\": \"value1\",\n" +
             "              \"path\": \"/\",\n" +
-            "              \"domain\": \"example.org\"\n" +
+            "              \"domain\": \"example.org\",\n" +
+            "              \"expires\": \"2019-12-23T15:15:03+01:00\"\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"cookie2\",\n" +
             "              \"value\": \"value2\",\n" +
             "              \"path\": \"/path\",\n" +
-            "              \"domain\": \"example.org\"\n" +
+            "              \"domain\": \"example.org\",\n" +
+            "              \"expires\": \"2018-12-23T15:15:03+01:00\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -455,6 +457,16 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getDomain(), "example.org",
                 "Expected the cookie.domain to be \"domain.org\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesExpires() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getExpires().format(
+                        DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+                "2019-12-23T15:15:03+01:00",
+                "Expected the cookie.expires to be \"2019-12-23T15:15:03+01:00\".");
     }
 
     @Test
