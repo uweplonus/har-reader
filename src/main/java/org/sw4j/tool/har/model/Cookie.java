@@ -46,9 +46,13 @@ public class Cookie {
     @Expose
     private String domain;
 
-    /** The date and time when the cookie expires. */
+    /** The optional date and time when the cookie expires. */
     @Expose
     private OffsetDateTime expires;
+
+    /** The optional indication if the cookie is HTTP only. */
+    @Expose
+    private Boolean httpOnly;
 
     /** The default constructor. */
     public Cookie() { }
@@ -143,7 +147,7 @@ public class Cookie {
 
     /**
      * <p>
-     * Returns the date and time when the cookie expires.
+     * Returns the optional date and time when the cookie expires.
      * </p>
      *
      * @return the date and time when the cookie expires.
@@ -154,13 +158,35 @@ public class Cookie {
 
     /**
      * <p>
-     * Sets the date and time when the cookie expires.
+     * Sets the optional date and time when the cookie expires.
      * </p>
      *
      * @param expires the date and time of the cookie expires.
      */
     public void setExpires(final OffsetDateTime expires) {
         this.expires = expires;
+    }
+
+    /**
+     * <p>
+     * Returns the optional indication if the cookie is HTTP only.
+     * </p>
+     *
+     * @return the indication for HTTP only cookies.
+     */
+    public Boolean getHttpOnly() {
+        return httpOnly;
+    }
+
+    /**
+     * <p>
+     * Sets the optional indication if the cookie is HTTP only.
+     * </p>
+     *
+     * @param httpOnly the indication for HTTP only cookies.
+     */
+    public void setHttpOnly(final Boolean httpOnly) {
+        this.httpOnly = httpOnly;
     }
 
 }

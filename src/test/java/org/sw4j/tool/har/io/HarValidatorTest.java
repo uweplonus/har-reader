@@ -124,6 +124,7 @@ public class HarValidatorTest {
         cookie1.setPath("/");
         cookie1.setDomain("example.org");
         cookie1.setExpires(OffsetDateTime.now().plusHours(1));
+        cookie1.setHttpOnly(Boolean.TRUE);
 
         Cookie cookie2 = new Cookie();
         request.addCookie(cookie2);
@@ -131,7 +132,8 @@ public class HarValidatorTest {
         cookie2.setValue("value2");
         cookie2.setPath("/path");
         cookie2.setDomain("example.org");
-        cookie1.setExpires(OffsetDateTime.now().plusHours(2));
+        cookie2.setExpires(OffsetDateTime.now().plusHours(2));
+        cookie2.setHttpOnly(Boolean.FALSE);
 
         // Gson reads a null element if the array ends with a comma.
         request.addCookie(null);
@@ -635,6 +637,14 @@ public class HarValidatorTest {
     @Test
     public void testEntriesCookiesExpiresMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setExpires(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesCookiesHttpOnlyMissing() {
+        model.getLog().getEntry(1).getRequest().getCookie(0).setHttpOnly(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
