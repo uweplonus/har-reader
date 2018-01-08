@@ -18,8 +18,16 @@ package org.sw4j.tool.har.io;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-
-import org.sw4j.tool.har.model.*;
+import org.sw4j.tool.har.model.Browser;
+import org.sw4j.tool.har.model.Cookie;
+import org.sw4j.tool.har.model.Creator;
+import org.sw4j.tool.har.model.CreatorBrowser;
+import org.sw4j.tool.har.model.Entry;
+import org.sw4j.tool.har.model.Har;
+import org.sw4j.tool.har.model.Log;
+import org.sw4j.tool.har.model.Page;
+import org.sw4j.tool.har.model.PageTimings;
+import org.sw4j.tool.har.model.Request;
 
 /**
  * The {@code HarValidator} provides methods to validate the HAR model.
