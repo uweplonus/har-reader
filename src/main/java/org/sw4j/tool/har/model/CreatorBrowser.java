@@ -25,6 +25,8 @@ import com.google.gson.annotations.Expose;
  * This class is not thread safe.
  * </p>
  *
+ * @see Creator
+ * @see Browser
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
 public abstract class CreatorBrowser {
