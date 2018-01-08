@@ -54,6 +54,10 @@ public class Cookie {
     @Expose
     private Boolean httpOnly;
 
+    /** The optional indication if the cookie is secure. */
+    @Expose
+    private Boolean secure;
+
     /** The default constructor. */
     public Cookie() { }
 
@@ -187,6 +191,28 @@ public class Cookie {
      */
     public void setHttpOnly(final Boolean httpOnly) {
         this.httpOnly = httpOnly;
+    }
+
+    /**
+     * <p>
+     * Returns the optional indication if the cookie is secure.
+     * </p>
+     *
+     * @return the indication for secure cookies.
+     */
+    public Boolean getSecure() {
+        return secure;
+    }
+
+    /**
+     * <p>
+     * Sets the optional indication if the cookie is secure.
+     * </p>
+     *
+     * @param secure the indication for secure cookies.
+     */
+    public void setSecure(final Boolean secure) {
+        this.secure = secure;
     }
 
 }

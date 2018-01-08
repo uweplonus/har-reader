@@ -130,7 +130,8 @@ public class HarReaderTest {
             "              \"path\": \"/\",\n" +
             "              \"domain\": \"example.org\",\n" +
             "              \"expires\": \"2019-12-23T15:15:03+01:00\",\n" +
-            "              \"httpOnly\": true\n" +
+            "              \"httpOnly\": true,\n" +
+            "              \"secure\": true\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"cookie2\",\n" +
@@ -138,7 +139,8 @@ public class HarReaderTest {
             "              \"path\": \"/path\",\n" +
             "              \"domain\": \"example.org\",\n" +
             "              \"expires\": \"2018-12-23T15:15:03+01:00\",\n" +
-            "              \"httpOnly\": false\n" +
+            "              \"httpOnly\": false,\n" +
+            "              \"secure\": false\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -477,6 +479,14 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getHttpOnly(), Boolean.TRUE,
                 "Expected the cookie.httpOnly to be true.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesSecure() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getSecure(), Boolean.TRUE,
+                "Expected the cookie.secure to be true.");
     }
 
     @Test
