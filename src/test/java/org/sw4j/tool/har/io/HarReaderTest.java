@@ -564,6 +564,30 @@ public class HarReaderTest {
     }
 
     @Test
+    public void testReadLogEntriesRequestQueryStringsEmpty() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getQueryStringsSize(), 0,
+                "Expected the request.queryString to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringsFilled() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryStringsSize(), 2,
+                "Expected the request.queryString not to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringName() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getName(), "parameter1",
+                "Expected the queryString.name to be \"parameter1\".");
+    }
+
+    @Test
     public void testReadLogComment() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);

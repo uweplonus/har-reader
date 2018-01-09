@@ -54,7 +54,7 @@ public class Request {
 
     /** The query string sent with the request. */
     @Expose
-    private List<QueryString> queryStrings;
+    private List<QueryString> queryString;
 
     /** The default constructor. */
     public Request() { }
@@ -273,14 +273,14 @@ public class Request {
      * Clears the query string that means that the query string are set to {@code null}.
      */
     public void clearQueryStrings() {
-        queryStrings = null;
+        queryString = null;
     }
 
     /**
      * Creates an empty query string list.
      */
     public void createEmptyQueryStrings() {
-        queryStrings = new LinkedList<>();
+        queryString = new LinkedList<>();
     }
 
     /**
@@ -290,11 +290,11 @@ public class Request {
      *
      * @return an unmodifiable list with the query string or {@code null} if the query string are {@code null}.
      */
-    public List<QueryString> getQueryStringsList() {
-        if (queryStrings == null) {
-            return queryStrings;
+    public List<QueryString> getQueryStrings() {
+        if (queryString == null) {
+            return queryString;
         }
-        return Collections.unmodifiableList(queryStrings);
+        return Collections.unmodifiableList(queryString);
     }
 
     /**
@@ -305,8 +305,8 @@ public class Request {
      * @return the size of the list of the query string. If there is no query string then {@code 0} is returned.
      */
     public int getQueryStringsSize() {
-        if (queryStrings != null) {
-            return queryStrings.size();
+        if (queryString != null) {
+            return queryString.size();
         }
         return 0;
     }
@@ -320,11 +320,11 @@ public class Request {
      * @return the query string at the given index or {@code null} if either the given index is invalid or no query
      *     string is available.
      */
-    public QueryString getQueryStrings(final int i) {
-        if (queryStrings == null || i < 0 || i >= queryStrings.size()) {
+    public QueryString getQueryString(final int i) {
+        if (queryString == null || i < 0 || i >= queryString.size()) {
             return null;
         }
-        return queryStrings.get(i);
+        return queryString.get(i);
     }
 
     /**
@@ -332,13 +332,13 @@ public class Request {
      * Adds the given query string to the list of query strings.
      * </p>
      *
-     * @param queryString the query string to add to the list.
+     * @param qs the query string to add to the list.
      */
-    public void addQueryString(final QueryString queryString) {
-        if (queryStrings == null) {
-            queryStrings = new LinkedList<>();
+    public void addQueryString(final QueryString qs) {
+        if (queryString == null) {
+            queryString = new LinkedList<>();
         }
-        queryStrings.add(queryString);
+        queryString.add(qs);
     }
 
 }

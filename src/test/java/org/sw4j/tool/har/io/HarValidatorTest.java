@@ -593,7 +593,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesMissingSize() {
+    public void testEntriesRequestCookiesMissingSize() {
         model.getLog().getEntry(0).getRequest().clearCookies();
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -601,7 +601,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesMissingValue() {
+    public void testEntriesRequestCookiesMissingValue() {
         model.getLog().getEntry(0).getRequest().clearCookies();
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -611,7 +611,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesEmpty() {
+    public void testEntriesRequestCookiesEmpty() {
         model.getLog().getEntry(0).getRequest().createEmptyCookies();
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -619,7 +619,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesNameMissingSize() {
+    public void testEntriesRequestCookiesNameMissingSize() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setName(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -627,7 +627,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesNameMissingValue() {
+    public void testEntriesRequestCookiesNameMissingValue() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setName(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -637,7 +637,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesValueMissingSize() {
+    public void testEntriesRequestCookiesValueMissingSize() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setValue(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -645,7 +645,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesValueMissingValue() {
+    public void testEntriesRequestCookiesValueMissingValue() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setValue(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -655,7 +655,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesPathMissing() {
+    public void testEntriesRequestCookiesPathMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setPath(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -663,7 +663,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesDomainMissing() {
+    public void testEntriesRequestCookiesDomainMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setDomain(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -671,7 +671,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesExpiresMissing() {
+    public void testEntriesRequestCookiesExpiresMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setExpires(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -679,7 +679,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesHttpOnlyMissing() {
+    public void testEntriesRequestCookiesHttpOnlyMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setHttpOnly(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -687,7 +687,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesSecureMissing() {
+    public void testEntriesRequestCookiesSecureMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setSecure(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -695,7 +695,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesCookiesCommentMissing() {
+    public void testEntriesRequestCookiesCommentMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setComment(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -703,7 +703,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesHeadersMissingSize() {
+    public void testEntriesRequestHeadersMissingSize() {
         model.getLog().getEntry(0).getRequest().clearHeaders();
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -711,7 +711,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesHeadersMissingValue() {
+    public void testEntriesRequestHeadersMissingValue() {
         model.getLog().getEntry(0).getRequest().clearHeaders();
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -721,7 +721,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesHeadersEmpty() {
+    public void testEntriesRequestHeadersEmpty() {
         model.getLog().getEntry(0).getRequest().createEmptyHeaders();
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -729,7 +729,7 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesHeadersNameMissingSize() {
+    public void testEntriesRequestHeadersNameMissingSize() {
         model.getLog().getEntry(1).getRequest().getHeader(0).setName(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
@@ -737,13 +737,58 @@ public class HarValidatorTest {
     }
 
     @Test
-    public void testEntriesHeadersNameMissingValue() {
+    public void testEntriesRequestHeadersNameMissingValue() {
         model.getLog().getEntry(1).getRequest().getHeader(0).setName(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertEquals(missingAttributes.get(0),
                 new HarValidator.RequiredAttribute("log.entries[1].request.headers[0]", "name"),
                 "Expected the parent to be \"log.entries[1].request.headers[0]\" and the attribute to be \"name\"");
+    }
+
+    @Test
+    public void testEntriesRequestQueryStringMissingSize() {
+        model.getLog().getEntry(0).getRequest().clearQueryStrings();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesRequestQueryStringMissingValue() {
+        model.getLog().getEntry(0).getRequest().clearQueryStrings();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertEquals(missingAttributes.get(0),
+                new HarValidator.RequiredAttribute("log.entries[0].request", "queryString"),
+                "Expected the parent to be \"log.entries[0].request\" and the attribute to be \"queryString\"");
+    }
+
+    @Test
+    public void testEntriesRequestQueryStringEmpty() {
+        model.getLog().getEntry(0).getRequest().createEmptyQueryStrings();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesRequestQueryStringNameMissingSize() {
+        model.getLog().getEntry(1).getRequest().getQueryString(0).setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesRequestQueryStringNameMissingValue() {
+        model.getLog().getEntry(1).getRequest().getQueryString(0).setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertEquals(missingAttributes.get(0),
+                new HarValidator.RequiredAttribute("log.entries[1].request.queryString[0]", "name"),
+                "Expected the parent to be \"log.entries[1].request.queryString[0]\" " +
+                        "and the attribute to be \"name\"");
     }
 
     @Test

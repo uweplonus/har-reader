@@ -28,6 +28,7 @@ import org.sw4j.tool.har.model.Header;
 import org.sw4j.tool.har.model.Log;
 import org.sw4j.tool.har.model.Page;
 import org.sw4j.tool.har.model.PageTimings;
+import org.sw4j.tool.har.model.QueryString;
 import org.sw4j.tool.har.model.Request;
 
 /**
@@ -292,6 +293,7 @@ public final class HarValidator {
             }
             result.addAll(getMissingCookiesAttributes(newParent, request.getCookies()));
             result.addAll(getMissingHeadersAttributes(newParent, request.getHeaders()));
+            result.addAll(getMissingQueryStringsAttributes(newParent, request.getQueryStrings()));
         }
         return result;
     }
@@ -379,6 +381,50 @@ public final class HarValidator {
         List<RequiredAttribute> result = new LinkedList<>();
         if (header != null) {
             if (header.getName() == null) {
+                result.add(new RequiredAttribute(parent, "name"));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the list of query strings.
+     * </p>
+     *
+     * @param parent the parent of the queryStrings object.
+     * @param queryStrings the list of query strings to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingQueryStringsAttributes(final CharSequence parent,
+            final List<QueryString> queryStrings) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (queryStrings == null) {
+            result.add(new RequiredAttribute(parent, "queryString"));
+        } else {
+            for (int i = 0; i < queryStrings.size(); i++) {
+                StringBuilder indexedPage = new StringBuilder("queryString[").append(i).append(']');
+                StringBuilder newParent = createNewParent(parent, indexedPage);
+                result.addAll(getMissingQueryStringAttributes(newParent, queryStrings.get(i)));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the query string object.
+     * </p>
+     *
+     * @param parent the parent of the query string object.
+     * @param queryString the query string object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingQueryStringAttributes(final CharSequence parent,
+            final QueryString queryString) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (queryString != null) {
+            if (queryString.getName() == null) {
                 result.add(new RequiredAttribute(parent, "name"));
             }
         }
