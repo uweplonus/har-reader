@@ -729,6 +729,24 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testEntriesHeadersNameMissingSize() {
+        model.getLog().getEntry(1).getRequest().getHeader(0).setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesHeadersNameMissingValue() {
+        model.getLog().getEntry(1).getRequest().getHeader(0).setName(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertEquals(missingAttributes.get(0),
+                new HarValidator.RequiredAttribute("log.entries[1].request.headers[0]", "name"),
+                "Expected the parent to be \"log.entries[1].request.headers[0]\" and the attribute to be \"name\"");
+    }
+
+    @Test
     public void testLogCommentMissing() {
         model.getLog().setComment(null);
 

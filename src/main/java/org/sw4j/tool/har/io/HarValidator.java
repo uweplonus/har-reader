@@ -356,12 +356,31 @@ public final class HarValidator {
         List<RequiredAttribute> result = new LinkedList<>();
         if (headers == null) {
             result.add(new RequiredAttribute(parent, "headers"));
-//        } else {
-//            for (int i = 0; i < headers.size(); i++) {
-//                StringBuilder indexedPage = new StringBuilder("headers[").append(i).append(']');
-//                StringBuilder newParent = createNewParent(parent, indexedPage);
-//                result.addAll(getMissingCookieAttributes(newParent, headers.get(i)));
-//            }
+        } else {
+            for (int i = 0; i < headers.size(); i++) {
+                StringBuilder indexedPage = new StringBuilder("headers[").append(i).append(']');
+                StringBuilder newParent = createNewParent(parent, indexedPage);
+                result.addAll(getMissingHeaderAttributes(newParent, headers.get(i)));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the header object.
+     * </p>
+     *
+     * @param parent the parent of the header object.
+     * @param header the header object to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingHeaderAttributes(final CharSequence parent, final Header header) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (header != null) {
+            if (header.getName() == null) {
+                result.add(new RequiredAttribute(parent, "name"));
+            }
         }
         return result;
     }
