@@ -43,6 +43,10 @@ public class HarReaderTest {
             "          \"url\": \"https://example.org/example1\",\n" +
             "          \"httpVersion\": \"HTTP/1.1\",\n" +
             "          \"cookies\": [\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
             "          ]\n" +
             "        }\n" +
             "      },\n" +
@@ -61,6 +65,22 @@ public class HarReaderTest {
             "            {\n" +
             "              \"name\": \"cookie2\",\n" +
             "              \"value\": \"value2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "            {\n" +
+            "              \"name\": \"header1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"header2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
+            "            {\n" +
+            "              \"name\": \"parameter1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"parameter2\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -113,6 +133,10 @@ public class HarReaderTest {
             "          \"url\": \"https://example.org/example1\",\n" +
             "          \"httpVersion\": \"HTTP/1.1\",\n" +
             "          \"cookies\": [\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
             "          ]\n" +
             "        }\n" +
             "      },\n" +
@@ -143,6 +167,22 @@ public class HarReaderTest {
             "              \"httpOnly\": false,\n" +
             "              \"secure\": false,\n" +
             "              \"comment\": \"Cookie Comment 2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "            {\n" +
+            "              \"name\": \"header1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"header2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
+            "            {\n" +
+            "              \"name\": \"parameter1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"parameter2\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -497,6 +537,30 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getComment(), "Cookie Comment 1",
                 "Expected the cookie.comment to be \"Cookie Comment 1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersEmpty() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getHeadersSize(), 0,
+                "Expected the request.headers to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersFilled() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeadersSize(), 2,
+                "Expected the request.headers not to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersName() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeader(0).getName(), "header1",
+                "Expected the header.name to be \"header1\".");
     }
 
     @Test

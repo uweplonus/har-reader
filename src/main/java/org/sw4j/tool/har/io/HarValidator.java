@@ -24,6 +24,7 @@ import org.sw4j.tool.har.model.Creator;
 import org.sw4j.tool.har.model.CreatorBrowser;
 import org.sw4j.tool.har.model.Entry;
 import org.sw4j.tool.har.model.Har;
+import org.sw4j.tool.har.model.Header;
 import org.sw4j.tool.har.model.Log;
 import org.sw4j.tool.har.model.Page;
 import org.sw4j.tool.har.model.PageTimings;
@@ -290,6 +291,7 @@ public final class HarValidator {
                 result.add(new RequiredAttribute(newParent, "httpVersion"));
             }
             result.addAll(getMissingCookiesAttributes(newParent, request.getCookies()));
+            result.addAll(getMissingHeadersAttributes(newParent, request.getHeaders()));
         }
         return result;
     }
@@ -336,6 +338,30 @@ public final class HarValidator {
             if (cookie.getValue() == null) {
                 result.add(new RequiredAttribute(parent, "value"));
             }
+        }
+        return result;
+    }
+
+    /**
+     * <p>
+     * Return all missing required attributes from the list of headers.
+     * </p>
+     *
+     * @param parent the parent of the headers object.
+     * @param headers the list of headers to check.
+     * @return a list containing all required but missing attributes.
+     */
+    private static List<RequiredAttribute> getMissingHeadersAttributes(final CharSequence parent,
+            final List<Header> headers) {
+        List<RequiredAttribute> result = new LinkedList<>();
+        if (headers == null) {
+            result.add(new RequiredAttribute(parent, "headers"));
+//        } else {
+//            for (int i = 0; i < headers.size(); i++) {
+//                StringBuilder indexedPage = new StringBuilder("headers[").append(i).append(']');
+//                StringBuilder newParent = createNewParent(parent, indexedPage);
+//                result.addAll(getMissingCookieAttributes(newParent, headers.get(i)));
+//            }
         }
         return result;
     }

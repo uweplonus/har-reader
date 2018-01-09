@@ -23,9 +23,11 @@ import org.sw4j.tool.har.model.Cookie;
 import org.sw4j.tool.har.model.Creator;
 import org.sw4j.tool.har.model.Entry;
 import org.sw4j.tool.har.model.Har;
+import org.sw4j.tool.har.model.Header;
 import org.sw4j.tool.har.model.Log;
 import org.sw4j.tool.har.model.Page;
 import org.sw4j.tool.har.model.PageTimings;
+import org.sw4j.tool.har.model.QueryString;
 import org.sw4j.tool.har.model.Request;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -99,6 +101,8 @@ public class HarValidatorTest {
         request.setUrl("https://example.org/example1");
         request.setHttpVersion("HTTP/1.1");
         request.createEmptyCookies();
+        request.createEmptyHeaders();
+        request.createEmptyQueryStrings();
 
         Entry entry2 = new Entry();
         log.addEntry(entry2);
@@ -111,6 +115,8 @@ public class HarValidatorTest {
         request.setUrl("https://example.com/example2");
         request.setHttpVersion("http/2.0");
         createCookies(request);
+        createHeaders(request);
+        createQueryString(request);
 
         // Gson reads a null element if the array ends with a comma.
         log.addEntry(null);
@@ -141,6 +147,32 @@ public class HarValidatorTest {
 
         // Gson reads a null element if the array ends with a comma.
         request.addCookie(null);
+    }
+
+    private void createHeaders(Request request) {
+        Header header1 = new Header();
+        request.addHeader(header1);
+        header1.setName("header1");
+
+        Header header2 = new Header();
+        request.addHeader(header2);
+        header2.setName("header2");
+
+        // Gson reads a null element if the array ends with a comma.
+        request.addHeader(null);
+    }
+
+    private void createQueryString(Request request) {
+        QueryString queryString1 = new QueryString();
+        request.addQueryString(queryString1);
+        queryString1.setName("parameter1");
+
+        QueryString queryString2 = new QueryString();
+        request.addQueryString(queryString2);
+        queryString2.setName("parameter2");
+
+        // Gson reads a null element if the array ends with a comma.
+        request.addQueryString(null);
     }
 
     @Test
@@ -665,6 +697,32 @@ public class HarValidatorTest {
     @Test
     public void testEntriesCookiesCommentMissing() {
         model.getLog().getEntry(1).getRequest().getCookie(0).setComment(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesHeadersMissingSize() {
+        model.getLog().getEntry(0).getRequest().clearHeaders();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertFalse(missingAttributes.isEmpty(), "Expected an attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesHeadersMissingValue() {
+        model.getLog().getEntry(0).getRequest().clearHeaders();
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertEquals(missingAttributes.get(0),
+                new HarValidator.RequiredAttribute("log.entries[0].request", "headers"),
+                "Expected the parent to be \"log.entries[0].request\" and the attribute to be \"headers\"");
+    }
+
+    @Test
+    public void testEntriesHeadersEmpty() {
+        model.getLog().getEntry(0).getRequest().createEmptyHeaders();
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
