@@ -35,6 +35,10 @@ public abstract class NameValuePair {
     @Expose
     private String name;
 
+    /** The value of the name-value pair. */
+    @Expose
+    private String value;
+
     /** The default constructor. */
     public NameValuePair() { }
 
@@ -58,6 +62,28 @@ public abstract class NameValuePair {
      */
     public void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * <p>
+     * Returns the value of the name-value pair.
+     * </p>
+     *
+     * @return the value.
+     */
+    public String getValue() {
+        return value;
+    }
+
+    /**
+     * <p>
+     * Sets the value of the name-value pair.
+     * </p>
+     *
+     * @param value the value.
+     */
+    public void setValue(final String value) {
+        this.value = value;
     }
 
 }

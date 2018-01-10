@@ -153,10 +153,12 @@ public class HarValidatorTest {
         Header header1 = new Header();
         request.addHeader(header1);
         header1.setName("header1");
+        header1.setValue("value1");
 
         Header header2 = new Header();
         request.addHeader(header2);
         header2.setName("header2");
+        header2.setValue("value2");
 
         // Gson reads a null element if the array ends with a comma.
         request.addHeader(null);
@@ -166,10 +168,12 @@ public class HarValidatorTest {
         QueryString queryString1 = new QueryString();
         request.addQueryString(queryString1);
         queryString1.setName("parameter1");
+        queryString1.setValue("value1");
 
         QueryString queryString2 = new QueryString();
         request.addQueryString(queryString2);
         queryString2.setName("parameter2");
+        queryString2.setValue("value2");
 
         // Gson reads a null element if the array ends with a comma.
         request.addQueryString(null);
@@ -747,6 +751,16 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testEntriesRequestHeadersValueMissingValue() {
+        model.getLog().getEntry(1).getRequest().getHeader(0).setValue(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertEquals(missingAttributes.get(0),
+                new HarValidator.RequiredAttribute("log.entries[1].request.headers[0]", "value"),
+                "Expected the parent to be \"log.entries[1].request.headers[0]\" and the attribute to be \"value\"");
+    }
+
+    @Test
     public void testEntriesRequestQueryStringMissingSize() {
         model.getLog().getEntry(0).getRequest().clearQueryStrings();
 
@@ -789,6 +803,17 @@ public class HarValidatorTest {
                 new HarValidator.RequiredAttribute("log.entries[1].request.queryString[0]", "name"),
                 "Expected the parent to be \"log.entries[1].request.queryString[0]\" " +
                         "and the attribute to be \"name\"");
+    }
+
+    @Test
+    public void testEntriesRequestQueryStringValueMissingValue() {
+        model.getLog().getEntry(1).getRequest().getQueryString(0).setValue(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertEquals(missingAttributes.get(0),
+                new HarValidator.RequiredAttribute("log.entries[1].request.queryString[0]", "value"),
+                "Expected the parent to be \"log.entries[1].request.queryString[0]\" " +
+                        "and the attribute to be \"value\"");
     }
 
     @Test

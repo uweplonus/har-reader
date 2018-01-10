@@ -383,6 +383,9 @@ public final class HarValidator {
             if (header.getName() == null) {
                 result.add(new RequiredAttribute(parent, "name"));
             }
+            if (header.getValue() == null) {
+                result.add(new RequiredAttribute(parent, "value"));
+            }
         }
         return result;
     }
@@ -426,6 +429,9 @@ public final class HarValidator {
         if (queryString != null) {
             if (queryString.getName() == null) {
                 result.add(new RequiredAttribute(parent, "name"));
+            }
+            if (queryString.getValue() == null) {
+                result.add(new RequiredAttribute(parent, "value"));
             }
         }
         return result;

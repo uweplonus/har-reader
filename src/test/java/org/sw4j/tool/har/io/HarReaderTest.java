@@ -69,18 +69,22 @@ public class HarReaderTest {
             "          ],\n" +
             "          \"headers\": [\n" +
             "            {\n" +
-            "              \"name\": \"header1\"\n" +
+            "              \"name\": \"header1\",\n" +
+            "              \"value\": \"value1\"\n" +
             "            },\n" +
             "            {\n" +
-            "              \"name\": \"header2\"\n" +
+            "              \"name\": \"header2\",\n" +
+            "              \"value\": \"value2\"\n" +
             "            }\n" +
             "          ],\n" +
             "          \"queryString\": [\n" +
             "            {\n" +
-            "              \"name\": \"parameter1\"\n" +
+            "              \"name\": \"parameter1\",\n" +
+            "              \"value\": \"value1\"\n" +
             "            },\n" +
             "            {\n" +
-            "              \"name\": \"parameter2\"\n" +
+            "              \"name\": \"parameter2\",\n" +
+            "              \"value\": \"value2\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -171,18 +175,22 @@ public class HarReaderTest {
             "          ],\n" +
             "          \"headers\": [\n" +
             "            {\n" +
-            "              \"name\": \"header1\"\n" +
+            "              \"name\": \"header1\",\n" +
+            "              \"value\": \"value1\"\n" +
             "            },\n" +
             "            {\n" +
-            "              \"name\": \"header2\"\n" +
+            "              \"name\": \"header2\",\n" +
+            "              \"value\": \"value2\"\n" +
             "            }\n" +
             "          ],\n" +
             "          \"queryString\": [\n" +
             "            {\n" +
-            "              \"name\": \"parameter1\"\n" +
+            "              \"name\": \"parameter1\",\n" +
+            "              \"value\": \"value1\"\n" +
             "            },\n" +
             "            {\n" +
-            "              \"name\": \"parameter2\"\n" +
+            "              \"name\": \"parameter2\",\n" +
+            "              \"value\": \"value2\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -564,6 +572,14 @@ public class HarReaderTest {
     }
 
     @Test
+    public void testReadLogEntriesRequestHeadersValue() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeader(0).getValue(), "value1",
+                "Expected the header.value to be \"value1\".");
+    }
+
+    @Test
     public void testReadLogEntriesRequestQueryStringsEmpty() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
@@ -585,6 +601,14 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getName(), "parameter1",
                 "Expected the queryString.name to be \"parameter1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringValue() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getValue(), "value1",
+                "Expected the queryString.value to be \"value1\".");
     }
 
     @Test
