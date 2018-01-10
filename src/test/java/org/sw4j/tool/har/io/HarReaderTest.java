@@ -70,21 +70,25 @@ public class HarReaderTest {
             "          \"headers\": [\n" +
             "            {\n" +
             "              \"name\": \"header1\",\n" +
-            "              \"value\": \"value1\"\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Header Comment 1\"\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"header2\",\n" +
-            "              \"value\": \"value2\"\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Header Comment 2\"\n" +
             "            }\n" +
             "          ],\n" +
             "          \"queryString\": [\n" +
             "            {\n" +
             "              \"name\": \"parameter1\",\n" +
-            "              \"value\": \"value1\"\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Parameter Comment 1\"\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"parameter2\",\n" +
-            "              \"value\": \"value2\"\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Parameter Comment 2\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -176,21 +180,25 @@ public class HarReaderTest {
             "          \"headers\": [\n" +
             "            {\n" +
             "              \"name\": \"header1\",\n" +
-            "              \"value\": \"value1\"\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Header Comment 1\"\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"header2\",\n" +
-            "              \"value\": \"value2\"\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Header Comment 2\"\n" +
             "            }\n" +
             "          ],\n" +
             "          \"queryString\": [\n" +
             "            {\n" +
             "              \"name\": \"parameter1\",\n" +
-            "              \"value\": \"value1\"\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Parameter Comment 1\"\n" +
             "            },\n" +
             "            {\n" +
             "              \"name\": \"parameter2\",\n" +
-            "              \"value\": \"value2\"\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Parameter Comment 2\"\n" +
             "            }\n" +
             "          ]\n" +
             "        }\n" +
@@ -580,6 +588,14 @@ public class HarReaderTest {
     }
 
     @Test
+    public void testReadLogEntriesRequestHeadersComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeader(0).getComment(), "Header Comment 1",
+                "Expected the header.comment to be \"Header Comment 1\".");
+    }
+
+    @Test
     public void testReadLogEntriesRequestQueryStringsEmpty() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
@@ -609,6 +625,14 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getValue(), "value1",
                 "Expected the queryString.value to be \"value1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getComment(), "Parameter Comment 1",
+                "Expected the queryString.comment to be \"Parameter Comment 1\".");
     }
 
     @Test

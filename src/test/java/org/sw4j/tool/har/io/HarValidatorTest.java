@@ -154,11 +154,13 @@ public class HarValidatorTest {
         request.addHeader(header1);
         header1.setName("header1");
         header1.setValue("value1");
+        header1.setComment("Header Comment 1");
 
         Header header2 = new Header();
         request.addHeader(header2);
         header2.setName("header2");
         header2.setValue("value2");
+        header2.setComment("Header Comment 2");
 
         // Gson reads a null element if the array ends with a comma.
         request.addHeader(null);
@@ -169,11 +171,13 @@ public class HarValidatorTest {
         request.addQueryString(queryString1);
         queryString1.setName("parameter1");
         queryString1.setValue("value1");
+        queryString1.setComment("Parameter Comment 1");
 
         QueryString queryString2 = new QueryString();
         request.addQueryString(queryString2);
         queryString2.setName("parameter2");
         queryString2.setValue("value2");
+        queryString2.setComment("Parameter Comment 2");
 
         // Gson reads a null element if the array ends with a comma.
         request.addQueryString(null);
@@ -761,6 +765,14 @@ public class HarValidatorTest {
     }
 
     @Test
+    public void testEntriesRequestHeadersCommentMissingValue() {
+        model.getLog().getEntry(1).getRequest().getHeader(0).setComment(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
     public void testEntriesRequestQueryStringMissingSize() {
         model.getLog().getEntry(0).getRequest().clearQueryStrings();
 
@@ -814,6 +826,14 @@ public class HarValidatorTest {
                 new HarValidator.RequiredAttribute("log.entries[1].request.queryString[0]", "value"),
                 "Expected the parent to be \"log.entries[1].request.queryString[0]\" " +
                         "and the attribute to be \"value\"");
+    }
+
+    @Test
+    public void testEntriesRequestQueryStringCommentMissingValue() {
+        model.getLog().getEntry(1).getRequest().getQueryString(0).setComment(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
     }
 
     @Test

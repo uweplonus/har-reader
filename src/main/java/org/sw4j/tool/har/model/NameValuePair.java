@@ -39,6 +39,10 @@ public abstract class NameValuePair {
     @Expose
     private String value;
 
+    /** The optional comment of the name-value pair. */
+    @Expose
+    private String comment;
+
     /** The default constructor. */
     public NameValuePair() { }
 
@@ -84,6 +88,28 @@ public abstract class NameValuePair {
      */
     public void setValue(final String value) {
         this.value = value;
+    }
+
+    /**
+     * <p>
+     * Returns the optional comment of the name-value pair.
+     * </p>
+     *
+     * @return the comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * <p>
+     * Sets the optional comment of the name-value pair.
+     * </p>
+     *
+     * @param comment the comment.
+     */
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 
 }
