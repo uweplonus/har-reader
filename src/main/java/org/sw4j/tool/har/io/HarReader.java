@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.Reader;
 import java.time.OffsetDateTime;
-import org.sw4j.gson.extension.OffsetDateTimeAdapter;
+import org.sw4j.gson.adapter.OffsetDateTimeAdapter;
 import org.sw4j.tool.har.model.Har;
 import org.sw4j.tool.har.model.Log;
 
