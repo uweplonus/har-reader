@@ -19,41 +19,36 @@ import com.google.gson.annotations.Expose;
 
 /**
  * <p>
- * This model class represents either a creator or a browser.
+ * This abstract class represents a name-value pair.
  * </p>
  * <p>
  * This class is not thread safe.
  * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
- * @see Creator
- * @see Browser
+ * @see Header
+ * @see QueryString
  */
-public abstract class CreatorBrowser {
+public abstract class NameValuePair {
 
-    /** The required name of the creator or the browser. */
+    /** The name of the name-value pair. */
     @Expose
     private String name;
 
-    /** The required version of the creator or the browser. */
+    /** The value of the name-value pair. */
     @Expose
-    private String version;
+    private String value;
 
-    /** The optional comment of the creator or the browser. */
+    /** The optional comment of the name-value pair. */
     @Expose
     private String comment;
 
-    /**
-     * <p>
-     * The default constructor.
-     * </p>
-     */
-    public CreatorBrowser() {
-    }
+    /** The default constructor. */
+    public NameValuePair() { }
 
     /**
      * <p>
-     * Returns the name of the creator or the browser.
+     * Returns the name of the name-value pair.
      * </p>
      *
      * @return the name.
@@ -64,10 +59,10 @@ public abstract class CreatorBrowser {
 
     /**
      * <p>
-     * Sets the name of the creator or the browser.
+     * Sets the name of the name-value pair.
      * </p>
      *
-     * @param name the name of the creator or browser.
+     * @param name the name.
      */
     public final void setName(final String name) {
         this.name = name;
@@ -75,29 +70,29 @@ public abstract class CreatorBrowser {
 
     /**
      * <p>
-     * Returns the version of the creator or the browser.
+     * Returns the value of the name-value pair.
      * </p>
      *
-     * @return the version.
+     * @return the value.
      */
-    public final String getVersion() {
-        return version;
+    public final String getValue() {
+        return value;
     }
 
     /**
      * <p>
-     * Sets the version of the creator or the browser.
+     * Sets the value of the name-value pair.
      * </p>
      *
-     * @param version the version of the creator or browser.
+     * @param value the value.
      */
-    public final void setVersion(final String version) {
-        this.version = version;
+    public final void setValue(final String value) {
+        this.value = value;
     }
 
     /**
      * <p>
-     * Returns the comment of the creator or the browser.
+     * Returns the optional comment of the name-value pair.
      * </p>
      *
      * @return the comment.
@@ -108,10 +103,10 @@ public abstract class CreatorBrowser {
 
     /**
      * <p>
-     * Sets the comment of the creator or the browser.
+     * Sets the optional comment of the name-value pair.
      * </p>
      *
-     * @param comment the comment of the creator or browser.
+     * @param comment the comment.
      */
     public final void setComment(final String comment) {
         this.comment = comment;

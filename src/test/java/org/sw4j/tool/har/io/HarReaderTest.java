@@ -33,7 +33,67 @@ public class HarReaderTest {
             "    \"creator\": {\n" +
             "      \"name\": \"HAR Test\",\n" +
             "      \"version\": \"2.2\"\n" +
-            "    }\n" +
+            "    },\n" +
+            "    \"entries\": [\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
+            "        \"time\": 100.01,\n" +
+            "        \"request\": {\n" +
+            "          \"method\": \"GET\",\n" +
+            "          \"url\": \"https://example.org/example1\",\n" +
+            "          \"httpVersion\": \"HTTP/1.1\",\n" +
+            "          \"cookies\": [\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
+            "          ]\n" +
+            "        }\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
+            "        \"time\": 200.02,\n" +
+            "        \"request\": {\n" +
+            "          \"method\": \"POST\",\n" +
+            "          \"url\": \"https://example.com/example2\",\n" +
+            "          \"httpVersion\": \"http/2.0\",\n" +
+            "          \"cookies\": [\n" +
+            "            {\n" +
+            "              \"name\": \"cookie1\",\n" +
+            "              \"value\": \"value1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"cookie2\",\n" +
+            "              \"value\": \"value2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "            {\n" +
+            "              \"name\": \"header1\",\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Header Comment 1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"header2\",\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Header Comment 2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
+            "            {\n" +
+            "              \"name\": \"parameter1\",\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Parameter Comment 1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"parameter2\",\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Parameter Comment 2\"\n" +
+            "            }\n" +
+            "          ]\n" +
+            "        }\n" +
+            "      }\n" +
+            "    ]\n" +
             "  }\n" +
             "}\n";
 
@@ -70,13 +130,90 @@ public class HarReaderTest {
             "        \"pageTimings\": {\n" +
             "        }\n" +
             "      }\n" +
-            "    ]\n" +
+            "    ],\n" +
+            "    \"entries\": [\n" +
+            "      {\n" +
+            "        \"pageref\": \"id0\",\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:02+01:00\",\n" +
+            "        \"time\": 101.01,\n" +
+            "        \"request\": {\n" +
+            "          \"method\": \"GET\",\n" +
+            "          \"url\": \"https://example.org/example1\",\n" +
+            "          \"httpVersion\": \"HTTP/1.1\",\n" +
+            "          \"cookies\": [\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
+            "          ]\n" +
+            "        }\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"startedDateTime\": \"2017-12-23T14:15:03+01:00\",\n" +
+            "        \"time\": 202.02,\n" +
+            "        \"request\": {\n" +
+            "          \"method\": \"POST\",\n" +
+            "          \"url\": \"https://example.com/example2\",\n" +
+            "          \"httpVersion\": \"http/2.0\",\n" +
+            "          \"cookies\": [\n" +
+            "            {\n" +
+            "              \"name\": \"cookie1\",\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"path\": \"/\",\n" +
+            "              \"domain\": \"example.org\",\n" +
+            "              \"expires\": \"2019-12-23T15:15:03+01:00\",\n" +
+            "              \"httpOnly\": true,\n" +
+            "              \"secure\": true,\n" +
+            "              \"comment\": \"Cookie Comment 1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"cookie2\",\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"path\": \"/path\",\n" +
+            "              \"domain\": \"example.org\",\n" +
+            "              \"expires\": \"2018-12-23T15:15:03+01:00\",\n" +
+            "              \"httpOnly\": false,\n" +
+            "              \"secure\": false,\n" +
+            "              \"comment\": \"Cookie Comment 2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"headers\": [\n" +
+            "            {\n" +
+            "              \"name\": \"header1\",\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Header Comment 1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"header2\",\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Header Comment 2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"queryString\": [\n" +
+            "            {\n" +
+            "              \"name\": \"parameter1\",\n" +
+            "              \"value\": \"value1\",\n" +
+            "              \"comment\": \"Parameter Comment 1\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"name\": \"parameter2\",\n" +
+            "              \"value\": \"value2\",\n" +
+            "              \"comment\": \"Parameter Comment 2\"\n" +
+            "            }\n" +
+            "          ],\n" +
+            "          \"postData\": {\n" +
+            "          }\n" +
+            "        }\n" +
+            "      }\n" +
+            "    ],\n" +
+            "    \"comment\": \"Log Comment\"\n" +
             "  }\n" +
             "}\n";
 
     @Test
     public void testReaderCreation() {
         HarReader hr = new HarReader(new StringReader(emptyJson));
+        Assert.assertNotNull(hr, "Expected a HAR reader object to be created.");
     }
 
     @Test
@@ -86,8 +223,8 @@ public class HarReaderTest {
             Log log = hr.read(true);
             Assert.fail("Read should have thrown an exception.");
         } catch (AttributeRequiredException ex) {
-            Assert.assertEquals("", ex.getObject(), "Expected the object with the missing attribute to be \"\"");
-            Assert.assertEquals("log", ex.getAttribute(), "Expected the missing attribute to be \"log\".");
+            Assert.assertEquals(ex, new AttributeRequiredException("", "log"),
+                    "Expected the object to be \"\" with the missing attribute to be \"log\"");
         }
     }
 
@@ -120,7 +257,6 @@ public class HarReaderTest {
     public void testReadLogVersion() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getVersion(), "Expected a nonnull log.version object.");
         Assert.assertEquals(log.getVersion(), "1.2", "Expected the version to be \"1.2\".");
     }
 
@@ -135,7 +271,6 @@ public class HarReaderTest {
     public void testReadLogCreatorName() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getCreator().getName(), "Expected a nonnull log.creator.name object.");
         Assert.assertEquals(log.getCreator().getName(), "HAR Test",
                 "Expected the creator.name to be \"HAR Test\".");
     }
@@ -144,7 +279,6 @@ public class HarReaderTest {
     public void testReadLogCreatorVersion() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(requiredJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getCreator().getVersion(), "Expected a nonnull log.creator.version object.");
         Assert.assertEquals(log.getCreator().getVersion(), "2.2",
                 "Expected the creator.version to be \"2.2\".");
     }
@@ -153,7 +287,6 @@ public class HarReaderTest {
     public void testReadLogCreatorComment() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getCreator().getComment(), "Expected a nonnull log.creator.comment object.");
         Assert.assertEquals(log.getCreator().getComment(), "creator's comment",
                 "Expected the creator.comment to be \"creator's comment\".");
     }
@@ -176,7 +309,6 @@ public class HarReaderTest {
     public void testReadLogBrowserName() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getBrowser().getName(), "Expected a nonnull log.browser.name object.");
         Assert.assertEquals(log.getBrowser().getName(), "HAR Test",
                 "Expected the browser.name to be \"HAR Test\".");
     }
@@ -185,7 +317,6 @@ public class HarReaderTest {
     public void testReadLogBrowserVersion() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getBrowser().getVersion(), "Expected a nonnull log.browser.version object.");
         Assert.assertEquals(log.getBrowser().getVersion(), "2.3",
                 "Expected the browser.version to be \"2.3\".");
     }
@@ -194,16 +325,22 @@ public class HarReaderTest {
     public void testReadLogBrowserComment() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getBrowser().getComment(), "Expected a nonnull log.browser.comment object.");
         Assert.assertEquals(log.getBrowser().getComment(), "browser's comment",
                 "Expected the browser.version to be \"browser's comment\".");
+    }
+
+    @Test
+    public void testReadLogPagesNull() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNull(log.getPages(),
+                "Expected the pages to be null.");
     }
 
     @Test
     public void testReadLogPages() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPages(), "Expected a nonnull log.pages object.");
         Assert.assertEquals(log.getPagesSize(), 2,
                 "Expected the pages size to be 2.");
     }
@@ -212,9 +349,7 @@ public class HarReaderTest {
     public void testReadLogPagesStartedDateTime() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPage(0).getStartedDateTime(),
-                "Expected a nonnull log.pages[0].startedDateTime object.");
-        Assert.assertEquals(log.getPage(0).getStartedDateTime().format(DateTimeFormatter.ISO_DATE_TIME),
+        Assert.assertEquals(DateTimeFormatter.ISO_DATE_TIME.format(log.getPage(0).getStartedDateTime()),
                 "2017-12-23T14:15:00+01:00",
                 "Expected the pages[0].startedDateTime to be \"2017-12-23T14:15:00+01:00\".");
     }
@@ -223,8 +358,6 @@ public class HarReaderTest {
     public void testReadLogPagesId() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPage(0).getId(),
-                "Expected a nonnull log.pages[0].id object.");
         Assert.assertEquals(log.getPage(0).getId(), "id0",
                 "Expected the pages[0].id to be \"id0\".");
     }
@@ -233,8 +366,6 @@ public class HarReaderTest {
     public void testReadLogPagesTitle() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPage(0).getTitle(),
-                "Expected a nonnull log.pages[0].title object.");
         Assert.assertEquals(log.getPage(0).getTitle(), "Page 1",
                 "Expected the pages[0].title to be \"Page 1\".");
     }
@@ -251,8 +382,6 @@ public class HarReaderTest {
     public void testReadLogPagesPageTimimgsOnContentLoad() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPage(0).getPageTimings().getOnContentLoad(),
-                "Expected a nonnull log.pages[0].pageTimings.onContentLoad object.");
         Assert.assertEquals(log.getPage(0).getPageTimings().getOnContentLoad(), new BigDecimal("100.01"),
                 "Expected the pages[0].pageTimings.onContentLoad to be 100.01.");
     }
@@ -261,8 +390,6 @@ public class HarReaderTest {
     public void testReadLogPagesPageTimimgsOnLoad() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPage(0).getPageTimings().getOnLoad(),
-                "Expected a nonnull log.pages[0].pageTimings.onLoad object.");
         Assert.assertEquals(log.getPage(0).getPageTimings().getOnLoad(), new BigDecimal("200.02"),
                 "Expected the pages[0].pageTimings.onLoad to be 200.02.");
     }
@@ -271,8 +398,6 @@ public class HarReaderTest {
     public void testReadLogPagesPageTimimgsComment() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPage(0).getPageTimings().getComment(),
-                "Expected a nonnull log.pages[0].pageTimings.comment object.");
         Assert.assertEquals(log.getPage(0).getPageTimings().getComment(), "Comment 1",
                 "Expected the pages[0].pageTimings.comment to be \"Comment 1\".");
     }
@@ -281,10 +406,251 @@ public class HarReaderTest {
     public void testReadLogPagesComment() throws AttributeRequiredException {
         HarReader hr = new HarReader(new StringReader(optionalJson));
         Log log = hr.read(true);
-        Assert.assertNotNull(log.getPage(0).getComment(),
-                "Expected a nonnull log.pages[0].comment object.");
         Assert.assertEquals(log.getPage(0).getComment(), "Page Comment 1",
                 "Expected the pages[0].comment to be \"Page Comment 1\".");
+    }
+
+    @Test
+    public void testReadLogEntries() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntriesSize(), 2,
+                "Expected the entries size to be 2.");
+    }
+
+    @Test
+    public void testReadLogEntriesPageref() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getPageref(), "id0",
+                "Expected the entries[0].pageref to be \"id0\".");
+    }
+
+    @Test
+    public void testReadLogEntriesStartedDateTime() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getStartedDateTime().format(DateTimeFormatter.ISO_DATE_TIME),
+                "2017-12-23T14:15:02+01:00",
+                "Expected the entries[0].startedDateTime to be \"2017-12-23T14:15:02+01:00\".");
+    }
+
+    @Test
+    public void testReadLogEntriesTime() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getTime(), new BigDecimal("100.01"),
+                "Expected the entries[0].startedDateTime to be 100.01.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequest() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(0).getRequest(),
+                "Expected a nonnull log.entries[0].request object.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestMethod() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getMethod(), "GET",
+                "Expected the request.method to be \"GET\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestUrl() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getUrl(), "https://example.org/example1",
+                "Expected the request.url to be \"https://example.org/example1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHttpVersion() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getHttpVersion(), "HTTP/1.1",
+                "Expected the request.httpVersion to be \"HTTP/1.1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesEmpty() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getCookiesSize(), 0,
+                "Expected the request.cookies to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesFilled() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookiesSize(), 2,
+                "Expected the request.cookies not to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesName() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getName(), "cookie1",
+                "Expected the cookie.name to be \"cookie1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesValue() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getValue(), "value1",
+                "Expected the cookie.value to be \"value1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesPath() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getPath(), "/",
+                "Expected the cookie.path to be \"/\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesDomain() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getDomain(), "example.org",
+                "Expected the cookie.domain to be \"domain.org\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesExpires() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getExpires().format(
+                        DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+                "2019-12-23T15:15:03+01:00",
+                "Expected the cookie.expires to be \"2019-12-23T15:15:03+01:00\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesHttpOnly() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getHttpOnly(), Boolean.TRUE,
+                "Expected the cookie.httpOnly to be true.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesSecure() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getSecure(), Boolean.TRUE,
+                "Expected the cookie.secure to be true.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestCookiesComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getCookie(0).getComment(), "Cookie Comment 1",
+                "Expected the cookie.comment to be \"Cookie Comment 1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersEmpty() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getHeadersSize(), 0,
+                "Expected the request.headers to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersFilled() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeadersSize(), 2,
+                "Expected the request.headers not to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersName() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeader(0).getName(), "header1",
+                "Expected the header.name to be \"header1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersValue() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeader(0).getValue(), "value1",
+                "Expected the header.value to be \"value1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestHeadersComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getHeader(0).getComment(), "Header Comment 1",
+                "Expected the header.comment to be \"Header Comment 1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringsEmpty() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(0).getRequest().getQueryStringsSize(), 0,
+                "Expected the request.queryString to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringsFilled() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryStringsSize(), 2,
+                "Expected the request.queryString not to be empty.");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringName() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getName(), "parameter1",
+                "Expected the queryString.name to be \"parameter1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringValue() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getValue(), "value1",
+                "Expected the queryString.value to be \"value1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestQueryStringComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(requiredJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getComment(), "Parameter Comment 1",
+                "Expected the queryString.comment to be \"Parameter Comment 1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestPostData() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(1).getRequest().getPostData(),
+                "Expected the request.postData not to be null.");
+    }
+
+    @Test
+    public void testReadLogComment() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertEquals(log.getComment(), "Log Comment",
+                "Expected the log.comment to be \"Log Comment \".");
     }
 
 }

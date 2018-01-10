@@ -2,7 +2,7 @@
 
 # Introduction
 
-This project is an extension to the [google gson](https://github.com/google/gson) library.
+This project is a HAR (HTTP Archive) reader to read and write HAR files.
 
 Further informations can be found at the [documentation page](https://sw4j-org.github.io/har-reader/) under the proper
 version.

@@ -22,6 +22,9 @@ import java.time.OffsetDateTime;
  * <p>
  * This is a page object of the log.
  * </p>
+ * <p>
+ * This class is not thread safe.
+ * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
@@ -43,7 +46,7 @@ public class Page {
     @Expose
     private PageTimings pageTimings;
 
-    /** Comment to the page timings. */
+    /** Comment to the page. */
     @Expose
     private String comment;
 

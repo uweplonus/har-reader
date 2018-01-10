@@ -15,6 +15,8 @@
  */
 package org.sw4j.tool.har.io;
 
+import java.util.Objects;
+
 /**
  * <p>
  * This exception is thrown when a required attribute is not set.
@@ -66,6 +68,26 @@ public class AttributeRequiredException extends RuntimeException {
      */
     public String getAttribute() {
         return attribute;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        AttributeRequiredException that = (AttributeRequiredException)o;
+        return Objects.equals(getObject(), that.getObject()) &&
+                Objects.equals(getAttribute(), that.getAttribute());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return Objects.hash(getObject(), getAttribute());
     }
 
 }

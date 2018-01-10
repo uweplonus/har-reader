@@ -32,6 +32,48 @@
           "comment": "Comment 2"
         }
       }
-    ]
+    ],
+    "entries": [
+      {
+        "startedDateTime": "2017-12-23T14:15:02+01:00",
+        "time": 100.01,
+        "request": {
+          "method": "GET",
+          "url": "https://example.org/example1",
+          "httpVersion": "HTTP/1.1",
+          "cookies": [
+            {
+              "name": "cookie1",
+              "value": "value1",
+              "path": "/",
+              "domain": "example.org",
+              "expires": "2019-12-23T14:15:02+01:00",
+              "httpOnly": true
+            },
+            {
+              "name": "cookie2",
+              "value": "value2",
+              "path": "/path",
+              "domain": "example.org",
+              "expires": "2018-12-23T14:15:02+01:00",
+              "httpOnly": false
+            }
+          ]
+        }
+      },
+      {
+        "startedDateTime": "2017-12-23T14:15:03+01:00",
+        "time": 200.02,
+        "request": {
+          "method": "POST",
+          "url": "https://example.com/example2",
+          "httpVersion": "http/2.0",
+          "cookies": [
+            {}
+          ]
+        }
+      }
+    ],
+    "comment": "Log Comment"
   }
 }

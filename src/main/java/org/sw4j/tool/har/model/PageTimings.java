@@ -22,6 +22,9 @@ import java.math.BigDecimal;
  * <p>
  * This is a page timings object of a page in the log.
  * </p>
+ * <p>
+ * This class is not thread safe.
+ * </p>
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
