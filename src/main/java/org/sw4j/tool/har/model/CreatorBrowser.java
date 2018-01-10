@@ -58,7 +58,7 @@ public abstract class CreatorBrowser {
      *
      * @return the name.
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
@@ -69,7 +69,7 @@ public abstract class CreatorBrowser {
      *
      * @param name the name of the creator or browser.
      */
-    public void setName(final String name) {
+    public final void setName(final String name) {
         this.name = name;
     }
 
@@ -80,7 +80,7 @@ public abstract class CreatorBrowser {
      *
      * @return the version.
      */
-    public String getVersion() {
+    public final String getVersion() {
         return version;
     }
 
@@ -91,7 +91,7 @@ public abstract class CreatorBrowser {
      *
      * @param version the version of the creator or browser.
      */
-    public void setVersion(final String version) {
+    public final void setVersion(final String version) {
         this.version = version;
     }
 
@@ -102,7 +102,7 @@ public abstract class CreatorBrowser {
      *
      * @return the comment.
      */
-    public String getComment() {
+    public final String getComment() {
         return comment;
     }
 
@@ -113,7 +113,7 @@ public abstract class CreatorBrowser {
      *
      * @param comment the comment of the creator or browser.
      */
-    public void setComment(final String comment) {
+    public final void setComment(final String comment) {
         this.comment = comment;
     }
 

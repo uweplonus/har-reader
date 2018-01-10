@@ -28,15 +28,7 @@ import java.time.OffsetDateTime;
  *
  * @author Uwe Plonus &lt;u.plonus@gmail.com&gt;
  */
-public class Cookie {
-
-    /** The name of the cookie. */
-    @Expose
-    private String name;
-
-    /** The value of the cookie. */
-    @Expose
-    private String value;
+public class Cookie extends NameValuePair {
 
     /** The optional path of the cookie. */
     @Expose
@@ -58,56 +50,8 @@ public class Cookie {
     @Expose
     private Boolean secure;
 
-    /** The optional comment of the cookie. */
-    @Expose
-    private String comment;
-
     /** The default constructor. */
     public Cookie() { }
-
-    /**
-     * <p>
-     * Returns the name of the cookie.
-     * </p>
-     *
-     * @return the name of the cookie.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * <p>
-     * Sets the name of the cookie.
-     * </p>
-     *
-     * @param name the name of the cookie.
-     */
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    /**
-     * <p>
-     * Returns the value of the cookie.
-     * </p>
-     *
-     * @return the value of the cookie.
-     */
-    public String getValue() {
-        return value;
-    }
-
-    /**
-     * <p>
-     * Sets the value of the cookie.
-     * </p>
-     *
-     * @param value the value of the cookie.
-     */
-    public void setValue(final String value) {
-        this.value = value;
-    }
 
     /**
      * <p>
@@ -217,28 +161,6 @@ public class Cookie {
      */
     public void setSecure(final Boolean secure) {
         this.secure = secure;
-    }
-
-    /**
-     * <p>
-     * Returns the optional comment of the cookie.
-     * </p>
-     *
-     * @return the comment.
-     */
-    public String getComment() {
-        return comment;
-    }
-
-    /**
-     * <p>
-     * Sets the optional comment of the cookie.
-     * </p>
-     *
-     * @param comment the comment of the cookie.
-     */
-    public void setComment(final String comment) {
-        this.comment = comment;
     }
 
 }

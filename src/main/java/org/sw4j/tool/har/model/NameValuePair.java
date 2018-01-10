@@ -53,7 +53,7 @@ public abstract class NameValuePair {
      *
      * @return the name.
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
@@ -64,7 +64,7 @@ public abstract class NameValuePair {
      *
      * @param name the name.
      */
-    public void setName(final String name) {
+    public final void setName(final String name) {
         this.name = name;
     }
 
@@ -75,7 +75,7 @@ public abstract class NameValuePair {
      *
      * @return the value.
      */
-    public String getValue() {
+    public final String getValue() {
         return value;
     }
 
@@ -86,7 +86,7 @@ public abstract class NameValuePair {
      *
      * @param value the value.
      */
-    public void setValue(final String value) {
+    public final void setValue(final String value) {
         this.value = value;
     }
 
@@ -97,7 +97,7 @@ public abstract class NameValuePair {
      *
      * @return the comment.
      */
-    public String getComment() {
+    public final String getComment() {
         return comment;
     }
 
@@ -108,7 +108,7 @@ public abstract class NameValuePair {
      *
      * @param comment the comment.
      */
-    public void setComment(final String comment) {
+    public final void setComment(final String comment) {
         this.comment = comment;
     }
 
