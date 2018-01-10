@@ -200,7 +200,9 @@ public class HarReaderTest {
             "              \"value\": \"value2\",\n" +
             "              \"comment\": \"Parameter Comment 2\"\n" +
             "            }\n" +
-            "          ]\n" +
+            "          ],\n" +
+            "          \"postData\": {\n" +
+            "          }\n" +
             "        }\n" +
             "      }\n" +
             "    ],\n" +
@@ -633,6 +635,14 @@ public class HarReaderTest {
         Log log = hr.read(true);
         Assert.assertEquals(log.getEntry(1).getRequest().getQueryString(0).getComment(), "Parameter Comment 1",
                 "Expected the queryString.comment to be \"Parameter Comment 1\".");
+    }
+
+    @Test
+    public void testReadLogEntriesRequestPostData() throws AttributeRequiredException {
+        HarReader hr = new HarReader(new StringReader(optionalJson));
+        Log log = hr.read(true);
+        Assert.assertNotNull(log.getEntry(1).getRequest().getPostData(),
+                "Expected the request.postData not to be null.");
     }
 
     @Test

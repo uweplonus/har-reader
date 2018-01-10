@@ -56,6 +56,10 @@ public class Request {
     @Expose
     private List<QueryString> queryString;
 
+    /** The optional posted data sent with the requrest. */
+    @Expose
+    private PostData postData;
+
     /** The default constructor. */
     public Request() { }
 
@@ -339,6 +343,28 @@ public class Request {
             queryString = new LinkedList<>();
         }
         queryString.add(qs);
+    }
+
+    /**
+     * <p>
+     * Returns the optional posted data of the request.
+     * </p>
+     *
+     * @return the posted data of the request.
+     */
+    public PostData getPostData() {
+        return postData;
+    }
+
+    /**
+     * <p>
+     * Sets the optional posted data of the request.
+     * </p>
+     *
+     * @param postData the posted data of the request.
+     */
+    public void setPostData(final PostData postData) {
+        this.postData = postData;
     }
 
 }

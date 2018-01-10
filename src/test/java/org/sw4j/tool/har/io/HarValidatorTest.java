@@ -27,6 +27,7 @@ import org.sw4j.tool.har.model.Header;
 import org.sw4j.tool.har.model.Log;
 import org.sw4j.tool.har.model.Page;
 import org.sw4j.tool.har.model.PageTimings;
+import org.sw4j.tool.har.model.PostData;
 import org.sw4j.tool.har.model.QueryString;
 import org.sw4j.tool.har.model.Request;
 import org.testng.Assert;
@@ -103,6 +104,8 @@ public class HarValidatorTest {
         request.createEmptyCookies();
         request.createEmptyHeaders();
         request.createEmptyQueryStrings();
+        PostData postData1 = new PostData();
+        request.setPostData(postData1);
 
         Entry entry2 = new Entry();
         log.addEntry(entry2);
@@ -117,6 +120,8 @@ public class HarValidatorTest {
         createCookies(request);
         createHeaders(request);
         createQueryString(request);
+        PostData postData2 = new PostData();
+        request.setPostData(postData2);
 
         // Gson reads a null element if the array ends with a comma.
         log.addEntry(null);
@@ -831,6 +836,14 @@ public class HarValidatorTest {
     @Test
     public void testEntriesRequestQueryStringCommentMissingValue() {
         model.getLog().getEntry(1).getRequest().getQueryString(0).setComment(null);
+
+        List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
+        Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
+    }
+
+    @Test
+    public void testEntriesRequestPostDataMissingValue() {
+        model.getLog().getEntry(1).getRequest().setPostData(null);
 
         List<HarValidator.RequiredAttribute> missingAttributes = HarValidator.getMissingAttributes(model);
         Assert.assertTrue(missingAttributes.isEmpty(), "Expected no attribute to be missing.");
